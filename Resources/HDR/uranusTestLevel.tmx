@@ -1,0 +1,71 @@
+<map height="20" nextobjectid="271" orientation="orthogonal" renderorder="right-down" tileheight="128" tilewidth="128" version="1.0" width="30">
+ <properties>
+  <property name="Gravity" value="-900" />
+  <property name="GroundFriction" value="60" />
+  <property name="Image" value="testPlanet.png" />
+  <property name="Name" value="URANO" />
+ </properties>
+ <tileset firstgid="1" name="properties" tilecount="10" tileheight="128" tilewidth="128">
+  <image height="256" source="propertiesTiles.png" width="640" />
+  <tile id="0">
+   <properties>
+    <property name="solid" value="true" />
+   </properties>
+  </tile>
+ </tileset>
+ <objectgroup name="objects">
+  <object id="1" name="spawn" x="384" y="1888" />
+  <object id="221" name="end" x="3584" y="2176">
+   <ellipse />
+  </object>
+ </objectgroup>
+ <layer height="20" name="propertiesLayer" width="30">
+  <data compression="zlib" encoding="base64">
+   eJxjZGBgYBwgTG8wau+ovaP2jtpLrr30tnugysuBKqsHOn5Hmr3E1s/USgvU8Cu93UwpAADvhwBf
+  </data>
+ </layer>
+ <objectgroup name="platforms">
+  <object height="128" id="256" name="plat1.png" width="1024" x="128" y="2176" />
+  <object height="128" id="257" name="plat2.png" width="512" x="1408" y="2176" />
+  <object height="128" id="259" name="plat2.png" width="512" x="3328" y="2304" />
+  <object height="128" id="260" name="plat1.png" width="1024" x="2048" y="2304" />
+ </objectgroup>
+ <objectgroup name="tips" />
+ <objectgroup name="coins">
+  <object id="261" x="3072" y="2176">
+   <ellipse />
+  </object>
+  <object id="262" x="3200" y="2176">
+   <ellipse />
+  </object>
+  <object id="263" x="3328" y="2176">
+   <ellipse />
+  </object>
+  <object id="264" x="2048" y="2240">
+   <ellipse />
+  </object>
+  <object id="265" x="1984" y="2176">
+   <ellipse />
+  </object>
+  <object id="267" x="1280" y="2048">
+   <ellipse />
+  </object>
+  <object id="268" x="1408" y="2048">
+   <ellipse />
+  </object>
+  <object id="269" x="1152" y="2048">
+   <ellipse />
+  </object>
+  <object id="270" x="1024" y="2048">
+   <ellipse />
+  </object>
+ </objectgroup>
+ <objectgroup name="spikes">
+  <object id="252" x="2560" y="2336">
+   <ellipse />
+  </object>
+  <object id="253" x="768" y="2208">
+   <ellipse />
+  </object>
+ </objectgroup>
+</map>

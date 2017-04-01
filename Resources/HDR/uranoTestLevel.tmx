@@ -1,0 +1,108 @@
+<map height="20" nextobjectid="256" orientation="orthogonal" renderorder="right-down" tileheight="128" tilewidth="128" version="1.0" width="30">
+ <properties>
+  <property name="Gravity" value="-900" />
+  <property name="GroundFriction" value="60" />
+  <property name="Image" value="testPlanet.png" />
+  <property name="Name" value="URANO" />
+ </properties>
+ <tileset firstgid="1" name="properties" tilecount="10" tileheight="128" tilewidth="128">
+  <image height="256" source="propertiesTiles.png" width="640" />
+  <tile id="0">
+   <properties>
+    <property name="solid" value="true" />
+   </properties>
+  </tile>
+ </tileset>
+ <objectgroup name="objects">
+  <object id="1" name="spawn" x="384" y="1888" />
+  <object id="221" name="end" x="3584" y="2176">
+   <ellipse />
+  </object>
+ </objectgroup>
+ <layer height="20" name="propertiesLayer" width="30">
+  <data compression="zlib" encoding="base64">
+   eJxjZGBgYBwgTG8wau+ovaP2Dn176V2GoNs1Uuwd6HCmFyDFXmrGB7H2YlNDid0DVXdTK7yGQlsDBgAG/gBr
+  </data>
+ </layer>
+ <objectgroup name="platforms" />
+ <objectgroup name="tips" />
+ <objectgroup name="coins">
+  <object id="223" x="2048" y="1920">
+   <ellipse />
+  </object>
+  <object id="224" x="2176" y="1792">
+   <ellipse />
+  </object>
+  <object id="225" x="2304" y="1664">
+   <ellipse />
+  </object>
+  <object id="226" x="2304" y="1536">
+   <ellipse />
+  </object>
+  <object id="227" x="2208" y="1408">
+   <ellipse />
+  </object>
+  <object id="228" x="2080" y="1280">
+   <ellipse />
+  </object>
+  <object id="229" x="1984" y="1184">
+   <ellipse />
+  </object>
+  <object id="230" x="1856" y="1088">
+   <ellipse />
+  </object>
+  <object id="231" x="1760" y="1056">
+   <ellipse />
+  </object>
+  <object id="232" x="2688" y="1664">
+   <ellipse />
+  </object>
+  <object id="233" x="2816" y="1792">
+   <ellipse />
+  </object>
+  <object id="239" x="2944" y="1888">
+   <ellipse />
+  </object>
+  <object id="240" x="3072" y="2016">
+   <ellipse />
+  </object>
+  <object id="241" x="3168" y="2080">
+   <ellipse />
+  </object>
+  <object id="242" x="3328" y="2112">
+   <ellipse />
+  </object>
+  <object id="243" x="1152" y="256">
+   <ellipse />
+  </object>
+  <object id="244" x="1152" y="480">
+   <ellipse />
+  </object>
+  <object id="245" x="1152" y="672">
+   <ellipse />
+  </object>
+  <object id="246" x="1152" y="928">
+   <ellipse />
+  </object>
+  <object id="247" x="992" y="800">
+   <ellipse />
+  </object>
+  <object id="248" x="832" y="704">
+   <ellipse />
+  </object>
+  <object id="249" x="1280" y="832">
+   <ellipse />
+  </object>
+  <object id="250" x="1472" y="736">
+   <ellipse />
+  </object>
+ </objectgroup>
+ <objectgroup name="spikes">
+  <object id="252" x="1536" y="2176">
+   <ellipse />
+  </object>
+  <object id="253" x="2176" y="2304">
+   <ellipse />
+  </object>
+ </objectgroup>
+</map>

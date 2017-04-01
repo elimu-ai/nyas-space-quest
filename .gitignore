@@ -56,6 +56,7 @@ proj.android-studio/*/build/
 cocos2d/cocos/platform/android/libcocos2dx/build/
 
 #libs
+proj.win32/
 cocos2d/cocos/2d/Debug.*/
 cocos2d/cocos/editor-support/spine/proj.win32/Debug.*/
 cocos2d/external/Box2D/proj.win32/Debug.*/
@@ -117,3 +118,5 @@ $RECYCLE.BIN/
 
 cocos2d/build/build/
 cocos2d/build/cocos2d_libs.xcodeproj/xcuserdata/
+cocos2d/cocos/platform/android/java/.d
+proj.android-studio/.idea/

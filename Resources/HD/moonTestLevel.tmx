@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" nextobjectid="276">
+ <properties>
+  <property name="Gravity" value="-300"/>
+  <property name="GroundFriction" value="120"/>
+  <property name="Image" value="testPlanet.png"/>
+  <property name="Name" value="LUNA"/>
+ </properties>
+ <tileset firstgid="1" name="properties" tilewidth="64" tileheight="64" tilecount="10">
+  <image source="propertiesTiles.png" width="320" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <objectgroup name="objects">
+  <object id="1" name="spawn" x="192" y="944"/>
+  <object id="221" name="end" x="1792" y="1088">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <layer name="propertiesLayer" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBwgTG8wau+ovaP2Dj57iS0XBtq/9LZ7oMpLcspqarh1oON3pNlL7/qZWmYOhbYGDAAACsoAZA==
+  </data>
+ </layer>
+ <objectgroup name="platforms">
+  <object id="257" name="plat2.png" x="64" y="1088" width="512" height="64"/>
+  <object id="264" name="plat1.png" x="1088" y="1152" width="256" height="80"/>
+  <object id="265" name="plat2.png" x="1344" y="1152" width="512" height="64"/>
+  <object id="267" name="plat3.png" x="768" y="832" width="128" height="80"/>
+  <object id="268" name="plat1.png" x="1216" y="576" width="256" height="80"/>
+  <object id="272" name="plat3.png" x="896" y="832" width="128" height="80"/>
+ </objectgroup>
+ <objectgroup name="tips">
+  <object id="266" name="tipMoon2" x="384" y="1024">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="coins">
+  <object id="273" x="1280" y="1088">
+   <ellipse/>
+  </object>
+  <object id="274" x="1344" y="1088">
+   <ellipse/>
+  </object>
+  <object id="275" x="1408" y="1088">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="meteors">
+  <object id="251" x="960" y="16">
+   <ellipse/>
+  </object>
+  <object id="252" x="1216" y="16">
+   <ellipse/>
+  </object>
+  <object id="253" x="1024" y="16">
+   <ellipse/>
+  </object>
+  <object id="254" x="1088" y="16">
+   <ellipse/>
+  </object>
+  <object id="255" x="1152" y="16">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
