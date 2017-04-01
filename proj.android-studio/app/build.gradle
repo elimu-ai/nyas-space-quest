@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 21
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "org.literacyapp.nya"
-        minSdkVersion 10
-        targetSdkVersion 22
+        minSdkVersion 17
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -39,6 +39,14 @@ android {
             if (project.hasProperty("RELEASE_STORE_FILE")) {
                 signingConfig signingConfigs.release
             }
+        }
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
         }
     }
 }
