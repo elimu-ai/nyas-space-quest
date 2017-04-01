@@ -1,0 +1,27 @@
+<map height="20" nextobjectid="216" orientation="orthogonal" renderorder="right-down" tileheight="32" tilewidth="32" version="1.0" width="14">
+ <properties>
+  <property name="Gravity" value="-980" />
+  <property name="GroundFriction" value="120" />
+  <property name="Image" value="" />
+  <property name="Name" value="Puerto" />
+ </properties>
+ <tileset firstgid="1" name="properties" tilecount="10" tileheight="32" tilewidth="32">
+  <image height="64" source="propertiesTiles.png" width="160" />
+  <tile id="0">
+   <properties>
+    <property name="solid" value="true" />
+   </properties>
+  </tile>
+ </tileset>
+ <objectgroup name="objects">
+  <object id="1" name="spawn" x="56" y="224" />
+ </objectgroup>
+ <layer height="20" name="propertiesLayer" width="14">
+  <data compression="zlib" encoding="base64">
+   eJxjZGBgYCQDjwLqAnLDdFQf9fSRm7ZHij5yMABaOAAv
+  </data>
+ </layer>
+ <objectgroup name="platforms" />
+ <objectgroup name="tips" />
+ <objectgroup name="coins" />
+</map>

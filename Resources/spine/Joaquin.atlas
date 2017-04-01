@@ -1,0 +1,195 @@
+
+Joaquin.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+antebrazo1
+  rotate: false
+  xy: 700, 46
+  size: 56, 88
+  orig: 56, 88
+  offset: 0, 0
+  index: -1
+antebrazo2
+  rotate: false
+  xy: 758, 2
+  size: 85, 65
+  orig: 86, 67
+  offset: 0, 1
+  index: -1
+antepierna1
+  rotate: false
+  xy: 386, 125
+  size: 89, 166
+  orig: 89, 166
+  offset: 0, 0
+  index: -1
+antepierna2
+  rotate: true
+  xy: 403, 293
+  size: 81, 176
+  orig: 82, 176
+  offset: 0, 0
+  index: -1
+brazo1
+  rotate: false
+  xy: 589, 30
+  size: 109, 104
+  orig: 110, 104
+  offset: 1, 0
+  index: -1
+brazo2
+  rotate: false
+  xy: 262, 23
+  size: 117, 92
+  orig: 117, 92
+  offset: 0, 0
+  index: -1
+cabeza
+  rotate: false
+  xy: 2, 257
+  size: 258, 238
+  orig: 258, 238
+  offset: 0, 0
+  index: -1
+jetpack
+  rotate: false
+  xy: 262, 312
+  size: 139, 183
+  orig: 140, 183
+  offset: 1, 0
+  index: -1
+mano1
+  rotate: true
+  xy: 845, 4
+  size: 64, 83
+  orig: 65, 83
+  offset: 0, 0
+  index: -1
+mano2
+  rotate: false
+  xy: 844, 70
+  size: 83, 66
+  orig: 83, 67
+  offset: 0, 0
+  index: -1
+pecho
+  rotate: false
+  xy: 262, 117
+  size: 122, 193
+  orig: 122, 193
+  offset: 0, 0
+  index: -1
+pie1
+  rotate: true
+  xy: 921, 343
+  size: 152, 101
+  orig: 153, 102
+  offset: 1, 1
+  index: -1
+pie2
+  rotate: true
+  xy: 477, 136
+  size: 155, 100
+  orig: 155, 100
+  offset: 0, 0
+  index: -1
+pierna1
+  rotate: true
+  xy: 739, 212
+  size: 73, 142
+  orig: 73, 142
+  offset: 0, 0
+  index: -1
+pierna2
+  rotate: true
+  xy: 581, 215
+  size: 78, 156
+  orig: 79, 156
+  offset: 1, 0
+  index: -1
+v2/antebrazo1
+  rotate: true
+  xy: 386, 70
+  size: 53, 88
+  orig: 56, 88
+  offset: 3, 0
+  index: -1
+v2/antebrazo2
+  rotate: false
+  xy: 758, 69
+  size: 84, 67
+  orig: 86, 67
+  offset: 0, 0
+  index: -1
+v2/antepierna1
+  rotate: true
+  xy: 758, 287
+  size: 89, 161
+  orig: 89, 166
+  offset: 0, 5
+  index: -1
+v2/antepierna2
+  rotate: true
+  xy: 581, 295
+  size: 73, 175
+  orig: 82, 176
+  offset: 3, 0
+  index: -1
+v2/brazo1
+  rotate: false
+  xy: 477, 30
+  size: 110, 104
+  orig: 110, 104
+  offset: 0, 0
+  index: -1
+v2/brazo2
+  rotate: true
+  xy: 921, 224
+  size: 117, 92
+  orig: 117, 92
+  offset: 0, 0
+  index: -1
+v2/cabeza
+  rotate: false
+  xy: 2, 17
+  size: 258, 238
+  orig: 258, 238
+  offset: 0, 0
+  index: -1
+v2/pecho
+  rotate: true
+  xy: 403, 376
+  size: 119, 191
+  orig: 122, 193
+  offset: 0, 0
+  index: -1
+v2/pie1
+  rotate: false
+  xy: 757, 378
+  size: 156, 117
+  orig: 166, 136
+  offset: 10, 4
+  index: -1
+v2/pie2
+  rotate: false
+  xy: 596, 370
+  size: 159, 125
+  orig: 167, 145
+  offset: 8, 11
+  index: -1
+v2/pierna1
+  rotate: true
+  xy: 737, 138
+  size: 72, 138
+  orig: 73, 142
+  offset: 0, 3
+  index: -1
+v2/pierna2
+  rotate: true
+  xy: 579, 136
+  size: 77, 156
+  orig: 79, 156
+  offset: 1, 0
+  index: -1

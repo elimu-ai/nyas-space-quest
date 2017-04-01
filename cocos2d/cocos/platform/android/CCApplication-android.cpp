@@ -184,6 +184,10 @@ LanguageType Application::getCurrentLanguage()
     {
         ret = LanguageType::BULGARIAN;
     }
+    else if (0 == strcmp("sw", pLanguageName))
+    {
+        ret = LanguageType::SWAHILI;
+    }
     return ret;
 }
 

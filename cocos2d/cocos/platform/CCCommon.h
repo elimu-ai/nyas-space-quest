@@ -69,7 +69,8 @@ enum class LanguageType
     TURKISH,
     UKRAINIAN,
     ROMANIAN,
-    BULGARIAN
+    BULGARIAN,
+	SWAHILI
 };
 
 // END of platform group
