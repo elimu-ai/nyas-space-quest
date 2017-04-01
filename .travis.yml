@@ -1,28 +1,42 @@
-## Handle git submodules yourself
-#git:
-#  submodules: false
-#
-#before_install:
-#  - git clone http://github.com/cocos2d/cocos2d-x.git
-#  - cd ./cocos2d-x
-#  - python download-deps.py -r yes
-#  - git submodule update --init
-#  - mkdir ~/.cocos
-#  - cp ../local_cfg.json ~/.cocos/local_cfg.json
-#  - cat ~/.cocos/local_cfg.json
-#  - cd ./tools/cocos2d-console/
-#  - python download-bin.py -r yes
-#  - cd ../../
-#  - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
-#  - export PATH=$PATH:$COCOS_CONSOLE_ROOT
-#  - export COCOS_TEMPLATES_ROOT=`pwd`/templates
-#  - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
-#  - export ANT_ROOT=/usr/share/ant/bin
-#  - export PATH=$PATH:$ANT_ROOT
-#  - cd ..
-#  - echo `pwd`
-#  - printenv
-#  - cocos -v
+language: android
+
+# Handle git submodules yourself
+git:
+    submodules: false
+
+install:
+# NDK configuration
+    - printenv
+    - echo `pwd`
+    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+    - chmod a+x android-ndk-r10d-linux-x86_64.bin
+    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+    - export NDK_ROOT=`pwd`/android-ndk-r10d
+    - echo $NDK_ROOT
+    - export PATH=$PATH:$NDK_ROOT
+    - echo $PATH
+
+# Android SDK configuration
+    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+
+# git submodule
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
+
+# cocos setup 
+    - cd ./cocos2d
+    - python download-deps.py --remove-download=yes
+    - python ./setup.py
+    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+    - export ANT_ROOT=/usr/share/ant/bin
+    - export PATH=$PATH:$ANT_ROOT
+    - printenv
 
 script:
-  - cocos compile -p android
+    - cd ..
+    - cocos compile -p android -j 8
