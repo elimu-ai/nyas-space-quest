@@ -47,6 +47,7 @@ cocos2d/cocos/platform/android/java/res/
 
 # proj.android-studio
 *.iml
+.idea/
 proj.android-studio/app/assets/
 proj.android-studio/app/obj/
 proj.android-studio/app/libs/armeabi/
