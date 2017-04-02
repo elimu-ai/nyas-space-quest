@@ -2,8 +2,6 @@
 git:
   submodules: false
 
-language: android
-
 jdk:
   - oraclejdk8
 
@@ -15,6 +13,8 @@ android:
     - extra-android-m2repository
 
 before_install:
+  - printenv
+
   # Android SDK configuration
   - export ANDROID_SDK_ROOT=/usr/local/android-sdk
   - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
@@ -40,7 +40,6 @@ before_install:
   - printenv
   # Do you agree to sent the data? [Y]es, [N]o
   - yes Y | cocos -v
-  - cocos -v
 
 script:
   - cocos compile -p android
