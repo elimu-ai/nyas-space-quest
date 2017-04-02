@@ -2,11 +2,11 @@
 git:
   submodules: false
 
-# Android SDK configuration
+before_install:
+  # Android SDK configuration
   - export ANDROID_SDK_ROOT=/usr/local/android-sdk
   - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
-before_install:
   - git clone --branch cocos2d-x-3.14.1 http://github.com/cocos2d/cocos2d-x.git
   - cd ./cocos2d-x
   - python download-deps.py -r yes
