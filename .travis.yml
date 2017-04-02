@@ -15,22 +15,22 @@ android:
     - extra-android-m2repository
 
 before_install:
+  # Android SDK configuration
   - printenv
+  - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+  - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
-  # NDK configuration
+  # Android NDK configuration
   - printenv
   - echo `pwd`
-  - wget http://dl.google.com/android/ndk/android-ndk-r14b-linux-x86_64.bin
-  - chmod a+x android-ndk-r14b-linux-x86_64.bin
-  - ./android-ndk-r14b-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
-  - export NDK_ROOT=`pwd`/android-ndk-r14b
+  - wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
+  - chmod a+x https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
+  - unzip android-ndk-r14b-linux-x86_64.zip -d $ANDROID_SDK_ROOT/ndk-bundle
+  - ls -al $ANDROID_SDK_ROOT/ndk-bundle
+  - export NDK_ROOT=$ANDROID_SDK_ROOT/ndk-bundle
   - echo $NDK_ROOT
   - export PATH=$PATH:$NDK_ROOT
   - echo $PATH
-
-  # Android SDK configuration
-  - export ANDROID_SDK_ROOT=/usr/local/android-sdk
-  - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
   - git clone --branch cocos2d-x-3.14.1 http://github.com/cocos2d/cocos2d-x.git
   - cd ./cocos2d-x
