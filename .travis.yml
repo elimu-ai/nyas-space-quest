@@ -4,6 +4,7 @@ git:
 
 before_install:
   - git clone http://github.com/cocos2d/cocos2d-x.git
+  - git checkout tags/cocos2d-x-3.14.1
   - cd ./cocos2d-x
   - python download-deps.py -r yes
   - git submodule update --init
@@ -22,7 +23,7 @@ before_install:
   - cd ..
   - echo `pwd`
   - printenv
-  - cocos -v
+  - cocos -v -r yes
 
 script:
   - cocos compile -p android
