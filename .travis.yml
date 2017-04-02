@@ -2,6 +2,10 @@
 git:
   submodules: false
 
+android:
+  components:
+    - android-23
+
 before_install:
   # Android SDK configuration
   - export ANDROID_SDK_ROOT=/usr/local/android-sdk
