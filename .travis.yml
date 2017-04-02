@@ -3,8 +3,7 @@ git:
   submodules: false
 
 before_install:
-  - git clone http://github.com/cocos2d/cocos2d-x.git
-  - git checkout tags/cocos2d-x-3.14.1
+  - git clone --branch cocos2d-x-3.14.1 http://github.com/cocos2d/cocos2d-x.git
   - cd ./cocos2d-x
   - python download-deps.py -r yes
   - git submodule update --init
