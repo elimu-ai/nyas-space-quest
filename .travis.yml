@@ -2,6 +2,8 @@
 git:
   submodules: false
 
+language: android
+
 jdk:
   - oraclejdk8
 
@@ -14,6 +16,17 @@ android:
 
 before_install:
   - printenv
+
+  # NDK configuration
+  - printenv
+  - echo `pwd`
+  - wget http://dl.google.com/android/ndk/android-ndk-r14b-linux-x86_64.bin
+  - chmod a+x android-ndk-r14b-linux-x86_64.bin
+  - ./android-ndk-r14b-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+  - export NDK_ROOT=`pwd`/android-ndk-r14b
+  - echo $NDK_ROOT
+  - export PATH=$PATH:$NDK_ROOT
+  - echo $PATH
 
   # Android SDK configuration
   - export ANDROID_SDK_ROOT=/usr/local/android-sdk
