@@ -21,6 +21,7 @@ public:
     static Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(Menug);
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event *e);
 
 private:
     void setupDirector();

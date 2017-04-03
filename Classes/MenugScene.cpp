@@ -38,8 +38,8 @@ bool Menug::init()
 	setupNave();
 	setupButtons();
 	setupLabel();
-	
-	if (CCApplication::sharedApplication()->getCurrentLanguage() == LanguageType::SWAHILI)
+	this->setKeypadEnabled(true);
+	if (CCApplication::getInstance()->getCurrentLanguage() == LanguageType::SWAHILI)
 	{
 		CCLOG("Swahili language device found");
 	}
@@ -216,6 +216,11 @@ void Menug::loadOptions()
 	//Director::getInstance()->replaceScene(TransitionFade::create(1.0f, optionsScene));
 }
 
+void Menug::onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event *event)
+{
+	if (keycode == cocos2d::EventKeyboard::KeyCode::KEY_BACK)
+		Director::getInstance()->end();
+}
 
 void Menug::exitAkua()
 {
