@@ -7,6 +7,7 @@
 //
 
 #include "LoadingScene.h"
+#include "MarsScene.h"
 
 Scene * Loading::createScene(int sceneNumber)
 {
@@ -39,9 +40,7 @@ void Loading::loadLvl(float dt)
 	Scene * scene;
 	if (sceneNumber == kNumberIdA)
 	{
-		//scene = Training::createScene();
+		scene = Mars::createScene();
 	}
-
-	//Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(0.5, scene));
-	
+	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(0.5, scene));
 }

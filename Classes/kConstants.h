@@ -22,4 +22,8 @@
 #define kBitacora -2
 #define kPuerto -1
 
+//Nya
+#define kNumberIdA 10
+
+
 #endif

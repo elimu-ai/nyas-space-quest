@@ -40,7 +40,7 @@ void Player::initPlayer(TMXTiledMap * tmap)
     setupBoundary();
 
 	auto ud = UserDefault::getInstance();
-	if (ud->getIntegerForKey("levelUnlock", 0) >= 1)
+	if (ud->getIntegerForKey("levelUnlock", 1) >= 0)
 	{
 		setupJetParticle();
 		jumpsEnabled = 2;
@@ -116,7 +116,7 @@ void Player::setupSkNode()
 	skNode->setMix("jump_down", "run", 0.1f);
 
 	auto ud = UserDefault::getInstance();
-	int levelUnlock = ud->getIntegerForKey("levelUnlock", 0);
+	int levelUnlock = ud->getIntegerForKey("levelUnlock", 1);
 	if (levelUnlock <= 0)
 	{
 		skNode->setSkin("v1");

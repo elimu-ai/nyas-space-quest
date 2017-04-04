@@ -47,25 +47,13 @@ bool GameMap::init()
 
 	setupDirector();
 	setupGameplayNode();
-	setupButtonExit();
+	//setupButtonExit();
 	setupLabels();
 	setupParallax();
 	setupKeyListener();
 
-	//SDL
-	/*
-	SDL_Init(SDL_INIT_GAMECONTROLLER);
-	SDL_GameController* controller;
-	for (int i = 0; i < SDL_NumJoysticks(); i++)
-	{
-		if (SDL_IsGameController(i))
-		{
-			controller = SDL_GameControllerOpen(i);
-			break;
-		}
-	}*/
-
 	//touch listener
+	
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_2(GameMap::onTouchBegan, this);
@@ -134,14 +122,14 @@ void GameMap::setupButtonExit()
 void GameMap::setupLabels()
 {
 	//score
-	scoreLabel = Label::createWithTTF("Estrellas: 0%", "fonts/Akashi.ttf", 18);
+	scoreLabel = Label::createWithTTF("Stars: 0", "fonts/Andika-Regular.ttf", 24);
 	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
 	scoreLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 20));
 	scoreLabel->enableGlow(Color4B::BLACK);
 	this->addChild(scoreLabel);
 
-	tipsLabel = Label::createWithTTF("Tips: 0%", "fonts/Akashi.ttf", 18);
+	tipsLabel = Label::createWithTTF("#: 0", "fonts/Andika-Regular.ttf", 24);
 	tipsLabel->setAnchorPoint(Vec2(0, 0.5));
 	tipsLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 40));
@@ -398,27 +386,6 @@ void GameMap::onTouchEnded(Touch *touch, Event *unused_event)
 
 void GameMap::update(float dt)
 {
-	//SDL
-	/*
-	SDL_Event ev;
-	while (SDL_PollEvent(&ev))
-	{
-		if (ev.type == SDL_CONTROLLERBUTTONDOWN)
-		{
-			if (ev.cbutton.button == SDL_CONTROLLER_BUTTON_A)
-				actionKeyPressed();
-			if (ev.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_LEFT)
-				player->accelerateHorizontal(false);
-			if (ev.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
-				player->accelerateHorizontal(true);
-		}
-		else if (ev.type == SDL_CONTROLLERBUTTONUP)
-		{
-			if (ev.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_LEFT || ev.cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
-				player->horizontalAccel = 0;
-		}
-	}*/
-
 	auto audio = SimpleAudioEngine::getInstance();
 	if (pauseTimer > 0)
 	{
@@ -457,7 +424,7 @@ void GameMap::update(float dt)
 				player->pausePlayer();
 				pauseTimer = 0;
 			}
-			sprintf(scoreString, "Tips: %.2f%s", 100 * (grabbedTips / totalTips), "\%");
+			sprintf(scoreString, "#: %i", grabbedTips);
 			tipsLabel->setString(scoreString); 
 			if (tipTextSprite->getTag() != -1) //is popping up
 			{
@@ -490,8 +457,9 @@ void GameMap::update(float dt)
 			{
 				coin->consume();
 				grabbedCoins++;
+				
 			}
-			sprintf(scoreString, "Estrellas: %.2f%s", 100 * (grabbedCoins / totalCoins), "\%");
+			sprintf(scoreString, "Stars: %i", grabbedCoins);
 			scoreLabel->setString(scoreString);
 		}
 	}
@@ -582,9 +550,9 @@ void GameMap::showTotal()
 	float totalStars = ud->getFloatForKey("stars0", 0.0f) + ud->getFloatForKey("stars1", 0.0f) + ud->getFloatForKey("stars2", 0.0f) + ud->getFloatForKey("stars3", 0.0f);
 	float totalTips = ud->getFloatForKey("tips0", 0.0f) + ud->getFloatForKey("tips1", 0.0f) + ud->getFloatForKey("tips2", 0.0f) + ud->getFloatForKey("tips3", 0.0f);
 	char scoreString[30];
-	sprintf(scoreString, "Total de Estrellas: %.2f%s", totalStars/4, "\%");
+	sprintf(scoreString, "Stars: 0");
 	scoreLabel->setString(scoreString);
-	sprintf(scoreString, "Total de Tips: %.2f%s", totalTips / 4, "\%");
+	sprintf(scoreString, "#:0");
 	tipsLabel->setString(scoreString);
 }
 

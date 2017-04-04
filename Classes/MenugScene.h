@@ -30,7 +30,7 @@ private:
     void setupLogo();
     void setupNave();
     void setupButtons();
-    void setupLabel();
+    void setupVersionLabel();
     
     void loadGame();
 	void loadBitacora();
