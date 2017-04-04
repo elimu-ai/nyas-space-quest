@@ -6,7 +6,7 @@
 //
 //
 #include "GameMapScene.h"
-//#include "PuertoScene.h"
+#include "MenugScene.h"
 
 #include "SimpleAudioEngine.h"
 #include "ui/CocosGUI.h"
@@ -86,7 +86,8 @@ void GameMap::setupTilemap(std::string map)
 	propLayer = tiledMap->getLayer("propertiesLayer");
 #ifndef kTileDebug
 	propLayer->setVisible(false);
-#endif // !kTileDebug
+#endif 
+	// !kTileDebug
 	//auto planetLabel = Label::createWithTTF(tiledMap->getProperty("Name").asString(), "fonts/Akashi.ttf", 18);
 	//addChild(planetLabel);
 	//planetLabel->setPosition(300, 50);
@@ -312,6 +313,14 @@ void GameMap::onKeyPressed(EventKeyboard::KeyCode keyCode, cocos2d::Event *event
 
 void GameMap::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
 {
+	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_BACK)
+	{
+		Scene * scene = Menug::createScene();
+		
+		Director::getInstance()->replaceScene(TransitionFadeBL::create(0.5, scene));
+	}
+	//Director::getInstance()->end();
+
     keys.erase(keyCode);
     switch (keyCode) {
         case RIGHT_KEY:
@@ -334,6 +343,7 @@ void GameMap::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *even
             break;
 	}
 }
+
 
 //Touches
 int joystickTouchId = -1;

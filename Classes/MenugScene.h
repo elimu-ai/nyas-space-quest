@@ -33,9 +33,8 @@ private:
     void setupVersionLabel();
     
     void loadGame();
-	void loadBitacora();
     void exitAkua();
-	void loadOptions();
+
     
     Size visibleSize;
     Size winSize;

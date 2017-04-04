@@ -57,8 +57,11 @@ void Menug::loadAudio()
 {
     auto audio = SimpleAudioEngine::getInstance();
     audio->preloadEffect("sfx/button.wav");
-	audio->stopBackgroundMusic();
-	audio->playBackgroundMusic("sfx/marsMusic.mp3", true);
+	if (!audio->isBackgroundMusicPlaying())
+	{
+		audio->stopBackgroundMusic();
+		audio->playBackgroundMusic("sfx/marsMusic.mp3", true);
+	}
 }
 
 void Menug::cacheImages()

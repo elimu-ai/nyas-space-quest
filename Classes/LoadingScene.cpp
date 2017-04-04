@@ -42,5 +42,5 @@ void Loading::loadLvl(float dt)
 	{
 		scene = Mars::createScene();
 	}
-	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(0.5, scene));
+	Director::getInstance()->replaceScene(TransitionFadeTR::create(0.5, scene));
 }

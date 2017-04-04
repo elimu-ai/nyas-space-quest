@@ -67,12 +67,12 @@ public:
 	int levelId = 0;
 	float zoomFactor = 0.85f;
 	bool verticalParallaxEnabled = true;
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event *e);
     
 private:
     void centerCamera(Vec2 position);
     
     void onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event);
-    void onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event);
     std::map<EventKeyboard::KeyCode, int > keys;
     int horizontalKeysActive = 0;
 	bool onTouchBegan(Touch * touch, Event * event);
