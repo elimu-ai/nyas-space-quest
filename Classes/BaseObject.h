@@ -1,6 +1,6 @@
 //
 //  BaseObject.h
-//  akua
+//  Nya
 //
 //  Created by German Torres on 9/8/15.
 //

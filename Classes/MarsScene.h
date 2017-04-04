@@ -1,6 +1,6 @@
 //
 //  MarsScene.hpp
-//  akua
+// Nya
 //
 //  Created by German Torres on 12/9/15.
 //

@@ -1,6 +1,6 @@
 //
 //  Coin.cpp
-//  akua
+// Nya
 //
 //  Created by German Torres on 8/3/15.
 //
