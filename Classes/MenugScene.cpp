@@ -155,7 +155,7 @@ void Menug::setupButtons()
 
 void Menug::setupVersionLabel()
 {
-    Label* label1 = Label::createWithTTF("Version 0.1", "fonts/Andika-Regular.ttf", 20);
+    Label* label1 = Label::createWithTTF("Version 0.1", "fonts/AndikaLowerCase-Regular_5dp.ttf", 20);
     label1->setPosition(Vec2(visibleSize.width - label1->getContentSize().width / 2 - 20, 20));
     label1->setColor(Color3B::WHITE);
     this->addChild(label1);
