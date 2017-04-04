@@ -13,7 +13,7 @@
 #include "spine/spine.h"
 #include <string>
 #include <sstream>
-//#include <SDL.h>
+#include "LanguageManager.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -122,7 +122,7 @@ void GameMap::setupButtonExit()
 void GameMap::setupLabels()
 {
 	//score
-	scoreLabel = Label::createWithTTF("Stars: 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
+	scoreLabel = Label::createWithTTF(LanguageManager::getString("stars") + ": 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
 	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
 	scoreLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 20));
@@ -453,14 +453,14 @@ void GameMap::update(float dt)
 	{
 		if (player->checkIntersect(coin))
 		{
-			char scoreString[20];
+			char scoreString[20]; 
 			if (!coin->consumed)
 			{
 				coin->consume();
 				grabbedCoins++;
 				
 			}
-			sprintf(scoreString, "Stars: %i", grabbedCoins);
+			sprintf(scoreString, "%s: %i", LanguageManager::getString("stars").c_str(), grabbedCoins);
 			scoreLabel->setString(scoreString);
 		}
 	}

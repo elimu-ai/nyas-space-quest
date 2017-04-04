@@ -10,6 +10,7 @@
 #include "LoadingScene.h"
 #include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
+#include "LanguageManager.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -41,6 +42,7 @@ bool Menug::init()
 	{
 		CCLOG("Swahili language device found");
 	}
+	auto lm = LanguageManager::getInstance();
 	return true;
 }
 
@@ -129,7 +131,7 @@ void Menug::setupButtons()
 
 void Menug::setupVersionLabel()
 {
-    Label* label1 = Label::createWithTTF("Version 0.1", "fonts/AndikaLowerCase-Regular_5dp.ttf", 20);
+    Label* label1 = Label::createWithTTF(LanguageManager::getString("language").c_str(), "fonts/AndikaLowerCase-Regular_5dp.ttf", 10);
     label1->setPosition(Vec2(visibleSize.width - label1->getContentSize().width / 2 - 20, 20));
     label1->setColor(Color3B::WHITE);
     this->addChild(label1);
