@@ -87,8 +87,7 @@ private:
     Label * scoreLabel;
     float totalCoins = 0;
     int grabbedCoins = 0;
-    
-    Label * tipsLabel;
+
     float totalTips = 0;
     int grabbedTips = 0;
 

@@ -47,7 +47,6 @@ bool GameMap::init()
 
 	setupDirector();
 	setupGameplayNode();
-	//setupButtonExit();
 	setupLabels();
 	setupParallax();
 	setupKeyListener();
@@ -129,13 +128,6 @@ void GameMap::setupLabels()
 		origin.y + visibleSize.height - 20));
 	scoreLabel->enableGlow(Color4B::BLACK);
 	this->addChild(scoreLabel);
-
-	tipsLabel = Label::createWithTTF("#: 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
-	tipsLabel->setAnchorPoint(Vec2(0, 0.5));
-	tipsLabel->setPosition(Vec2(origin.x + 10,
-		origin.y + visibleSize.height - 40));
-	tipsLabel->enableGlow(Color4B::BLACK);
-	this->addChild(tipsLabel);
 }
 
 void GameMap::setupParallax()
@@ -434,8 +426,7 @@ void GameMap::update(float dt)
 				player->pausePlayer();
 				pauseTimer = 0;
 			}
-			sprintf(scoreString, "#: %i", grabbedTips);
-			tipsLabel->setString(scoreString); 
+ 
 			if (tipTextSprite->getTag() != -1) //is popping up
 			{
 				auto popup = MoveTo::create(0.2f, Vec2(tipTextSprite->getPositionX(), 125.0f));
@@ -563,7 +554,7 @@ void GameMap::showTotal()
 	sprintf(scoreString, "Stars: 0");
 	scoreLabel->setString(scoreString);
 	sprintf(scoreString, "#:0");
-	tipsLabel->setString(scoreString);
+
 }
 
 void GameMap::hurtPlayer()
