@@ -123,14 +123,14 @@ void GameMap::setupButtonExit()
 void GameMap::setupLabels()
 {
 	//score
-	scoreLabel = Label::createWithTTF("Stars: 0", "fonts/Andika-Regular.ttf", 24);
+	scoreLabel = Label::createWithTTF("Stars: 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
 	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
 	scoreLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 20));
 	scoreLabel->enableGlow(Color4B::BLACK);
 	this->addChild(scoreLabel);
 
-	tipsLabel = Label::createWithTTF("#: 0", "fonts/Andika-Regular.ttf", 24);
+	tipsLabel = Label::createWithTTF("#: 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
 	tipsLabel->setAnchorPoint(Vec2(0, 0.5));
 	tipsLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 40));
