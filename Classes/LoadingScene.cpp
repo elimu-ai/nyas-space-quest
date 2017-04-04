@@ -1,6 +1,6 @@
 //
 //  LoadingScene.cpp
-//  akua
+//  Nya
 //
 //  Created by German Torres on 11/18/15.
 //

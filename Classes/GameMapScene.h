@@ -1,6 +1,6 @@
 //
 //  GameScene.h
-//  scrollerTest.x
+//  
 //
 //  Created by German Torres on 7/7/15.
 //
