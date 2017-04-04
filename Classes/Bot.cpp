@@ -24,7 +24,7 @@ Bot::~Bot(){}
 
 void Bot::initBot()
 {
-	botSprite = Sprite::createWithSpriteFrameName("botPerfil.png");
+	botSprite = Sprite::createWithSpriteFrameName("botProfile.png");
     auto moveBy = MoveBy::create(1, Vec2(0, 3));
     auto moveBack = moveBy->reverse();
     auto seq = Sequence::create(moveBy,DelayTime::create(0.3f), moveBack,DelayTime::create(0.2f), nullptr);
@@ -48,12 +48,12 @@ void Bot::update(Vec2 playerPosition, float dt)
 	if (t2 >= 0 && !isOpen)
 	{
 		isOpen = true;
-		botSprite->setSpriteFrame(cache->getSpriteFrameByName("botPerfilOpen.png"));
+		botSprite->setSpriteFrame(cache->getSpriteFrameByName("botProfileOpen.png"));
 	}
 	if (t2 <= 0 && isOpen)
 	{
 		isOpen = false;
-		botSprite->setSpriteFrame(cache->getSpriteFrameByName("botPerfil.png"));
+		botSprite->setSpriteFrame(cache->getSpriteFrameByName("botProfile.png"));
 	}
 	if (t2 >= 0)
 	{
@@ -74,7 +74,7 @@ void Bot::update(Vec2 playerPosition, float dt)
 void Bot::bubbleMode(Vec2 playerPosition)
 {
 	auto cache = SpriteFrameCache::getInstance();
-	botSprite->setSpriteFrame(cache->getSpriteFrameByName("botPerfil.png"));
+	botSprite->setSpriteFrame(cache->getSpriteFrameByName("botProfile.png"));
 	isOpen = false;
 	auto moveBot = MoveTo::create(0.1, playerPosition + Vec2(0, 60));
 	auto growBot = ScaleTo::create(0.1, 2.55);
