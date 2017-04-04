@@ -1,6 +1,6 @@
 //
 //  Tip.h
-//  akua
+// Nya
 //
 //  Created by German Torres on 7/30/15.
 //  object for displaying tips 

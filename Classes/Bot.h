@@ -1,6 +1,6 @@
 //
 //  Bot.h
-//  akua
+//  Nya
 //
 //  Created by German Torres on 7/31/15.
 //  bot bot character

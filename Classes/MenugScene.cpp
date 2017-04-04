@@ -1,6 +1,6 @@
 //
 //  MenuScene.cpp
-//  scrollerTest.x
+//  
 //
 //  Created by German Torres on 7/22/15.
 //

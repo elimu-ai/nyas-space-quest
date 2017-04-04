@@ -1,6 +1,6 @@
 //
 //  LoadingScene.h
-//  akua
+// Nya
 //
 //  Created by German Torres on 11/18/15.
 //  This is the scene for the space port thingy
