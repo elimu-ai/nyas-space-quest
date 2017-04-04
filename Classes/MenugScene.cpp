@@ -123,34 +123,8 @@ void Menug::setupButtons()
     });
     buttonPlay->setScale(0.9f);
     buttonPlay->setPosition(Vec2(origin.x + 3* visibleSize.width / 4, origin.y + visibleSize.height / 2 - 50));
-    
-   
-    
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
-    auto buttonExit = ui::Button::create("botonSalir.png", "botonSalirSel.png", "botonSalir.png", ui::Widget::TextureResType::PLIST);
-    buttonExit->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type)
-        {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-            {
-                auto audio = SimpleAudioEngine::getInstance();
-                audio->playEffect("sfx/button.wav");
-                Menug::exitAkua();
-                break;
-            }
-            default:
-                break;
-        }
-    });
-    buttonExit->setScale(0.4f);
-    buttonExit->setPosition(Vec2(origin.x + 60, origin.y + 40));
-#endif	
+
     this->addChild(buttonPlay);
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
-    //this->addChild(buttonExit);
-#endif
 }
 
 void Menug::setupVersionLabel()

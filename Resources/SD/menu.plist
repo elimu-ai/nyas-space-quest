@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{105,44}</string>
                 <key>textureRect</key>
-                <string>{{140,262},{99,40}}</string>
+                <string>{{140,216},{99,40}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>botonJugarSel.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{105,44}</string>
                 <key>textureRect</key>
-                <string>{{2,362},{101,42}}</string>
+                <string>{{140,172},{101,42}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,102}</string>
                 <key>textureRect</key>
-                <string>{{2,262},{136,98}}</string>
+                <string>{{2,172},{136,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -54,15 +54,15 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-0.5,0}</string>
+                <string>{-0.5,-8}</string>
                 <key>spriteSize</key>
-                <string>{258,166}</string>
+                <string>{230,168}</string>
                 <key>spriteSourceSize</key>
                 <string>{373,298}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{258,166}}</string>
+                <string>{{2,2},{230,168}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
         </dict>
         <key>metadata</key>
@@ -76,9 +76,9 @@
             <key>realTextureFileName</key>
             <string>menu.png</string>
             <key>size</key>
-            <string>{182,406}</string>
+            <string>{243,272}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f0119215abed0bfe2a5b025153b37657:6fc249da80bc459265f55654f111409f:d8262aade98c5042ace66a849ab96659$</string>
+            <string>$TexturePacker:SmartUpdate:c1940cad3125d7399f9335e6c65b5320:58ee99c17af6c2003b600aec71b9ec23:d8262aade98c5042ace66a849ab96659$</string>
             <key>textureFileName</key>
             <string>menu.png</string>
         </dict>
