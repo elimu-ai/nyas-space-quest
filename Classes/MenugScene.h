@@ -21,6 +21,7 @@ public:
     static Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(Menug);
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event *e);
 
 private:
     void setupDirector();
@@ -29,12 +30,11 @@ private:
     void setupLogo();
     void setupNave();
     void setupButtons();
-    void setupLabel();
+    void setupVersionLabel();
     
     void loadGame();
-	void loadBitacora();
     void exitAkua();
-	void loadOptions();
+
     
     Size visibleSize;
     Size winSize;

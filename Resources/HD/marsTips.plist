@@ -9,13 +9,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-4,11}</string>
+                <string>{-4,12}</string>
                 <key>spriteSize</key>
-                <string>{186,200}</string>
+                <string>{190,206}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{878,654},{186,200}}</string>
+                <string>{{492,914},{190,206}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -32,22 +32,22 @@
                 <key>textureRect</key>
                 <string>{{4,4},{890,126}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>tipMars2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{4,9}</string>
+                <string>{2,10}</string>
                 <key>spriteSize</key>
-                <string>{182,188}</string>
+                <string>{186,194}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{510,808},{182,188}}</string>
+                <string>{{702,914},{186,194}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>tipMars2Text.png</key>
             <dict>
@@ -60,22 +60,22 @@
                 <key>spriteSourceSize</key>
                 <string>{889,125}</string>
                 <key>textureRect</key>
-                <string>{{134,4},{890,126}}</string>
+                <string>{{4,134},{890,126}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>tipMars3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,5}</string>
+                <string>{-2,6}</string>
                 <key>spriteSize</key>
-                <string>{172,180}</string>
+                <string>{174,182}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{702,808},{172,180}}</string>
+                <string>{{238,1072},{174,182}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{889,125}</string>
                 <key>textureRect</key>
-                <string>{{264,4},{890,126}}</string>
+                <string>{{4,264},{890,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -101,11 +101,11 @@
                 <key>spriteOffset</key>
                 <string>{0,4}</string>
                 <key>spriteSize</key>
-                <string>{250,150}</string>
+                <string>{250,154}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{454,654},{250,150}}</string>
+                <string>{{238,914},{250,154}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{889,125}</string>
                 <key>textureRect</key>
-                <string>{{264,134},{890,126}}</string>
+                <string>{{4,394},{890,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -129,13 +129,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-9,0}</string>
+                <string>{-8,2}</string>
                 <key>spriteSize</key>
-                <string>{148,162}</string>
+                <string>{150,166}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{708,654},{148,162}}</string>
+                <string>{{4,1104},{150,166}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -150,7 +150,7 @@
                 <key>spriteSourceSize</key>
                 <string>{889,125}</string>
                 <key>textureRect</key>
-                <string>{{264,264},{890,126}}</string>
+                <string>{{4,524},{890,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -159,13 +159,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,9}</string>
+                <string>{-2,10}</string>
                 <key>spriteSize</key>
-                <string>{242,96}</string>
+                <string>{242,102}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{264,886},{242,96}}</string>
+                <string>{{416,1108},{242,102}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -180,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{889,125}</string>
                 <key>textureRect</key>
-                <string>{{264,394},{890,126}}</string>
+                <string>{{4,654},{890,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -189,15 +189,15 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-3,-12}</string>
+                <string>{-2,-12}</string>
                 <key>spriteSize</key>
-                <string>{228,186}</string>
+                <string>{230,186}</string>
                 <key>spriteSourceSize</key>
                 <string>{250,250}</string>
                 <key>textureRect</key>
-                <string>{{264,654},{228,186}}</string>
+                <string>{{4,914},{230,186}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>tipMars7Text.png</key>
             <dict>
@@ -210,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{889,125}</string>
                 <key>textureRect</key>
-                <string>{{264,524},{890,126}}</string>
+                <string>{{4,784},{890,126}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -219,14 +219,18 @@
         <dict>
             <key>format</key>
             <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
             <key>realTextureFileName</key>
-            <string>marsTips.gys</string>
+            <string>marsTips.png</string>
             <key>size</key>
-            <string>{1158,994}</string>
+            <string>{898,1258}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:3c4fc0f67d52c9099a0d8d746211d92a:f06f347fd04922edbbe90ee4b83e23ae:b89c8afa1a181d3e6f49aa9cad6004ba$</string>
+            <string>$TexturePacker:SmartUpdate:34bccdeca3e64564bfe31dc7eddd8b61:f06f347fd04922edbbe90ee4b83e23ae:d47bd4066b9b1c155b7cb9e13434265e$</string>
             <key>textureFileName</key>
-            <string>marsTips.gys</string>
+            <string>marsTips.png</string>
         </dict>
     </dict>
 </plist>

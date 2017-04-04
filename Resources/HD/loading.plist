@@ -24,14 +24,18 @@
         <dict>
             <key>format</key>
             <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
             <key>realTextureFileName</key>
-            <string>loading.gys</string>
+            <string>loading.png</string>
             <key>size</key>
             <string>{898,508}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:73b632393553453da8bfba99958c1be3:d1dfe55e7a0eb270d708072907e22695:b74151d162d50e6419a4d0698c79cbdc$</string>
+            <string>$TexturePacker:SmartUpdate:827ff7c3b34d6e8fdc083a01b1edb2bc:b2982f3b0f1163cbbd7b6e32cee656e6:10835eda6669db2948c7877fc882b595$</string>
             <key>textureFileName</key>
-            <string>loading.gys</string>
+            <string>loading.png</string>
         </dict>
     </dict>
 </plist>
