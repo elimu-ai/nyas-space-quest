@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>botonJugar.png</key>
+            <key>buttonPlay.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>botonJugarSel.png</key>
+            <key>buttonPlaySel.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -78,7 +78,7 @@
             <key>size</key>
             <string>{243,272}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c1940cad3125d7399f9335e6c65b5320:58ee99c17af6c2003b600aec71b9ec23:d8262aade98c5042ace66a849ab96659$</string>
+            <string>$TexturePacker:SmartUpdate:4b66287377b4d1dda05ea0f3b3f0e4c1:58ee99c17af6c2003b600aec71b9ec23:d8262aade98c5042ace66a849ab96659$</string>
             <key>textureFileName</key>
             <string>menu.png</string>
         </dict>
