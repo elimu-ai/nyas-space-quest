@@ -8,16 +8,16 @@
 
 #ifndef androidFix_h
 #define androidFix_h
-//motherfucking android doesnt have to_string
+//android doesnt have to_string
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 namespace std
 {
-    template < typename T > std::string to_string(const T& n)
-    {
-        std::ostringstream ss;
-        ss << n;
-        return ss.str();
-    }
+	template < typename T > std::string to_string(const T& n)
+	{
+		std::ostringstream ss;
+		ss << n;
+		return ss.str();
+	}
 }
 #endif
 

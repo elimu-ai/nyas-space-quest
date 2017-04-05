@@ -24,7 +24,7 @@ USING_NS_CC;
 class GameMap : public Layer
 {
 public:
-    static Scene* createScene(std::string map);
+	static Scene* createScene(std::string map);
 	void setupDirector();
 	void setupGameplayNode();
 	void setupTilemap(std::string map);
@@ -33,72 +33,71 @@ public:
 	void setupParallax();
 	void setupKeyListener();
 	virtual bool init();
-    void menuCloseCallback(Ref* pSender);
+	void menuCloseCallback(Ref* pSender);
 
 	virtual void loadMap();
-    void update(float dt);
+	void update(float dt);
 	void parallaxMove();
 	void writeData();
 	void showTotal();
 	void hurtPlayer();
-   
+
 	virtual void actionKeyPressed();
-	virtual void sceneExit();
 
 	void setZoom(float z);
 
-    CREATE_FUNC(GameMap);
-    
+	CREATE_FUNC(GameMap);
+
 	Vec2 origin;
-    Size visibleSize;
-    Size winSize;
-    Size frameSize;
-    
-    Player * player;
+	Size visibleSize;
+	Size winSize;
+	Size frameSize;
+
+	Player * player;
 	Node * gameplayNode;
-    Node * parallaxNodeBack;
-    Node * parallaxNodeFront;
+	Node * parallaxNodeBack;
+	Node * parallaxNodeFront;
 	TMXTiledMap * tiledMap;
 	TMXLayer * propLayer;
 	Sprite * nave;
-    End * endObject;
-    bool endEnabled;
+	End * endObject;
+	bool endEnabled;
 	bool isCameraActive;
 	int levelId = 0;
 	float zoomFactor = 0.85f;
 	bool verticalParallaxEnabled = true;
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event *e);
-    
+
 private:
-    void centerCamera(Vec2 position);
-    
-    void onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event);
-    std::map<EventKeyboard::KeyCode, int > keys;
-    int horizontalKeysActive = 0;
+	void centerCamera(Vec2 position);
+
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event);
+	std::map<EventKeyboard::KeyCode, int > keys;
+	int horizontalKeysActive = 0;
 	bool onTouchBegan(Touch * touch, Event * event);
-    void onTouchMoved(Touch * touch, Event * event);
-    void onTouchEnded(Touch * touch, Event * event);
-     
-    Sprite * joystickSprite;
+	void onTouchMoved(Touch * touch, Event * event);
+	void onTouchEnded(Touch * touch, Event * event);
+
+	Sprite * joystickSprite;
 	ParticleGalaxy * spawnMarker;
-    
-    Label * scoreLabel;
-    float totalCoins = 0;
-    int grabbedCoins = 0;
 
-    float totalTips = 0;
-    int grabbedTips = 0;
+	Label * scoreLabel;
+	float totalCoins = 0;
+	int grabbedCoins = 0;
 
-    float previousGPNx = 0.0f;
-    float previousGPNy = 0.0f;
+	float totalTips = 0;
+	int grabbedTips = 0;
+
+	float previousGPNx = 0.0f;
+	float previousGPNy = 0.0f;
 
 	float pauseTimer = 0.0f;
-    int joystickActive = 0;
+	int joystickActive = 0;
 
 	//tips
 	Vector<Tip*> tipVector;
 	//coins
-    Vector<Coin*> coinVector;
+	Vector<Coin*> coinVector;
 	//Tip texts
 	Vector<Sprite*> tiptextVector;
 };

@@ -17,7 +17,7 @@ public:
 	static Tip * create(std::string tipName);
 	void update(bool hit);
 	void playAudio();
-   
+
 	bool consumed;
 
 private:
@@ -27,8 +27,6 @@ private:
 	void setupMessageSprite(std::string tipName);
 	void setupAudio(std::string tipName);
 	void setupSprite();
-	
-	
 	std::string name;
 	bool isMessagevisible;
 	Sprite * messageSprite;

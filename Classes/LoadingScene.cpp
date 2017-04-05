@@ -28,7 +28,7 @@ bool Loading::init()
 	auto cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("loading.plist");
 	auto bgSprite = Sprite::createWithSpriteFrameName("loading.png");
-	bgSprite->setPosition(Vec2(Director::getInstance()->getVisibleSize().width/2, Director::getInstance()->getVisibleSize().height/2));
+	bgSprite->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2));
 	this->addChild(bgSprite);
 
 	this->scheduleOnce(SEL_SCHEDULE(&Loading::loadLvl), 1.0);

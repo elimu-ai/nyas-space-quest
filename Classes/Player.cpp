@@ -18,26 +18,26 @@ using namespace CocosDenshion;
 
 Player * Player::create(TMXTiledMap * tmap)
 {
-    Player * player = new Player();
-	
-    if(player && player->init())
-    {
-        player->autorelease();
-        player->initPlayer(tmap);
-        return player;
-    }
-    CC_SAFE_DELETE(player);
-    return NULL;
+	Player * player = new Player();
+
+	if (player && player->init())
+	{
+		player->autorelease();
+		player->initPlayer(tmap);
+		return player;
+	}
+	CC_SAFE_DELETE(player);
+	return NULL;
 }
 
-Player::~Player(){}
+Player::~Player() {}
 
 void Player::initPlayer(TMXTiledMap * tmap)
 {
 	setupAudio();
-	
+
 	setupSkNode();
-    setupBoundary();
+	setupBoundary();
 
 	auto ud = UserDefault::getInstance();
 	if (ud->getIntegerForKey("levelUnlock", 1) >= 0)
@@ -47,9 +47,9 @@ void Player::initPlayer(TMXTiledMap * tmap)
 	}
 
 	phyState = PHYSICS_STATE::air;
-    animState = ANIMATION_STATE::idle;
-    this->setAnchorPoint(Vec2(0.5, 0));
-	
+	animState = ANIMATION_STATE::idle;
+	this->setAnchorPoint(Vec2(0.5, 0));
+
 	tiledMap = tmap;
 	propLayer = tiledMap->getLayer("propertiesLayer");
 
@@ -60,7 +60,7 @@ void Player::initPlayer(TMXTiledMap * tmap)
 	bot = Bot::create();
 
 	BaseObject::initObject();
-    isHurt = false;
+	isHurt = false;
 	jumpCounter = jumpsEnabled;
 }
 
@@ -141,20 +141,20 @@ void Player::setupSkNode()
 
 void Player::setupBoundary()
 {
-    boundary.shape = SHAPE::rectangle;
-    boundary.active = true;
-    boundary.height = 75;
-    boundary.width = 30;
-    boundary.offset = Vec2(-15,10);
+	boundary.shape = SHAPE::rectangle;
+	boundary.active = true;
+	boundary.height = 75;
+	boundary.width = 30;
+	boundary.offset = Vec2(-15, 10);
 }
 
 void Player::update(float dt, TMXTiledMap * tiledMap)
 {
-    if (!isHurt)
-    {
-        doTerrain();
-        doPhysics(dt);
-    }
+	if (!isHurt)
+	{
+		doTerrain();
+		doPhysics(dt);
+	}
 	bot->update(this->getPosition(), dt);
 }
 
@@ -170,7 +170,7 @@ void Player::doTerrain()
 	if (this->getPosition().y <= 0)
 	{
 		this->gotHurt();
-        return;
+		return;
 	}
 
 	//get corners and mid in points
@@ -192,7 +192,7 @@ void Player::doTerrain()
 	//Horizontal detection
 	detectRight(rightTopTilePosition, rightBottomTilePosition, rightMiddleTilePosition);
 	detectLeft(leftTopTilePosition, leftBottomTilePosition, leftMiddleTilePosition);
-	
+
 	//Vertical detection
 	detectCeiling(leftTopTilePosition, rightTopTilePosition);
 	detectFloor(leftBottomTilePosition, rightBottomTilePosition);
@@ -401,7 +401,7 @@ void Player::doPhysics(float dt)
 	}
 	if (std::abs(horizontalSpeed) > kMaxSpeed)
 	{
-		horizontalSpeed = (horizontalSpeed > 0) ? kMaxSpeed:-kMaxSpeed;
+		horizontalSpeed = (horizontalSpeed > 0) ? kMaxSpeed : -kMaxSpeed;
 	}
 	finalX = x + horizontalSpeed * dt;
 
@@ -422,68 +422,68 @@ void Player::doPhysics(float dt)
 
 void Player::doAnimation()
 {
-    if (horizontalAccel > 0)
-    {
-        this->setScaleX(1);
-    }
-    else if (horizontalAccel < 0)
-    {
-        this->setScaleX(-1);
-    }
-    
-    switch (phyState) {
-        case PHYSICS_STATE::air :
-            if (verticalSpeed > 0)
-            {
-                if (animState != ANIMATION_STATE::jump_up)
-                {
-					skNode->setAnimation(0, "jump_up", false);
-                    animState = ANIMATION_STATE::jump_up;
-                }
-            }
-            else
-            {
-                if (animState != ANIMATION_STATE::jump_down)
-                {
-                    skNode->setAnimation(0, "jump_down", false);
-                    animState = ANIMATION_STATE::jump_down;
-                }
-            }
-            break;
-        case PHYSICS_STATE::ground :
-            if (std::abs(horizontalSpeed) > 40)
-            {
-                if (animState != ANIMATION_STATE::run && animState != ANIMATION_STATE::walk)
-                {
-					skNode->setAnimation(0, "walk", true);
-                    animState = ANIMATION_STATE::walk;
-                }
-                if (animState == ANIMATION_STATE::walk && std::abs(horizontalSpeed) > kRUN_SPEED )
-                {
-					skNode->setAnimation(0, "run", true);
-                    animState = ANIMATION_STATE::run;
-                }
-                if (animState == ANIMATION_STATE::run && std::abs(horizontalSpeed) <= kRUN_SPEED )
-                {
-					skNode->setAnimation(0, "walk", true);
-                    animState = ANIMATION_STATE::walk;
-                }
-                
-            }
-            else
-            {
-                if (animState != ANIMATION_STATE::idle)
-                {
-					skNode->setAnimation(0, "idle", true);
-                    animState = ANIMATION_STATE::idle;
-                }
-            }
-            
-            break;
-            
-        default:
-            break;
-    }
+	if (horizontalAccel > 0)
+	{
+		this->setScaleX(1);
+	}
+	else if (horizontalAccel < 0)
+	{
+		this->setScaleX(-1);
+	}
+
+	switch (phyState) {
+	case PHYSICS_STATE::air:
+		if (verticalSpeed > 0)
+		{
+			if (animState != ANIMATION_STATE::jump_up)
+			{
+				skNode->setAnimation(0, "jump_up", false);
+				animState = ANIMATION_STATE::jump_up;
+			}
+		}
+		else
+		{
+			if (animState != ANIMATION_STATE::jump_down)
+			{
+				skNode->setAnimation(0, "jump_down", false);
+				animState = ANIMATION_STATE::jump_down;
+			}
+		}
+		break;
+	case PHYSICS_STATE::ground:
+		if (std::abs(horizontalSpeed) > 40)
+		{
+			if (animState != ANIMATION_STATE::run && animState != ANIMATION_STATE::walk)
+			{
+				skNode->setAnimation(0, "walk", true);
+				animState = ANIMATION_STATE::walk;
+			}
+			if (animState == ANIMATION_STATE::walk && std::abs(horizontalSpeed) > kRUN_SPEED)
+			{
+				skNode->setAnimation(0, "run", true);
+				animState = ANIMATION_STATE::run;
+			}
+			if (animState == ANIMATION_STATE::run && std::abs(horizontalSpeed) <= kRUN_SPEED)
+			{
+				skNode->setAnimation(0, "walk", true);
+				animState = ANIMATION_STATE::walk;
+			}
+
+		}
+		else
+		{
+			if (animState != ANIMATION_STATE::idle)
+			{
+				skNode->setAnimation(0, "idle", true);
+				animState = ANIMATION_STATE::idle;
+			}
+		}
+
+		break;
+
+	default:
+		break;
+	}
 }
 
 void Player::gotHurt()
@@ -497,12 +497,12 @@ void Player::gotHurt()
 	horizontalSpeed = 0;
 	auto audio = SimpleAudioEngine::getInstance();
 	audio->playEffect("sfx/hurt.wav");
-    this->horizontalAccel = 0;
-    this->horizontalAccel = 0;
-    this->verticalSpeed = 0;
-    
+	this->horizontalAccel = 0;
+	this->horizontalAccel = 0;
+	this->verticalSpeed = 0;
+
 	bot->bubbleMode(this->getPosition());
-	
+
 	auto delayAction = DelayTime::create(0.3f);
 	auto moveAction = MoveTo::create(0.3f, spawnPoint);
 	auto callbackF = CallFunc::create([&]() {
@@ -516,8 +516,8 @@ void Player::gotHurt()
 
 void Player::accelerateHorizontal(bool direction)
 {
-	horizontalAccel = (direction) ? FORCE_HI:-FORCE_HI;
-	horizontalSpeed += (direction) ? 75:-75;
+	horizontalAccel = (direction) ? FORCE_HI : -FORCE_HI;
+	horizontalSpeed += (direction) ? 75 : -75;
 }
 
 void Player::pausePlayer()
@@ -552,7 +552,7 @@ void Player::jump()
 		skNode->setAnimation(0, "jump_down", false);
 		animState = ANIMATION_STATE::jump_down;
 	}
-	
+
 	audio->playEffect("sfx/jump.wav");
 	phyState = PHYSICS_STATE::air;
 	verticalSpeed = 400;

@@ -20,16 +20,16 @@ Bot * Bot::create()
 	return NULL;
 }
 
-Bot::~Bot(){}
+Bot::~Bot() {}
 
 void Bot::initBot()
 {
 	botSprite = Sprite::createWithSpriteFrameName("botProfile.png");
-    auto moveBy = MoveBy::create(1, Vec2(0, 3));
-    auto moveBack = moveBy->reverse();
-    auto seq = Sequence::create(moveBy,DelayTime::create(0.3f), moveBack,DelayTime::create(0.2f), nullptr);
-    botSprite->runAction(RepeatForever::create(seq));
-    this->addChild(botSprite);
+	auto moveBy = MoveBy::create(1, Vec2(0, 3));
+	auto moveBack = moveBy->reverse();
+	auto seq = Sequence::create(moveBy, DelayTime::create(0.3f), moveBack, DelayTime::create(0.2f), nullptr);
+	botSprite->runAction(RepeatForever::create(seq));
+	this->addChild(botSprite);
 	bubbleModeEnabled = false;
 }
 
@@ -65,10 +65,10 @@ void Bot::update(Vec2 playerPosition, float dt)
 		this->setPosition(playerPosition + Vec2(0, 60));
 		return;
 	}
-    float dx = this->getPositionX() - playerPosition.x;
-    float dy = this->getPositionY() - playerPosition.y;
+	float dx = this->getPositionX() - playerPosition.x;
+	float dy = this->getPositionY() - playerPosition.y;
 	Vec2 dPos = Vec2(dx, dy);
-	setBotPosition(dt, dPos);	
+	setBotPosition(dt, dPos);
 }
 
 void Bot::bubbleMode(Vec2 playerPosition)

@@ -14,19 +14,19 @@
 class Coin : public BaseObject
 {
 public:
-    static Coin * create();
-    bool consumed;
-    void consume();
+	static Coin * create();
+	bool consumed;
+	void consume();
 
 private:
-    ~Coin();
-    void initCoin();
+	~Coin();
+	void initCoin();
 	void setupBoundary();
-    void setupCoin();
+	void setupCoin();
 	void setupAudio();
 
 	Sprite * coinSprite;
-    Sequence * disappear;
+	Sequence * disappear;
 };
 
 #endif /* defined(__akua__Coin__) */
