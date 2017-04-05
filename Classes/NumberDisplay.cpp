@@ -1,17 +1,20 @@
 #include "NumberDisplay.h"
 #include "SimpleAudioEngine.h"
+#include "LanguageManager.h"
+#include "Planet.h"
+
 
 USING_NS_CC;
 using namespace CocosDenshion;
 
-NumberDisplay * NumberDisplay::create(std::string tipName, Sprite * _bg)
+NumberDisplay * NumberDisplay::create(int _number, Sprite * _bg)
 {
 	NumberDisplay * tip = new NumberDisplay();
 
 	if (tip && tip->init())
 	{
 		tip->autorelease();
-		tip->initNumberDisplay(tipName, _bg);
+		tip->initNumberDisplay(_number, _bg);
 		return tip;
 	}
 	CC_SAFE_DELETE(tip);
@@ -20,21 +23,28 @@ NumberDisplay * NumberDisplay::create(std::string tipName, Sprite * _bg)
 
 NumberDisplay::~NumberDisplay()
 {
-	popDownSeq->release();
-	popUpSeq->release();
+
 }
 
-void NumberDisplay::initNumberDisplay(std::string tipName, Sprite * _bg)
+void NumberDisplay::initNumberDisplay(int _number, Sprite * _bg)
 {
-	name = tipName;
+	number = _number;
+	setupDirector();
 	setupBoundary();
-	setupMessageSprite(tipName);
 	setupSprite();
-	setupAudio(tipName);
+	setupAudio();
 	consumed = false;
 	this->setScale(0.9);
 	bg = _bg;
 	BaseObject::initObject();
+}
+
+void NumberDisplay::setupDirector()
+{
+	visibleSize = Director::getInstance()->getVisibleSize();
+	winSize = Director::getInstance()->getWinSize(); //design size?
+	frameSize = Director::getInstance()->getOpenGLView()->getFrameSize();
+	origin = Director::getInstance()->getVisibleOrigin(); // common to all maps i hope
 }
 
 void NumberDisplay::setupBoundary()
@@ -42,23 +52,6 @@ void NumberDisplay::setupBoundary()
 	boundary.shape = SHAPE::circle;
 	boundary.active = true;
 	boundary.r = 20;
-}
-
-void NumberDisplay::setupMessageSprite(std::string tipName)
-{
-	popUpSeq = Sequence::create(ScaleTo::create(0.3, 1), nullptr);
-	popUpSeq->retain();
-	popDownSeq = Sequence::create(ScaleTo::create(0.5, 0.0f), nullptr);
-	popDownSeq->retain();
-	auto tipSprite = Sprite::createWithSpriteFrameName(tipName + ".png");
-	tipSprite->setTag(55);
-	messageSprite = Sprite::createWithSpriteFrameName("tipBg.png");
-	tipSprite->setPosition(Vec2(messageSprite->getContentSize().width / 2, messageSprite->getContentSize().height / 2));
-	messageSprite->addChild(tipSprite);
-	messageSprite->setScale(0.0f);
-	messageSprite->setAnchorPoint(Vec2(0.5, 0));
-	isMessagevisible = false;
-	this->addChild(messageSprite);
 }
 
 void NumberDisplay::setupSprite()
@@ -71,39 +64,74 @@ void NumberDisplay::setupSprite()
 	this->addChild(sprite);
 }
 
-void NumberDisplay::setupAudio(std::string tipName)
+void NumberDisplay::setupAudio()
 {
 	auto audio = SimpleAudioEngine::getInstance();
 	audio->preloadEffect("sfx/bot.wav");
-	audio->preloadEffect(("sfx/tips/" + name + ".mp3").c_str());
 }
 
 void NumberDisplay::update(bool hit)
 {
-	if (hit && !isMessagevisible)
+	if (hit && !isMessagevisible && !consumed)
 	{
 		auto audio = SimpleAudioEngine::getInstance();
-		//set this var to true for the name of the Tip, save it to file
-		auto ud = UserDefault::getInstance();
-		ud->setBoolForKey(name.c_str(), true);
-		ud->flush();
 		isMessagevisible = true;
 		audio->playEffect("sfx/bot.wav");
-		messageSprite->stopAllActions();
-		messageSprite->runAction(popUpSeq);
-		bg->setVisible(true);
+
+		Vector<FiniteTimeAction *>  allActions;
+		auto action = MoveTo::create(1.5, Vec2(0, 0));
+		TargetedAction * t1 = TargetedAction::create(bg, action);
+		allActions.pushBack(t1);
+
+		Label * label = Label::createWithTTF("0", LanguageManager::getString("font"), 150);
+		bg->addChild(label);
+		label->setPosition(Vec2(visibleSize.width - 125, visibleSize.height / 2));
+		label->setScale(0.9);
+
+		auto scaleTo1 = ScaleTo::create(1.3, 1);
+		int vLevel = 2;
+		int hLevel = 1;
+		for (int i = 1; i <= number; i++)
+		{
+			auto planet = Planet::create();
+			planet->setPosition(Vec2(105 * hLevel - 40, vLevel * visibleSize.height / 3));
+			bg->addChild(planet);
+			hLevel++;
+			if (i == 5)
+			{
+				vLevel = 1;
+				hLevel = 1;
+			}
+			planet->setScale(0.01);
+			TargetedAction * tA = TargetedAction::create(planet, scaleTo1);
+			allActions.pushBack(tA);
+			auto playAudio = CallFunc::create([label, i]() {
+				log("Play number audio here!");
+				label->setString(std::to_string(i));
+			});
+			allActions.pushBack(playAudio);
+		}
+		auto * scaleLabel = TargetedAction::create(label, scaleTo1);
+		allActions.pushBack(scaleLabel);
+		auto * delay = DelayTime::create(1.5);
+		allActions.pushBack(delay);
+		auto * moveUp = MoveTo::create(1.5, Vec2(0, visibleSize.height));
+		allActions.pushBack(moveUp);
+		auto consumeNumberDisplay = CallFunc::create([this]() {
+			consumed = true;
+		});
+		allActions.pushBack(consumeNumberDisplay);
+		auto seq = Sequence::create(allActions);
+		bg->stopAllActions();
+		bg->runAction(seq);
 	}
 	else if (!hit && isMessagevisible)
 	{
 		isMessagevisible = false;
-		messageSprite->stopAllActions();
-		messageSprite->runAction(popDownSeq);
-		bg->setVisible(false);
+		auto action = MoveTo::create(1.5, Vec2(0, visibleSize.height));
+		bg->stopAllActions();
+		bg->runAction(action);
+		bg->removeAllChildren();
 	}
 }
 
-void NumberDisplay::playAudio()
-{
-	auto audio = SimpleAudioEngine::getInstance();
-	audio->playEffect(("sfx/tips/" + name + ".mp3").c_str());
-}

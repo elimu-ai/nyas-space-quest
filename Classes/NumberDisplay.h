@@ -14,7 +14,7 @@
 class NumberDisplay : public BaseObject
 {
 public:
-	static NumberDisplay * create(std::string tipName, Sprite * bg);
+	static NumberDisplay * create(int number, Sprite * bg);
 	void update(bool hit);
 	void playAudio();
 
@@ -22,17 +22,21 @@ public:
 
 private:
 	~NumberDisplay();
-	void initNumberDisplay(std::string tipName, Sprite * _bg);
+	bool isMessagevisible = false;
+	void initNumberDisplay(int _number, Sprite * _bg);
 	void setupBoundary();
-	void setupMessageSprite(std::string tipName);
-	void setupAudio(std::string tipName);
+
+	void setupDirector();
+	void setupAudio();
 	void setupSprite();
-	std::string name;
-	bool isMessagevisible;
-	Sprite * messageSprite;
-	Sequence * popUpSeq;
-	Sequence * popDownSeq;
+
+	Vec2 origin;
+	Size visibleSize;
+	Size winSize;
+	Size frameSize;
+
 	Sprite * bg;
+	int number;
 };
 
 #endif /* defined(__akua__BitacoraScene__) */

@@ -31,6 +31,7 @@ public:
 	void setupLabels();
 	void setupParallax();
 	void setupKeyListener();
+	void setupNumberDisplayBG();
 	virtual bool init();
 	void menuCloseCallback(Ref* pSender);
 
@@ -91,11 +92,12 @@ private:
 	float previousGPNx = 0.0f;
 	float previousGPNy = 0.0f;
 
+	bool playerPaused = false;
 	float pauseTimer = 0.0f;
 	int joystickActive = 0;
 
 	//tips
-	Vector<NumberDisplay*> tipVector;
+	Vector<NumberDisplay*> numberDisplayVector;
 	//coins
 	Vector<Coin*> coinVector;
 	//Tip texts

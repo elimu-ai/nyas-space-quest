@@ -2,6 +2,8 @@
 #define __akua__Planet__
 
 #include "BaseObject.h"
+#include "androidFix.h"
+
 class Planet : public BaseObject
 {
 public:
