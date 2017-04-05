@@ -1,5 +1,6 @@
 {
-	"language":"Swahili",
-	"stars":"Nyota",
-	"test":"meow?"
+  "font":"fonts/AndikaLowerCase-Regular_5dp.ttf",
+  "language": "Swahili",
+  "stars": "Nyota",
+  "test": "meow?"
 }

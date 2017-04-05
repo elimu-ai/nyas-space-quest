@@ -1,5 +1,6 @@
 {
-	"language":"English",
-	"stars":"Stars",
-	"test":"meow"
+  "font":"fonts/AndikaLowerCase-Regular_5dp.ttf",
+  "language": "Arabic",
+  "stars": "Stars",
+  "test": "meow"
 }
