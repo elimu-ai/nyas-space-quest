@@ -10,25 +10,26 @@
 #include "LoadingScene.h"
 #include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
+#include "LanguageManager.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
 
 Scene * Menug::createScene()
 {
-    auto scene = Scene::create();
-    auto layer = Menug::create();
-    scene->addChild(layer);
-    return scene;
+	auto scene = Scene::create();
+	auto layer = Menug::create();
+	scene->addChild(layer);
+	return scene;
 }
 
 bool Menug::init()
 {
-    if (!LayerColor::initWithColor(Color4B::BLACK))
-    {
-        return false;
-    }
-	
+	if (!LayerColor::initWithColor(Color4B::BLACK))
+	{
+		return false;
+	}
+
 	setupDirector();
 	loadAudio();
 	cacheImages();
@@ -41,22 +42,23 @@ bool Menug::init()
 	{
 		CCLOG("Swahili language device found");
 	}
+	auto lm = LanguageManager::getInstance();
 	return true;
 }
 
 void Menug::setupDirector()
 {
-    auto director = Director::getInstance();
-    visibleSize = director->getVisibleSize();
-    winSize = director->getWinSize(); 
-    frameSize = director->getOpenGLView()->getFrameSize();
-    origin = director->getVisibleOrigin();
+	auto director = Director::getInstance();
+	visibleSize = director->getVisibleSize();
+	winSize = director->getWinSize();
+	frameSize = director->getOpenGLView()->getFrameSize();
+	origin = director->getVisibleOrigin();
 }
 
 void Menug::loadAudio()
 {
-    auto audio = SimpleAudioEngine::getInstance();
-    audio->preloadEffect("sfx/button.wav");
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->preloadEffect("sfx/button.wav");
 	if (!audio->isBackgroundMusicPlaying())
 	{
 		audio->stopBackgroundMusic();
@@ -66,8 +68,8 @@ void Menug::loadAudio()
 
 void Menug::cacheImages()
 {
-    auto cache = SpriteFrameCache::getInstance();
-    cache->addSpriteFramesWithFile("menu.plist");
+	auto cache = SpriteFrameCache::getInstance();
+	cache->addSpriteFramesWithFile("menu.plist");
 	cache->addSpriteFramesWithFile("common.plist");
 }
 
@@ -76,12 +78,12 @@ void Menug::setupLogo()
 	auto stars = Sprite::createWithSpriteFrameName("stars.jpg");
 	stars->setAnchorPoint(Vec2::ZERO);
 	this->addChild(stars);
-	
-    auto logo = Sprite::createWithSpriteFrameName("nyaLogo.png");
-    logo->setScale(0.75);
-    logo->setAnchorPoint(Vec2(0.5, 1));
-    logo->setPosition(Vec2(origin.x + visibleSize.width / 2, visibleSize.height + 100));
-    this->addChild(logo);
+
+	auto logo = Sprite::createWithSpriteFrameName("nyaLogo.png");
+	logo->setScale(0.75);
+	logo->setAnchorPoint(Vec2(0.5, 1));
+	logo->setPosition(Vec2(origin.x + visibleSize.width / 2, visibleSize.height + 100));
+	this->addChild(logo);
 	auto fadeOut = FadeTo::create(13, 120);
 	auto fadeIn = FadeIn::create(5);
 	auto seq = Sequence::create(fadeOut, fadeIn, nullptr);
@@ -90,55 +92,55 @@ void Menug::setupLogo()
 
 void Menug::setupNave()
 {
-    auto nave = Sprite::createWithSpriteFrameName("naveMenu.png");
-    nave->setPosition(Vec2(origin.x + visibleSize.width / 4, origin.y + visibleSize.height / 2 - 50));
-    auto moveBy = MoveBy::create(2, Vec2(0, 7));
-    auto moveBack = moveBy->reverse();
-    auto seq1 = Sequence::create(moveBy, moveBack, nullptr);
-    nave->runAction(RepeatForever::create(seq1));
-    this->addChild(nave);
+	auto nave = Sprite::createWithSpriteFrameName("naveMenu.png");
+	nave->setPosition(Vec2(origin.x + visibleSize.width / 4, origin.y + visibleSize.height / 2 - 50));
+	auto moveBy = MoveBy::create(2, Vec2(0, 7));
+	auto moveBack = moveBy->reverse();
+	auto seq1 = Sequence::create(moveBy, moveBack, nullptr);
+	nave->runAction(RepeatForever::create(seq1));
+	this->addChild(nave);
 }
 
 void Menug::setupButtons()
 {
-    //TODO: extract a lot of this. still doing too much here
-    float buttonX = visibleSize.width - 120;
-    
-    auto buttonPlay = ui::Button::create("botonJugar.png", "botonJugarSel.png", "botonJugar.png", ui::Widget::TextureResType::PLIST);
-    buttonPlay->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type)
-        {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-            {
-                auto audio = SimpleAudioEngine::getInstance();
-                audio->playEffect("sfx/button.wav");
-                Menug::loadGame();
-                break;
-            }
-            default:
-                break;
-        }
-    });
-    buttonPlay->setScale(0.9f);
-    buttonPlay->setPosition(Vec2(origin.x + 3* visibleSize.width / 4, origin.y + visibleSize.height / 2 - 50));
+	//TODO: extract a lot of this. still doing too much here
+	float buttonX = visibleSize.width - 120;
 
-    this->addChild(buttonPlay);
+	auto buttonPlay = ui::Button::create("botonJugar.png", "botonJugarSel.png", "botonJugar.png", ui::Widget::TextureResType::PLIST);
+	buttonPlay->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+		{
+			auto audio = SimpleAudioEngine::getInstance();
+			audio->playEffect("sfx/button.wav");
+			Menug::loadGame();
+			break;
+		}
+		default:
+			break;
+		}
+	});
+	buttonPlay->setScale(0.9f);
+	buttonPlay->setPosition(Vec2(origin.x + 3 * visibleSize.width / 4, origin.y + visibleSize.height / 2 - 50));
+
+	this->addChild(buttonPlay);
 }
 
 void Menug::setupVersionLabel()
 {
-    Label* label1 = Label::createWithTTF("Version 0.1", "fonts/AndikaLowerCase-Regular_5dp.ttf", 20);
-    label1->setPosition(Vec2(visibleSize.width - label1->getContentSize().width / 2 - 20, 20));
-    label1->setColor(Color3B::WHITE);
-    this->addChild(label1);
+	Label* label1 = Label::createWithTTF(LanguageManager::getString("language").c_str(), "fonts/AndikaLowerCase-Regular_5dp.ttf", 10);
+	label1->setPosition(Vec2(visibleSize.width - label1->getContentSize().width / 2 - 20, 20));
+	label1->setColor(Color3B::WHITE);
+	this->addChild(label1);
 }
 
 void Menug::loadGame()
 {
-    auto loadScene = Loading::createScene(kNumberIdA);
-    Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
+	auto loadScene = Loading::createScene(kNumberIdA);
+	Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
 }
 
 void Menug::onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event *event)
@@ -149,9 +151,9 @@ void Menug::onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Even
 
 void Menug::exitAkua()
 {
-    Director::getInstance()->end();
+	Director::getInstance()->end();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
+	exit(0);
 #endif
 }
 

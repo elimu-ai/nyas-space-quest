@@ -14,7 +14,7 @@ End * End::create()
 	return NULL;
 }
 
-End::~End(){}
+End::~End() {}
 
 void End::initEnd()
 {

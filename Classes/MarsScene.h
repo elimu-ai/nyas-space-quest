@@ -18,16 +18,16 @@ USING_NS_CC;
 class Mars : public GameMap
 {
 public:
-    static Scene * createScene();
-    virtual bool init();
-    CREATE_FUNC(Mars);
-    
+	static Scene * createScene();
+	virtual bool init();
+	CREATE_FUNC(Mars);
+
 private:
-    void loadMap();
+	void loadMap();
 	void setupAudio();
 	void setupBackground();
 	void setupParallaxImages();
-    void update(float dt);
+	void update(float dt);
 	ParticleRain * dust;
 };
 
