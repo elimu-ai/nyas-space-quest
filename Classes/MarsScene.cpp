@@ -35,19 +35,10 @@ bool Mars::init()
 
 void Mars::loadMap()
 {
-	//setupAudio();
 	setupBackground();
 	setupParallaxImages();
 	setupTilemap("marsLevel.tmx");
 	GameMap::loadMap();
-}
-
-void Mars::setupAudio()
-{
-	auto audio = SimpleAudioEngine::getInstance();
-	audio->stopBackgroundMusic();
-	audio->playBackgroundMusic("sfx/marsMusic.mp3", true);
-	audio->setBackgroundMusicVolume(0.7);
 }
 
 void Mars::setupBackground()
