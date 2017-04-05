@@ -1,5 +1,6 @@
 {
-	"language":"Español",
-	"stars":"Estrellas",
-	"test":"miau"
+  "font":"fonts/AndikaLowerCase-Regular_5dp.ttf",
+  "language": "Español",
+  "stars": "Estrellas",
+  "test": "miau"
 }
