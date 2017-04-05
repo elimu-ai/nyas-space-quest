@@ -1,5 +1,5 @@
 //
-//  Tip.h
+//  NumberDisplay.h
 // Nya
 //
 //  Created by German Torres on 7/30/15.
@@ -11,18 +11,18 @@
 
 #include "BaseObject.h"
 
-class Tip : public BaseObject
+class NumberDisplay : public BaseObject
 {
 public:
-	static Tip * create(std::string tipName);
+	static NumberDisplay * create(std::string tipName, Sprite * bg);
 	void update(bool hit);
 	void playAudio();
 
 	bool consumed;
 
 private:
-	~Tip();
-	void initTip(std::string tipName);
+	~NumberDisplay();
+	void initNumberDisplay(std::string tipName, Sprite * _bg);
 	void setupBoundary();
 	void setupMessageSprite(std::string tipName);
 	void setupAudio(std::string tipName);
@@ -32,6 +32,7 @@ private:
 	Sprite * messageSprite;
 	Sequence * popUpSeq;
 	Sequence * popDownSeq;
+	Sprite * bg;
 };
 
 #endif /* defined(__akua__BitacoraScene__) */

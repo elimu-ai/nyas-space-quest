@@ -37,8 +37,9 @@ bool GameMap::init()
 	auto cache = SpriteFrameCache::getInstance();
 	cache->removeUnusedSpriteFrames();
 	cache->addSpriteFramesWithFile("common.plist");
+	cache->addSpriteFramesWithFile("planets.plist");
 
-	tipVector = Vector<Tip*>();
+	tipVector = Vector<NumberDisplay*>();
 	coinVector = Vector<Coin*>();
 	isCameraActive = true;
 
@@ -47,6 +48,11 @@ bool GameMap::init()
 	setupLabels();
 	setupParallax();
 	setupKeyListener();
+
+	numberDisplayBG = Sprite::createWithSpriteFrameName("stars.jpg");
+	numberDisplayBG->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	numberDisplayBG->setVisible(false);
+	this->addChild(numberDisplayBG);
 
 	//touch listener
 
@@ -172,7 +178,7 @@ void GameMap::loadMap()
 		gameplayNode->addChild(sprite);
 	}
 
-	//load tips
+	//load Number Displays
 	auto tips = tiledMap->getObjectGroup("tips")->getObjects();
 	if (!tips.empty())
 	{
@@ -182,7 +188,7 @@ void GameMap::loadMap()
 			std::string tipName = tipMap["name"].asString();
 			int x = tipMap["x"].asInt();
 			int y = tipMap["y"].asInt();
-			auto object = Tip::create(tipName);
+			auto object = NumberDisplay::create(tipName, numberDisplayBG);
 			object->setAnchorPoint(Vec2::ZERO);
 			object->setPosition(Vec2(x, y));
 			tipVector.pushBack(object);
@@ -349,7 +355,7 @@ void GameMap::update(float dt)
 	if (pauseTimer > 0)
 	{
 		pauseTimer -= dt;
-		if (pauseTimer < 3) player->update(dt, tiledMap);
+		//if (pauseTimer < 3) player->update(dt, tiledMap);
 	}
 	else
 	{
@@ -362,7 +368,7 @@ void GameMap::update(float dt)
 	}
 	this->parallaxMove();
 	//tips
-	for (Tip * tip : tipVector)
+	for (NumberDisplay * tip : tipVector)
 	{
 		auto tipTextSprite = tiptextVector.at(tip->getTag());
 
@@ -378,7 +384,7 @@ void GameMap::update(float dt)
 				grabbedTips++;
 				//play audio here?
 				auto audio = SimpleAudioEngine::getInstance();
-				audio->pauseBackgroundMusic();
+				//audio->pauseBackgroundMusic();
 				tip->playAudio();
 				player->pausePlayer();
 				pauseTimer = 0;
@@ -392,6 +398,9 @@ void GameMap::update(float dt)
 				tipTextSprite->setTag(-1);
 			}
 			tip->update(true);
+
+			Vector<FiniteTimeAction * > actions;
+			//ver targeted actions: http://discuss.cocos2d-x.org/t/checking-if-action-within-a-sequence-is-done/15885/8 
 		}
 		else
 		{

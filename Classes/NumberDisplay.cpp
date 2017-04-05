@@ -1,30 +1,30 @@
-#include "Tip.h"
+#include "NumberDisplay.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
 
-Tip * Tip::create(std::string tipName)
+NumberDisplay * NumberDisplay::create(std::string tipName, Sprite * _bg)
 {
-	Tip * tip = new Tip();
+	NumberDisplay * tip = new NumberDisplay();
 
 	if (tip && tip->init())
 	{
 		tip->autorelease();
-		tip->initTip(tipName);
+		tip->initNumberDisplay(tipName, _bg);
 		return tip;
 	}
 	CC_SAFE_DELETE(tip);
 	return NULL;
 }
 
-Tip::~Tip()
+NumberDisplay::~NumberDisplay()
 {
 	popDownSeq->release();
 	popUpSeq->release();
 }
 
-void Tip::initTip(std::string tipName)
+void NumberDisplay::initNumberDisplay(std::string tipName, Sprite * _bg)
 {
 	name = tipName;
 	setupBoundary();
@@ -33,17 +33,18 @@ void Tip::initTip(std::string tipName)
 	setupAudio(tipName);
 	consumed = false;
 	this->setScale(0.9);
+	bg = _bg;
 	BaseObject::initObject();
 }
 
-void Tip::setupBoundary()
+void NumberDisplay::setupBoundary()
 {
 	boundary.shape = SHAPE::circle;
 	boundary.active = true;
 	boundary.r = 20;
 }
 
-void Tip::setupMessageSprite(std::string tipName)
+void NumberDisplay::setupMessageSprite(std::string tipName)
 {
 	popUpSeq = Sequence::create(ScaleTo::create(0.3, 1), nullptr);
 	popUpSeq->retain();
@@ -60,7 +61,7 @@ void Tip::setupMessageSprite(std::string tipName)
 	this->addChild(messageSprite);
 }
 
-void Tip::setupSprite()
+void NumberDisplay::setupSprite()
 {
 	auto sprite = Sprite::createWithSpriteFrameName("tip.png");
 	auto moveUp = EaseInOut::create(MoveBy::create(2, Vec2(0, 5.0f)), 2);
@@ -70,14 +71,14 @@ void Tip::setupSprite()
 	this->addChild(sprite);
 }
 
-void Tip::setupAudio(std::string tipName)
+void NumberDisplay::setupAudio(std::string tipName)
 {
 	auto audio = SimpleAudioEngine::getInstance();
 	audio->preloadEffect("sfx/bot.wav");
 	audio->preloadEffect(("sfx/tips/" + name + ".mp3").c_str());
 }
 
-void Tip::update(bool hit)
+void NumberDisplay::update(bool hit)
 {
 	if (hit && !isMessagevisible)
 	{
@@ -90,16 +91,18 @@ void Tip::update(bool hit)
 		audio->playEffect("sfx/bot.wav");
 		messageSprite->stopAllActions();
 		messageSprite->runAction(popUpSeq);
+		bg->setVisible(true);
 	}
 	else if (!hit && isMessagevisible)
 	{
 		isMessagevisible = false;
 		messageSprite->stopAllActions();
 		messageSprite->runAction(popDownSeq);
+		bg->setVisible(false);
 	}
 }
 
-void Tip::playAudio()
+void NumberDisplay::playAudio()
 {
 	auto audio = SimpleAudioEngine::getInstance();
 	audio->playEffect(("sfx/tips/" + name + ".mp3").c_str());

@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
-#include "Tip.h"
+#include "NumberDisplay.h"
 #include "Coin.h"
 #include "End.h"
 
@@ -28,7 +28,6 @@ public:
 	void setupDirector();
 	void setupGameplayNode();
 	void setupTilemap(std::string map);
-	void setupButtonExit();
 	void setupLabels();
 	void setupParallax();
 	void setupKeyListener();
@@ -80,6 +79,7 @@ private:
 
 	Sprite * joystickSprite;
 	ParticleGalaxy * spawnMarker;
+	Sprite * numberDisplayBG;
 
 	Label * scoreLabel;
 	float totalCoins = 0;
@@ -95,7 +95,7 @@ private:
 	int joystickActive = 0;
 
 	//tips
-	Vector<Tip*> tipVector;
+	Vector<NumberDisplay*> tipVector;
 	//coins
 	Vector<Coin*> coinVector;
 	//Tip texts
