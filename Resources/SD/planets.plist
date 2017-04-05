@@ -11,11 +11,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{50,50}}</string>
+                <string>{{2,63},{35,35}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -26,11 +26,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{2,54},{50,50}}</string>
+                <string>{{39,63},{35,35}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -41,11 +41,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{54,2},{50,50}}</string>
+                <string>{{76,2},{35,35}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -56,11 +56,26 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{54,54},{50,50}}</string>
+                <string>{{76,39},{35,35}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>glow.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{59,59}</string>
+                <key>spriteSourceSize</key>
+                <string>{79,79}</string>
+                <key>textureRect</key>
+                <string>{{2,2},{59,59}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -76,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>planets.png</string>
             <key>size</key>
-            <string>{106,106}</string>
+            <string>{113,100}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f5bae911bbd9dbe6907a9d3e2c7ff8ce:7e723d842e24a461b3b2d9990d890709:3ca5bbcc965eab6e6071cafe82a66b0c$</string>
+            <string>$TexturePacker:SmartUpdate:399a3a324a799ec309db9549187e2342:9330128db42adc271032756cb7117c6f:3ca5bbcc965eab6e6071cafe82a66b0c$</string>
             <key>textureFileName</key>
             <string>planets.png</string>
         </dict>
