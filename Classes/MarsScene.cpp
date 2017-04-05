@@ -30,7 +30,6 @@ bool Mars::init()
 	auto cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("mars.plist");
 	cache->addSpriteFramesWithFile("marsTips.plist");
-	levelId = kMars;
 	return true;
 }
 

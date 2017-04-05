@@ -86,32 +86,6 @@ void GameMap::setupTilemap(std::string map)
 	gameplayNode->addChild(tiledMap, -10);
 }
 
-void GameMap::setupButtonExit()
-{
-	auto buttonExit = ui::Button::create("botonSalir.png", "botonSalirSel.png", "botonSalir.png", ui::Widget::TextureResType::PLIST);
-	buttonExit->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-		{
-			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-			audio->playEffect("sfx/button.wav");
-			sceneExit();
-			break;
-		}
-		default:
-			break;
-		}
-	});
-	buttonExit->setScale(0.45f);
-	buttonExit->setOpacity(210);
-	buttonExit->setAnchorPoint(Vec2(1, 1));
-	buttonExit->setPosition(Vec2(origin.x - 20 + visibleSize.width, origin.y - 10 + visibleSize.height));
-	this->addChild(buttonExit, 10);
-}
-
 void GameMap::setupLabels()
 {
 	//score
