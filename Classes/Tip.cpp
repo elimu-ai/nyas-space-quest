@@ -31,9 +31,8 @@ void Tip::initTip(std::string tipName)
 	setupMessageSprite(tipName);
 	setupSprite();
 	setupAudio(tipName);
-	
-    consumed = false;	
-    this->setScale(0.9);
+	consumed = false;
+	this->setScale(0.9);
 	BaseObject::initObject();
 }
 
@@ -52,11 +51,9 @@ void Tip::setupMessageSprite(std::string tipName)
 	popDownSeq->retain();
 	auto tipSprite = Sprite::createWithSpriteFrameName(tipName + ".png");
 	tipSprite->setTag(55);
-	//tipSprite->setOpacity(0);
 	messageSprite = Sprite::createWithSpriteFrameName("tipBg.png");
-	tipSprite->setPosition(Vec2(messageSprite->getContentSize().width/2, messageSprite->getContentSize().height/2));
+	tipSprite->setPosition(Vec2(messageSprite->getContentSize().width / 2, messageSprite->getContentSize().height / 2));
 	messageSprite->addChild(tipSprite);
-	//messageSprite->setOpacity(0);
 	messageSprite->setScale(0.0f);
 	messageSprite->setAnchorPoint(Vec2(0.5, 0));
 	isMessagevisible = false;
@@ -105,5 +102,5 @@ void Tip::update(bool hit)
 void Tip::playAudio()
 {
 	auto audio = SimpleAudioEngine::getInstance();
-	audio->playEffect(("sfx/tips/" + name + ".mp3").c_str());	
+	audio->playEffect(("sfx/tips/" + name + ".mp3").c_str());
 }

@@ -23,19 +23,19 @@ bool BaseObject::checkIntersect(BaseObject * otherObject)
 {
 	if (otherObject->boundary.shape == circle && this->boundary.shape == circle)
 	{
-        return checkCircleCircle(this, otherObject);
+		return checkCircleCircle(this, otherObject);
 	}
 	if (otherObject->boundary.shape == circle && this->boundary.shape == rectangle)
 	{
-        return checkCircleRect(this, otherObject);
+		return checkCircleRect(this, otherObject);
 	}
 	if (otherObject->boundary.shape == rectangle && this->boundary.shape == circle)
 	{
-        return checkCircleRect(this, otherObject);
+		return checkCircleRect(this, otherObject);
 	}
 	if (otherObject->boundary.shape == rectangle && this->boundary.shape == rectangle)
 	{
-        return checkRectRect(this, otherObject);
+		return checkRectRect(this, otherObject);
 	}
 	return false;
 }
@@ -52,27 +52,27 @@ bool BaseObject::checkCircleCircle(BaseObject * cA, BaseObject * cB)
 	{
 		transformedOffsetCb = transformedOffsetCb.rotateByAngle(Vec2::ZERO, CC_DEGREES_TO_RADIANS(-cB->getRotation()));
 	}
-    Vec2 positionA = cA->getPosition() + transformedOffsetCa;
-    Vec2 positionB = cB->getPosition() + transformedOffsetCb;
-    float scaleA = cA->getScaleY();
-    float scaleB = cB->getScaleY();
-    float distance = positionA.getDistance(positionB);
-    float maxDistance = cA->boundary.r * scaleA + cB->boundary.r * scaleB;
+	Vec2 positionA = cA->getPosition() + transformedOffsetCa;
+	Vec2 positionB = cB->getPosition() + transformedOffsetCb;
+	float scaleA = cA->getScaleY();
+	float scaleB = cB->getScaleY();
+	float distance = positionA.getDistance(positionB);
+	float maxDistance = cA->boundary.r * scaleA + cB->boundary.r * scaleB;
 	if (maxDistance > distance && !cB->boundary.active)
 	{
 		cB->drwColor = Color4F::YELLOW;
 		return false;
 	}
 	if (maxDistance > distance)
-    {
-        cB->drwColor = Color4F::RED;
-        return true;
-    }
-    else
-    {
-        cB->drwColor = Color4F::GREEN;
-    }
-    return false;
+	{
+		cB->drwColor = Color4F::RED;
+		return true;
+	}
+	else
+	{
+		cB->drwColor = Color4F::GREEN;
+	}
+	return false;
 }
 
 bool BaseObject::checkCircleRect(BaseObject *r, BaseObject *c)
@@ -84,62 +84,62 @@ bool BaseObject::checkCircleRect(BaseObject *r, BaseObject *c)
 	}
 	Vec2 transformedOffsetR = r->boundary.offset * r->getScaleY();
 
-    Vec2 positionR = r->getPosition() + transformedOffsetR;
-    Vec2 positionC = c->getPosition() + transformedOffsetC;
-    
-    float x = positionR.x;
-    float y = positionR.y;
-    float width = r->boundary.width * r->getScaleY();
-    float height = r->boundary.height * r->getScaleY();
-    Rect rectangle =  Rect(x, y, width, height);
-    
-    float rR = c->boundary.r * c->getScaleY();
+	Vec2 positionR = r->getPosition() + transformedOffsetR;
+	Vec2 positionC = c->getPosition() + transformedOffsetC;
+
+	float x = positionR.x;
+	float y = positionR.y;
+	float width = r->boundary.width * r->getScaleY();
+	float height = r->boundary.height * r->getScaleY();
+	Rect rectangle = Rect(x, y, width, height);
+
+	float rR = c->boundary.r * c->getScaleY();
 	if (rectangle.intersectsCircle(positionC, rR) && !r->boundary.active)
 	{
 		c->drwColor = Color4F::YELLOW;
 		return true;
 	}
 
-    if (rectangle.intersectsCircle(positionC, rR))
-    {
-        c->drwColor = Color4F::RED;
-        return true;
-    }
-    else
-    {
-        c->drwColor = Color4F::GREEN;
-    }
-    return false;
+	if (rectangle.intersectsCircle(positionC, rR))
+	{
+		c->drwColor = Color4F::RED;
+		return true;
+	}
+	else
+	{
+		c->drwColor = Color4F::GREEN;
+	}
+	return false;
 }
 
 bool BaseObject::checkRectRect(BaseObject *rA, BaseObject *rB)
 {
 	//for rectangles we only support AABB 
-    Vec2 positionRa = rA->getPosition() + rA->boundary.offset * rA->getScaleY();
-    float widthA = rA->boundary.width * rA->getScaleY();
-    float heightA = rA->boundary.height * rA->getScaleY();
-    Rect rectangleA = Rect(positionRa.x, positionRa.y, widthA, heightA);
-    
-    Vec2 positionRb = rB->getPosition() + rB->boundary.offset * rB->getScaleY();
-    float widthB = rB->boundary.width * rB->getScaleY();
-    float heightB = rB->boundary.height * rB->getScaleY();
-    Rect rectangleB = Rect(positionRb.x, positionRb.y, widthB, heightB);
-    
+	Vec2 positionRa = rA->getPosition() + rA->boundary.offset * rA->getScaleY();
+	float widthA = rA->boundary.width * rA->getScaleY();
+	float heightA = rA->boundary.height * rA->getScaleY();
+	Rect rectangleA = Rect(positionRa.x, positionRa.y, widthA, heightA);
+
+	Vec2 positionRb = rB->getPosition() + rB->boundary.offset * rB->getScaleY();
+	float widthB = rB->boundary.width * rB->getScaleY();
+	float heightB = rB->boundary.height * rB->getScaleY();
+	Rect rectangleB = Rect(positionRb.x, positionRb.y, widthB, heightB);
+
 	if (rectangleA.intersectsRect(rectangleB) && !rB->boundary.active)
 	{
 		rB->drwColor = Color4F::YELLOW;
 		return false;
 	}
-    if (rectangleA.intersectsRect(rectangleB))
-    {
-        rB->drwColor = Color4F::RED;
-        return true;
-    }
-    else
-    {
-        rB->drwColor = Color4F::GREEN;
-    }
-    return false;
+	if (rectangleA.intersectsRect(rectangleB))
+	{
+		rB->drwColor = Color4F::RED;
+		return true;
+	}
+	else
+	{
+		rB->drwColor = Color4F::GREEN;
+	}
+	return false;
 }
 
 void BaseObject::reDraw(float dt)

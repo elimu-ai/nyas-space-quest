@@ -13,7 +13,7 @@
 #include "spine/spine.h"
 #include <string>
 #include <sstream>
-//#include <SDL.h>
+#include "LanguageManager.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -21,22 +21,19 @@ using namespace CocosDenshion;
 
 Scene* GameMap::createScene(std::string map)
 {
-    auto scene = Scene::create();
-    auto layer = GameMap::create();
-
-	//layer->loadMap();
-
-    scene->addChild(layer);
-    return scene;
+	auto scene = Scene::create();
+	auto layer = GameMap::create();
+	scene->addChild(layer);
+	return scene;
 }
 
 
 bool GameMap::init()
 {
-    if ( !Layer::init() )
-    {
-        return false;
-    }
+	if (!Layer::init())
+	{
+		return false;
+	}
 	auto cache = SpriteFrameCache::getInstance();
 	cache->removeUnusedSpriteFrames();
 	cache->addSpriteFramesWithFile("common.plist");
@@ -47,23 +44,22 @@ bool GameMap::init()
 
 	setupDirector();
 	setupGameplayNode();
-	//setupButtonExit();
 	setupLabels();
 	setupParallax();
 	setupKeyListener();
 
 	//touch listener
-	
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->onTouchBegan = CC_CALLBACK_2(GameMap::onTouchBegan, this);
-    touchListener->onTouchMoved = CC_CALLBACK_2(GameMap::onTouchMoved, this);
-    touchListener->onTouchEnded = CC_CALLBACK_2(GameMap::onTouchEnded, this);
-    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+	auto touchListener = EventListenerTouchOneByOne::create();
+	touchListener->onTouchBegan = CC_CALLBACK_2(GameMap::onTouchBegan, this);
+	touchListener->onTouchMoved = CC_CALLBACK_2(GameMap::onTouchMoved, this);
+	touchListener->onTouchEnded = CC_CALLBACK_2(GameMap::onTouchEnded, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 #endif
 	gameplayNode->setScale(zoomFactor);
-    this->scheduleUpdate();
-    return true;
+	this->scheduleUpdate();
+	return true;
 }
 
 void GameMap::setupDirector()
@@ -87,55 +83,18 @@ void GameMap::setupTilemap(std::string map)
 #ifndef kTileDebug
 	propLayer->setVisible(false);
 #endif 
-	// !kTileDebug
-	//auto planetLabel = Label::createWithTTF(tiledMap->getProperty("Name").asString(), "fonts/Akashi.ttf", 18);
-	//addChild(planetLabel);
-	//planetLabel->setPosition(300, 50);
 	gameplayNode->addChild(tiledMap, -10);
-}
-
-void GameMap::setupButtonExit()
-{
-	auto buttonExit = ui::Button::create("botonSalir.png", "botonSalirSel.png", "botonSalir.png", ui::Widget::TextureResType::PLIST);
-	buttonExit->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-		{
-			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-			audio->playEffect("sfx/button.wav");
-			sceneExit();
-			break;
-		}
-		default:
-			break;
-		}
-	});
-	buttonExit->setScale(0.45f);
-	buttonExit->setOpacity(210);
-	buttonExit->setAnchorPoint(Vec2(1, 1));
-	buttonExit->setPosition(Vec2(origin.x - 20 + visibleSize.width, origin.y - 10 + visibleSize.height));
-	this->addChild(buttonExit, 10);
 }
 
 void GameMap::setupLabels()
 {
 	//score
-	scoreLabel = Label::createWithTTF("Stars: 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
+	scoreLabel = Label::createWithTTF(LanguageManager::getString("stars") + ": 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
 	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
 	scoreLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 20));
 	scoreLabel->enableGlow(Color4B::BLACK);
 	this->addChild(scoreLabel);
-
-	tipsLabel = Label::createWithTTF("#: 0", "fonts/AndikaLowerCase-Regular_5dp.ttf", 24);
-	tipsLabel->setAnchorPoint(Vec2(0, 0.5));
-	tipsLabel->setPosition(Vec2(origin.x + 10,
-		origin.y + visibleSize.height - 40));
-	tipsLabel->enableGlow(Color4B::BLACK);
-	this->addChild(tipsLabel);
 }
 
 void GameMap::setupParallax()
@@ -157,43 +116,43 @@ void GameMap::setupKeyListener()
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyListener, gameplayNode);
 }
 
- void GameMap::loadMap()
+void GameMap::loadMap()
 {
-    //joystick
-    joystickSprite = Sprite::createWithSpriteFrameName("joystick.png");
-    joystickSprite->setPosition(Vec2(-1000,-1000));
-    this->addChild(joystickSprite);
-    
-    //load objects from tilemap
-    auto objects = tiledMap->getObjectGroup("objects");
-	
-    //spawn point
-    auto spawnPoint = objects->getObject("spawn");
-    int x = spawnPoint["x"].asInt();
-    int y = spawnPoint["y"].asInt();
-    spawnMarker = ParticleGalaxy::create();
-    spawnMarker->setPositionType(ParticleSystem::PositionType::GROUPED);
-    spawnMarker->setScale(0.4f);
-    spawnMarker->setPosition(Vec2(x,y));
-    gameplayNode->addChild(spawnMarker);
-    
-    //end
-    auto endPoint = objects->getObject("end");
-    int endX = endPoint["x"].asInt();
-    int endY = endPoint["y"].asInt();
+	//joystick
+	joystickSprite = Sprite::createWithSpriteFrameName("joystick.png");
+	joystickSprite->setPosition(Vec2(-1000, -1000));
+	this->addChild(joystickSprite);
+
+	//load objects from tilemap
+	auto objects = tiledMap->getObjectGroup("objects");
+
+	//spawn point
+	auto spawnPoint = objects->getObject("spawn");
+	int x = spawnPoint["x"].asInt();
+	int y = spawnPoint["y"].asInt();
+	spawnMarker = ParticleGalaxy::create();
+	spawnMarker->setPositionType(ParticleSystem::PositionType::GROUPED);
+	spawnMarker->setScale(0.4f);
+	spawnMarker->setPosition(Vec2(x, y));
+	gameplayNode->addChild(spawnMarker);
+
+	//end
+	auto endPoint = objects->getObject("end");
+	int endX = endPoint["x"].asInt();
+	int endY = endPoint["y"].asInt();
 	endObject = End::create();
 	endObject->setPosition(Vec2(endX, endY));
 	gameplayNode->addChild(endObject);
-    
-    //nave
-    nave = Sprite::createWithSpriteFrameName("nave.png");
-    gameplayNode->addChild(nave,2);
-    nave->setAnchorPoint(Vec2(0.75,0));
-    auto moveBy = MoveBy::create(2, Vec2(0, 7));
-    auto moveBack = moveBy->reverse();
-    auto seq1 = Sequence::create(moveBy, moveBack, nullptr);
-    nave->runAction(RepeatForever::create(seq1));
-    nave->setPosition(Vec2(x,y));
+
+	//nave
+	nave = Sprite::createWithSpriteFrameName("nave.png");
+	gameplayNode->addChild(nave, 2);
+	nave->setAnchorPoint(Vec2(0.75, 0));
+	auto moveBy = MoveBy::create(2, Vec2(0, 7));
+	auto moveBack = moveBy->reverse();
+	auto seq1 = Sequence::create(moveBy, moveBack, nullptr);
+	nave->runAction(RepeatForever::create(seq1));
+	nave->setPosition(Vec2(x, y));
 
 	//load platforms
 	auto platforms = tiledMap->getObjectGroup("platforms")->getObjects();
@@ -212,7 +171,7 @@ void GameMap::setupKeyListener()
 		sprite->setPosition(Vec2(x, y));
 		gameplayNode->addChild(sprite);
 	}
-    
+
 	//load tips
 	auto tips = tiledMap->getObjectGroup("tips")->getObjects();
 	if (!tips.empty())
@@ -229,7 +188,7 @@ void GameMap::setupKeyListener()
 			tipVector.pushBack(object);
 			gameplayNode->addChild(object);
 			object->setTag(totalTips);
-            totalTips++;
+			totalTips++;
 			auto textSprite = Sprite::createWithSpriteFrameName(tipName + "Text.png");
 			textSprite->setAnchorPoint(Vec2(0.5, 1));
 			textSprite->setPosition(Vec2(visibleSize.width / 2, 0.0f));
@@ -237,47 +196,38 @@ void GameMap::setupKeyListener()
 			tiptextVector.pushBack(textSprite);
 		}
 	}
-    
-    //load coins
-    auto coins = tiledMap->getObjectGroup("coins")->getObjects();
-    for (auto coin : coins)
-    {
-        auto coinMap = coin.asValueMap();
-        int x = coinMap["x"].asInt();
-        int y = coinMap["y"].asInt();
-        auto object = Coin::create();
-        object->setPosition(Vec2(x, y));
-        coinVector.pushBack(object);
-        gameplayNode->addChild(object);
-        totalCoins++;
-    }
+
+	//load coins
+	auto coins = tiledMap->getObjectGroup("coins")->getObjects();
+	for (auto coin : coins)
+	{
+		auto coinMap = coin.asValueMap();
+		int x = coinMap["x"].asInt();
+		int y = coinMap["y"].asInt();
+		auto object = Coin::create();
+		object->setPosition(Vec2(x, y));
+		coinVector.pushBack(object);
+		gameplayNode->addChild(object);
+		totalCoins++;
+	}
 
 	//load player
-    player = Player::create(tiledMap);
-    player->spawnPoint = Vec2(x,y);
-    player->setPosition(player->spawnPoint);
-    player->spawn();
-    gameplayNode->addChild(player);
-    
-    //load bot
-    gameplayNode->addChild(player->bot);
+	player = Player::create(tiledMap);
+	player->spawnPoint = Vec2(x, y);
+	player->setPosition(player->spawnPoint);
+	player->spawn();
+	gameplayNode->addChild(player);
+
+	//load bot
+	gameplayNode->addChild(player->bot);
 	player->bot->setPosition(player->spawnPoint + Vec2(0, 100));
 
-    //load settings
-    auto gravity = tiledMap->getProperty("Gravity");
-    player->GRAVITY = gravity.asFloat();
+	//load settings
+	auto gravity = tiledMap->getProperty("Gravity");
+	player->GRAVITY = gravity.asFloat();
 
 	auto groundFriction = tiledMap->getProperty("GroundFriction");
 	player->groundFriction = groundFriction.asFloat();
-}
-
-void GameMap::sceneExit()
-{
-	//SDL_Quit();
-	/*
-    auto menuScene = Puerto::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5, menuScene));
-	*/
 }
 
 void GameMap::setZoom(float z)
@@ -292,23 +242,23 @@ void GameMap::setZoom(float z)
 #define SPACE_KEY cocos2d::EventKeyboard::KeyCode::KEY_SPACE
 void GameMap::onKeyPressed(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
 {
-    keys[keyCode] = 0;
-    switch (keyCode) {
-        case RIGHT_KEY:
-			player->accelerateHorizontal(true);
-            horizontalKeysActive++;
-            break;
-        case LEFT_KEY:
-			player->accelerateHorizontal(false);
-            horizontalKeysActive++;
-            break;
-        case SPACE_KEY:
-            actionKeyPressed();
-            break;
-            
-        default:
-            break;
-    }
+	keys[keyCode] = 0;
+	switch (keyCode) {
+	case RIGHT_KEY:
+		player->accelerateHorizontal(true);
+		horizontalKeysActive++;
+		break;
+	case LEFT_KEY:
+		player->accelerateHorizontal(false);
+		horizontalKeysActive++;
+		break;
+	case SPACE_KEY:
+		actionKeyPressed();
+		break;
+
+	default:
+		break;
+	}
 }
 
 void GameMap::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
@@ -316,31 +266,30 @@ void GameMap::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *even
 	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_BACK)
 	{
 		Scene * scene = Menug::createScene();
-		
+
 		Director::getInstance()->replaceScene(TransitionFadeBL::create(0.5, scene));
 	}
-	//Director::getInstance()->end();
 
-    keys.erase(keyCode);
-    switch (keyCode) {
-        case RIGHT_KEY:
-            horizontalKeysActive--;
-			if (horizontalKeysActive <= 0)
-			{
-				player->horizontalAccel = 0;
-				horizontalKeysActive = 0;
-			}
-            break;
-        case LEFT_KEY:
-            horizontalKeysActive--;
-			if (horizontalKeysActive <= 0)
-			{
-				player->horizontalAccel = 0;
-				horizontalKeysActive = 0;
-			}
-            break;
-        default:
-            break;
+	keys.erase(keyCode);
+	switch (keyCode) {
+	case RIGHT_KEY:
+		horizontalKeysActive--;
+		if (horizontalKeysActive <= 0)
+		{
+			player->horizontalAccel = 0;
+			horizontalKeysActive = 0;
+		}
+		break;
+	case LEFT_KEY:
+		horizontalKeysActive--;
+		if (horizontalKeysActive <= 0)
+		{
+			player->horizontalAccel = 0;
+			horizontalKeysActive = 0;
+		}
+		break;
+	default:
+		break;
 	}
 }
 
@@ -373,12 +322,12 @@ void GameMap::onTouchMoved(Touch *touch, Event *event)
 		if (location.x > joystickTouchLocation.x && joystickActive != 1)
 		{
 			player->accelerateHorizontal(true);
-            joystickActive = 1;
+			joystickActive = 1;
 		}
 		else if (location.x < joystickTouchLocation.x && joystickActive != -1)
 		{
 			player->accelerateHorizontal(false);
-            joystickActive = -1;
+			joystickActive = -1;
 		}
 	}
 }
@@ -387,7 +336,7 @@ void GameMap::onTouchEnded(Touch *touch, Event *unused_event)
 {
 	if (joystickTouchId == touch->getID())
 	{
-        joystickActive = 0;
+		joystickActive = 0;
 		player->horizontalAccel = 0;
 		joystickTouchId = -1;
 		joystickSprite->setPosition(Vec2(-1000, -1000));
@@ -400,11 +349,11 @@ void GameMap::update(float dt)
 	if (pauseTimer > 0)
 	{
 		pauseTimer -= dt;
-        if (pauseTimer < 3) player->update(dt, tiledMap);
+		if (pauseTimer < 3) player->update(dt, tiledMap);
 	}
 	else
 	{
-        audio->resumeBackgroundMusic();
+		audio->resumeBackgroundMusic();
 		player->update(dt, tiledMap);
 	}
 	if (isCameraActive)
@@ -434,8 +383,7 @@ void GameMap::update(float dt)
 				player->pausePlayer();
 				pauseTimer = 0;
 			}
-			sprintf(scoreString, "#: %i", grabbedTips);
-			tipsLabel->setString(scoreString); 
+
 			if (tipTextSprite->getTag() != -1) //is popping up
 			{
 				auto popup = MoveTo::create(0.2f, Vec2(tipTextSprite->getPositionX(), 125.0f));
@@ -467,9 +415,9 @@ void GameMap::update(float dt)
 			{
 				coin->consume();
 				grabbedCoins++;
-				
+
 			}
-			sprintf(scoreString, "Stars: %i", grabbedCoins);
+			sprintf(scoreString, "%s: %i", LanguageManager::getString("stars").c_str(), grabbedCoins);
 			scoreLabel->setString(scoreString);
 		}
 	}
@@ -483,7 +431,7 @@ void GameMap::update(float dt)
 
 void GameMap::parallaxMove()
 {
-    float scale = Director::getInstance()->getContentScaleFactor();
+	float scale = Director::getInstance()->getContentScaleFactor();
 	float p = 0.2f;
 	//get the amount moved by gameplayNode
 	float dx = gameplayNode->getPositionX() - previousGPNx;
@@ -563,7 +511,7 @@ void GameMap::showTotal()
 	sprintf(scoreString, "Stars: 0");
 	scoreLabel->setString(scoreString);
 	sprintf(scoreString, "#:0");
-	tipsLabel->setString(scoreString);
+
 }
 
 void GameMap::hurtPlayer()
@@ -581,28 +529,28 @@ void GameMap::actionKeyPressed()
 
 void GameMap::centerCamera(Vec2 position)
 {
-    //TODO: make this smoother
-    float scale = Director::getInstance()->getContentScaleFactor();
-    float x = MAX(position.x*zoomFactor, winSize.width/2);
-    float y = MAX((position.y+50)*zoomFactor, winSize.height/2);
-    x = MIN(x, zoomFactor*(tiledMap->getMapSize().width * tiledMap->getTileSize().width/scale) - winSize.width/2);
-    y = MIN(y, zoomFactor*(tiledMap->getMapSize().height * tiledMap->getTileSize().height/scale) - winSize.height/2);
-    Vec2 actualPosition = Vec2(x,y);
-    
-    Vec2 centerOfView = Vec2(winSize.width/2, winSize.height/2);
-    Vec2 viewPoint = centerOfView - actualPosition;
+	//TODO: make this smoother
+	float scale = Director::getInstance()->getContentScaleFactor();
+	float x = MAX(position.x*zoomFactor, winSize.width / 2);
+	float y = MAX((position.y + 50)*zoomFactor, winSize.height / 2);
+	x = MIN(x, zoomFactor*(tiledMap->getMapSize().width * tiledMap->getTileSize().width / scale) - winSize.width / 2);
+	y = MIN(y, zoomFactor*(tiledMap->getMapSize().height * tiledMap->getTileSize().height / scale) - winSize.height / 2);
+	Vec2 actualPosition = Vec2(x, y);
 
-    float newX = round(viewPoint.x * scale) / scale;
-    float newY = round(viewPoint.y * scale) / scale;
-    
-    gameplayNode->setPosition(Vec2(newX, newY));
+	Vec2 centerOfView = Vec2(winSize.width / 2, winSize.height / 2);
+	Vec2 viewPoint = centerOfView - actualPosition;
+
+	float newX = round(viewPoint.x * scale) / scale;
+	float newY = round(viewPoint.y * scale) / scale;
+
+	gameplayNode->setPosition(Vec2(newX, newY));
 }
 
 void GameMap::menuCloseCallback(Ref* pSender)
 {
-    Director::getInstance()->end();
-    
+	Director::getInstance()->end();
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
+	exit(0);
 #endif
 }

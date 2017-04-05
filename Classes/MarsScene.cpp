@@ -14,41 +14,31 @@ using namespace CocosDenshion;
 
 Scene * Mars::createScene()
 {
-    auto scene = Scene::create();
-    auto layer = Mars::create();
-    scene->addChild(layer);
-    layer->loadMap();
-    return scene;
+	auto scene = Scene::create();
+	auto layer = Mars::create();
+	scene->addChild(layer);
+	layer->loadMap();
+	return scene;
 }
 
 bool Mars::init()
 {
-    if (!GameMap::init())
-    {
-        return false;
-    }
+	if (!GameMap::init())
+	{
+		return false;
+	}
 	auto cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("mars.plist");
-    cache->addSpriteFramesWithFile("marsTips.plist");
-	levelId = kMars;
-    return true;
+	cache->addSpriteFramesWithFile("marsTips.plist");
+	return true;
 }
 
 void Mars::loadMap()
 {
-	//setupAudio();
 	setupBackground();
 	setupParallaxImages();
-    setupTilemap("marsLevel.tmx");
-    GameMap::loadMap();
-}
-
-void Mars::setupAudio()
-{
-	auto audio = SimpleAudioEngine::getInstance();
-	audio->stopBackgroundMusic();
-	audio->playBackgroundMusic("sfx/marsMusic.mp3", true);
-	audio->setBackgroundMusicVolume(0.7);
+	setupTilemap("marsLevel.tmx");
+	GameMap::loadMap();
 }
 
 void Mars::setupBackground()
@@ -93,8 +83,8 @@ void Mars::setupParallaxImages()
 		std::string name = "p" + std::to_string(i) + ".png";
 		auto sprite = Sprite::createWithSpriteFrameName(name);
 		sprite->setAnchorPoint(Vec2::ZERO);
-		sprite->setPositionX((i-1)*sprite->getContentSize().width);
-		parallaxNodeBack->addChild(sprite);		
+		sprite->setPositionX((i - 1)*sprite->getContentSize().width);
+		parallaxNodeBack->addChild(sprite);
 	}
 }
 
@@ -102,5 +92,5 @@ void Mars::setupParallaxImages()
 void Mars::update(float dt)
 {
 	dust->setPosition(player->getPosition() + Vec2(0, 3 * winSize.height / 4));
-    GameMap::update(dt);
+	GameMap::update(dt);
 }

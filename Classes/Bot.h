@@ -18,7 +18,7 @@ public:
 	void update(Vec2 playerPosition, float dt);
 	void bubbleMode(Vec2 playerPosition);
 	void normalMode();
-	
+
 private:
 	~Bot();
 	void initBot();

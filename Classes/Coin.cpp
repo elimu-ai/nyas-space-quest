@@ -14,21 +14,21 @@ using namespace CocosDenshion;
 
 Coin * Coin::create()
 {
-    Coin * coin = new Coin();
-    
-    if (coin && coin->init())
-    {
-        coin->autorelease();
-        coin->initCoin();
-        return coin;
-    }
-    CC_SAFE_DELETE(coin);
-    return NULL;
+	Coin * coin = new Coin();
+
+	if (coin && coin->init())
+	{
+		coin->autorelease();
+		coin->initCoin();
+		return coin;
+	}
+	CC_SAFE_DELETE(coin);
+	return NULL;
 }
 
 Coin::~Coin()
 {
-    disappear->release();
+	disappear->release();
 }
 
 void Coin::initCoin()
@@ -36,7 +36,7 @@ void Coin::initCoin()
 	setupBoundary();
 	setupCoin();
 	setupAudio();
-    BaseObject::initObject();
+	BaseObject::initObject();
 }
 
 void Coin::setupBoundary()
@@ -48,13 +48,13 @@ void Coin::setupBoundary()
 
 void Coin::setupCoin()
 {
-    consumed = false;
+	consumed = false;
 	coinSprite = Sprite::createWithSpriteFrameName("coin.png");
 	auto rotation = RotateBy::create(RandomHelper::random_int(1, 4), 25);
 	coinSprite->runAction(RepeatForever::create(rotation));
 	coinSprite->setOpacity(140);
-    disappear = Sequence::create(ScaleTo::create(0.3, 1.9), FadeOut::create(0.5), nullptr);
-    disappear->retain();
+	disappear = Sequence::create(ScaleTo::create(0.3, 1.9), FadeOut::create(0.5), nullptr);
+	disappear->retain();
 	this->addChild(coinSprite);
 	this->setScale(0.7);
 }
@@ -67,8 +67,8 @@ void Coin::setupAudio()
 
 void Coin::consume()
 {
-    consumed = true;
-    auto audio = SimpleAudioEngine::getInstance();
-    audio->playEffect("sfx/coin.wav");
-    coinSprite->runAction(disappear);
+	consumed = true;
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->playEffect("sfx/coin.wav");
+	coinSprite->runAction(disappear);
 }
