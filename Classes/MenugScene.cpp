@@ -38,10 +38,6 @@ bool Menug::init()
 	setupButtons();
 	setupVersionLabel();
 	this->setKeypadEnabled(true);
-	if (CCApplication::getInstance()->getCurrentLanguage() == LanguageType::SWAHILI)
-	{
-		CCLOG("Swahili language device found");
-	}
 	auto lm = LanguageManager::getInstance();
 	return true;
 }

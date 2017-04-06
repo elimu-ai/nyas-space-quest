@@ -33,6 +33,7 @@ void NumberDisplay::initNumberDisplay(int _number, Sprite * _bg)
 	setupBoundary();
 	setupSprite();
 	setupAudio();
+	setupLabel();
 	consumed = false;
 	this->setScale(0.9);
 	bg = _bg;
@@ -68,6 +69,26 @@ void NumberDisplay::setupAudio()
 {
 	auto audio = SimpleAudioEngine::getInstance();
 	audio->preloadEffect("sfx/bot.wav");
+	langCode = "en";
+	if (CCApplication::getInstance()->getCurrentLanguage() == LanguageType::SWAHILI)
+		langCode = "sw";
+	for (int i = 0; i <= 10; i++)
+	{
+		audio->preloadEffect(("sfx/" + langCode + "/digit_" + std::to_string(i) + ".wav").c_str());
+	}
+}
+
+void NumberDisplay::setupLabel()
+{
+	numberLabel = Label::createWithTTF(std::to_string(number), LanguageManager::getString("font"), 50);
+	numberLabel->setPosition(Vec2(0,100));
+	auto action0 = ScaleTo::create(0.3f, 1.1f, 1.1f);
+	auto action1 = ScaleTo::create(0.3f, 0.99f, 0.99f);
+	ActionInterval *bouncingAction = Sequence::create(action0, action1, nullptr);
+	auto action = RepeatForever::create(bouncingAction);
+	numberLabel->runAction(action);
+	numberLabel->setVisible(false);
+	this->addChild(numberLabel);
 }
 
 void NumberDisplay::update(bool hit)
@@ -91,22 +112,27 @@ void NumberDisplay::update(bool hit)
 		auto scaleTo1 = ScaleTo::create(1.3, 1);
 		int vLevel = 2;
 		int hLevel = 1;
-		for (int i = 1; i <= number; i++)
+		for (int i = 0; i <= number; i++)
 		{
-			auto planet = Planet::create();
-			planet->setPosition(Vec2(105 * hLevel - 40, vLevel * visibleSize.height / 3));
-			bg->addChild(planet);
-			hLevel++;
-			if (i == 5)
+			if (i != 0)
 			{
-				vLevel = 1;
-				hLevel = 1;
+				auto planet = Planet::create();
+				planet->setPosition(Vec2(105 * hLevel - 40, vLevel * visibleSize.height / 3));
+				bg->addChild(planet);
+				hLevel++;
+				if (i == 5)
+				{
+					vLevel = 1;
+					hLevel = 1;
+				}
+				planet->setScale(0.01);
+				TargetedAction * tA = TargetedAction::create(planet, scaleTo1);
+				allActions.pushBack(tA);
 			}
-			planet->setScale(0.01);
-			TargetedAction * tA = TargetedAction::create(planet, scaleTo1);
-			allActions.pushBack(tA);
-			auto playAudio = CallFunc::create([label, i]() {
-				log("Play number audio here!");
+			auto playAudio = CallFunc::create([this, i, label]() {
+
+				auto audio = SimpleAudioEngine::getInstance();
+				audio->playEffect(("sfx/" + langCode + "/digit_" + std::to_string(i) + ".wav").c_str());
 				label->setString(std::to_string(i));
 			});
 			allActions.pushBack(playAudio);
@@ -124,6 +150,7 @@ void NumberDisplay::update(bool hit)
 		auto seq = Sequence::create(allActions);
 		bg->stopAllActions();
 		bg->runAction(seq);
+		numberLabel->setVisible(true);
 	}
 	else if (!hit && isMessagevisible)
 	{
@@ -132,6 +159,13 @@ void NumberDisplay::update(bool hit)
 		bg->stopAllActions();
 		bg->runAction(action);
 		bg->removeAllChildren();
+	}
+
+	if (hit && !isMessagevisible && consumed)
+	{
+		isMessagevisible = true;
+		auto audio = SimpleAudioEngine::getInstance();
+		audio->playEffect(("sfx/" + langCode + "/digit_" + std::to_string(number) + ".wav").c_str());
 	}
 }
 
