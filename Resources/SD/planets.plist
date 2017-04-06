@@ -4,63 +4,78 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>buttonPlay.png</key>
+            <key>0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,-2.5}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{198,80}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{210,87}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{280,432},{198,80}}</string>
+                <string>{{2,63},{35,35}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>buttonPlaySel.png</key>
+            <key>1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,-2.5}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{202,84}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{210,87}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{280,344},{202,84}}</string>
+                <string>{{39,63},{35,35}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>naveMenu.png</key>
+            <key>2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,2}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{272,196}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{272,204}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{4,344},{272,196}}</string>
+                <string>{{76,2},{35,35}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nyaLogo.png</key>
+            <key>3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-1,-16}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{460,336}</string>
+                <string>{35,35}</string>
                 <key>spriteSourceSize</key>
-                <string>{746,596}</string>
+                <string>{35,35}</string>
                 <key>textureRect</key>
-                <string>{{4,4},{460,336}}</string>
+                <string>{{76,39},{35,35}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>glow.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{59,59}</string>
+                <key>spriteSourceSize</key>
+                <string>{79,79}</string>
+                <key>textureRect</key>
+                <string>{{2,2},{59,59}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -74,13 +89,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>menu.png</string>
+            <string>planets.png</string>
             <key>size</key>
-            <string>{486,544}</string>
+            <string>{113,100}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4b66287377b4d1dda05ea0f3b3f0e4c1:58ee99c17af6c2003b600aec71b9ec23:d8262aade98c5042ace66a849ab96659$</string>
+            <string>$TexturePacker:SmartUpdate:399a3a324a799ec309db9549187e2342:9330128db42adc271032756cb7117c6f:3ca5bbcc965eab6e6071cafe82a66b0c$</string>
             <key>textureFileName</key>
-            <string>menu.png</string>
+            <string>planets.png</string>
         </dict>
     </dict>
 </plist>

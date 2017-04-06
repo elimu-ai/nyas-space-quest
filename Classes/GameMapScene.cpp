@@ -38,7 +38,7 @@ bool GameMap::init()
 	cache->removeUnusedSpriteFrames();
 	cache->addSpriteFramesWithFile("common.plist");
 
-	tipVector = Vector<Tip*>();
+	numberDisplayVector = Vector<NumberDisplay*>();
 	coinVector = Vector<Coin*>();
 	isCameraActive = true;
 
@@ -47,9 +47,9 @@ bool GameMap::init()
 	setupLabels();
 	setupParallax();
 	setupKeyListener();
+	setupNumberDisplayBG();
 
 	//touch listener
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameMap::onTouchBegan, this);
@@ -116,6 +116,16 @@ void GameMap::setupKeyListener()
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyListener, gameplayNode);
 }
 
+void GameMap::setupNumberDisplayBG()
+{
+	numberDisplayBG = Sprite::createWithSpriteFrameName("stars.jpg");
+	numberDisplayBG->setAnchorPoint(Vec2(0, 0));
+	numberDisplayBG->setOpacity(230);
+	numberDisplayBG->setPosition(0, visibleSize.height);
+
+	this->addChild(numberDisplayBG);
+}
+
 void GameMap::loadMap()
 {
 	//joystick
@@ -172,28 +182,22 @@ void GameMap::loadMap()
 		gameplayNode->addChild(sprite);
 	}
 
-	//load tips
-	auto tips = tiledMap->getObjectGroup("tips")->getObjects();
-	if (!tips.empty())
+	//load Number Displays
+	auto numberDisplays = tiledMap->getObjectGroup("tips")->getObjects();
+	if (!numberDisplays.empty())
 	{
-		for (auto tip : tips)
+		for (auto tip : numberDisplays)
 		{
 			auto tipMap = tip.asValueMap();
-			std::string tipName = tipMap["name"].asString();
 			int x = tipMap["x"].asInt();
 			int y = tipMap["y"].asInt();
-			auto object = Tip::create(tipName);
+			auto object = NumberDisplay::create(RandomHelper::random_int(1,10), numberDisplayBG);
 			object->setAnchorPoint(Vec2::ZERO);
 			object->setPosition(Vec2(x, y));
-			tipVector.pushBack(object);
+			numberDisplayVector.pushBack(object);
 			gameplayNode->addChild(object);
 			object->setTag(totalTips);
 			totalTips++;
-			auto textSprite = Sprite::createWithSpriteFrameName(tipName + "Text.png");
-			textSprite->setAnchorPoint(Vec2(0.5, 1));
-			textSprite->setPosition(Vec2(visibleSize.width / 2, 0.0f));
-			addChild(textSprite, 200);
-			tiptextVector.pushBack(textSprite);
 		}
 	}
 
@@ -346,63 +350,40 @@ void GameMap::onTouchEnded(Touch *touch, Event *unused_event)
 void GameMap::update(float dt)
 {
 	auto audio = SimpleAudioEngine::getInstance();
-	if (pauseTimer > 0)
+	if (!playerPaused)
 	{
-		pauseTimer -= dt;
-		if (pauseTimer < 3) player->update(dt, tiledMap);
-	}
-	else
-	{
-		audio->resumeBackgroundMusic();
 		player->update(dt, tiledMap);
 	}
+
 	if (isCameraActive)
 	{
 		this->centerCamera(player->getPosition());
 	}
 	this->parallaxMove();
-	//tips
-	for (Tip * tip : tipVector)
-	{
-		auto tipTextSprite = tiptextVector.at(tip->getTag());
 
-		if (player->checkIntersect(tip))
+	//numberDisplays
+	for (NumberDisplay * numberDisplay : numberDisplayVector)
+	{
+		if (player->checkIntersect(numberDisplay))
 		{
-			spawnMarker->setPosition(tip->getPosition());
+			spawnMarker->setPosition(numberDisplay->getPosition());
 			player->spawnPoint = spawnMarker->getPosition();
 
-			char scoreString[20];
-			if (!tip->consumed)
+			if (!numberDisplay->consumed)
 			{
-				tip->consumed = true;
-				grabbedTips++;
-				//play audio here?
-				auto audio = SimpleAudioEngine::getInstance();
-				audio->pauseBackgroundMusic();
-				tip->playAudio();
 				player->pausePlayer();
-				pauseTimer = 0;
+				playerPaused = true;
+			}
+			else
+			{
+				playerPaused = false;
 			}
 
-			if (tipTextSprite->getTag() != -1) //is popping up
-			{
-				auto popup = MoveTo::create(0.2f, Vec2(tipTextSprite->getPositionX(), 125.0f));
-				tipTextSprite->stopAllActions();
-				tipTextSprite->runAction(popup);
-				tipTextSprite->setTag(-1);
-			}
-			tip->update(true);
+			numberDisplay->update(true);
 		}
 		else
 		{
-			if (tipTextSprite->getTag() != 1) //is popping down
-			{
-				auto popdn = MoveTo::create(0.5f, Vec2(tipTextSprite->getPositionX(), 0.0f));
-				tipTextSprite->stopAllActions();
-				tipTextSprite->runAction(popdn);
-				tipTextSprite->setTag(1);
-			}
-			tip->update(false);
+			numberDisplay->update(false);
 		}
 	}
 	//coins
@@ -490,7 +471,7 @@ void GameMap::writeData()
 		ud->setIntegerForKey("levelUnlock", levelId + 1);
 	}
 	std::string starsString = "stars" + std::to_string(levelId);
-	std::string tipsString = "tips" + std::to_string(levelId);
+	std::string tipsString = "numberDisplays" + std::to_string(levelId);
 	if (ud->getFloatForKey(starsString.c_str(), 0.0f) < grabbedCoins / totalCoins * 100)
 	{
 		ud->setFloatForKey(starsString.c_str(), grabbedCoins / totalCoins * 100);
