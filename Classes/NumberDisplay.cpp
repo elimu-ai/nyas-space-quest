@@ -81,7 +81,7 @@ void NumberDisplay::setupAudio()
 void NumberDisplay::setupLabel()
 {
 	numberLabel = Label::createWithTTF(std::to_string(number), LanguageManager::getString("font"), 50);
-	numberLabel->setPosition(Vec2(0,100));
+	numberLabel->setPosition(Vec2(0, 100));
 	auto action0 = ScaleTo::create(0.3f, 1.1f, 1.1f);
 	auto action1 = ScaleTo::create(0.3f, 0.99f, 0.99f);
 	ActionInterval *bouncingAction = Sequence::create(action0, action1, nullptr);
@@ -104,7 +104,7 @@ void NumberDisplay::update(bool hit)
 		TargetedAction * t1 = TargetedAction::create(bg, action);
 		allActions.pushBack(t1);
 
-		Label * label = Label::createWithTTF("0", LanguageManager::getString("font"), 150);
+		Label * label = Label::createWithTTF("1", LanguageManager::getString("font"), 150);
 		bg->addChild(label);
 		label->setPosition(Vec2(visibleSize.width - 125, visibleSize.height / 2));
 		label->setScale(0.9);
@@ -112,23 +112,20 @@ void NumberDisplay::update(bool hit)
 		auto scaleTo1 = ScaleTo::create(1.3, 1);
 		int vLevel = 2;
 		int hLevel = 1;
-		for (int i = 0; i <= number; i++)
+		for (int i = 1; i <= number; i++)
 		{
-			if (i != 0)
+			auto planet = Planet::create();
+			planet->setPosition(Vec2(105 * hLevel - 40, vLevel * visibleSize.height / 3));
+			bg->addChild(planet);
+			hLevel++;
+			if (i == 5)
 			{
-				auto planet = Planet::create();
-				planet->setPosition(Vec2(105 * hLevel - 40, vLevel * visibleSize.height / 3));
-				bg->addChild(planet);
-				hLevel++;
-				if (i == 5)
-				{
-					vLevel = 1;
-					hLevel = 1;
-				}
-				planet->setScale(0.01);
-				TargetedAction * tA = TargetedAction::create(planet, scaleTo1);
-				allActions.pushBack(tA);
+				vLevel = 1;
+				hLevel = 1;
 			}
+			planet->setScale(0.01);
+			TargetedAction * tA = TargetedAction::create(planet, scaleTo1);
+			allActions.pushBack(tA);
 			auto playAudio = CallFunc::create([this, i, label]() {
 
 				auto audio = SimpleAudioEngine::getInstance();
