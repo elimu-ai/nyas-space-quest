@@ -10,6 +10,7 @@
 #define __akua__Tip__
 
 #include "BaseObject.h"
+#include "androidFix.h"
 
 class NumberDisplay : public BaseObject
 {
@@ -29,6 +30,7 @@ private:
 	void setupDirector();
 	void setupAudio();
 	void setupSprite();
+	void setupLabel();
 
 	Vec2 origin;
 	Size visibleSize;
@@ -37,6 +39,8 @@ private:
 
 	Sprite * bg;
 	int number;
+	Label * numberLabel;
+	std::string langCode;
 };
 
 #endif /* defined(__akua__BitacoraScene__) */
