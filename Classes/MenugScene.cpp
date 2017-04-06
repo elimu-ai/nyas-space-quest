@@ -106,7 +106,7 @@ void Menug::setupButtons()
 	//TODO: extract a lot of this. still doing too much here
 	float buttonX = visibleSize.width - 120;
 
-	auto buttonPlay = ui::Button::create("botonJugar.png", "botonJugarSel.png", "botonJugar.png", ui::Widget::TextureResType::PLIST);
+	auto buttonPlay = ui::Button::create("buttonPlay.png", "buttonPlaySel.png", "buttonPlay.png", ui::Widget::TextureResType::PLIST);
 	buttonPlay->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
 		switch (type)
 		{
@@ -131,7 +131,7 @@ void Menug::setupButtons()
 
 void Menug::setupVersionLabel()
 {
-	Label* label1 = Label::createWithTTF(LanguageManager::getString("language").c_str(), LanguageManager::getString("font"), 10);
+	Label* label1 = Label::createWithTTF(LanguageManager::getString("language").c_str(), LanguageManager::getString("font").c_str(), 10);
 	label1->setPosition(Vec2(visibleSize.width - label1->getContentSize().width / 2 - 20, 20));
 	label1->setColor(Color3B::WHITE);
 	this->addChild(label1);

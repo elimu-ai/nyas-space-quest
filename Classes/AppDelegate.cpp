@@ -60,11 +60,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-		//glview = GLViewImpl::createWithRect("AKUA", Rect(0,0, 1024, 768));
-		glview = GLViewImpl::createWithFullScreen("AKUA");
+		//glview = GLViewImpl::createWithRect("NYA", Rect(0,0, 1024, 768));
+		glview = GLViewImpl::createWithFullScreen("NYA");
 #else
-		glview = GLViewImpl::create("AKUA");
-		//glview = GLViewImpl::createWithFullScreen("AKUA"); //works on windows
+		glview = GLViewImpl::create("NYA");
+		//glview = GLViewImpl::createWithFullScreen("NYA"); //works on windows
 #endif
 		director->setOpenGLView(glview);
 	}
