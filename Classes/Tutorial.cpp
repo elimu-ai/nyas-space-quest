@@ -42,6 +42,7 @@ void Tutorial::setupMovement()
 	auto * handSeq = Sequence::create(MoveTo::create(1, handPos + Vec2(40, 0)), MoveTo::create(1, handPos - Vec2(40, 0)), NULL);
 	auto * handAction = RepeatForever::create(handSeq);
 	hand->runAction(handAction);
+	hand->setOpacity(200);
 
 	Sprite * leftArrow = Sprite::createWithSpriteFrameName("arrow.png");
 	leftArrow->setPosition(Vec2(visibleSize.width / 4 - 100, visibleSize.height / 6));
@@ -52,20 +53,39 @@ void Tutorial::setupMovement()
 	auto * arrowAction = RepeatForever::create(arrowSeq);
 	leftArrow->runAction(arrowAction);
 	rightArrow->runAction(arrowAction->clone());
+	leftArrow->setOpacity(200);
+	rightArrow->setOpacity(200);
 
 	this->addChild(hand);
 	this->addChild(leftArrow);
 	this->addChild(rightArrow);
-	hand->setOpacity(200);
-	leftArrow->setOpacity(200);
-	rightArrow->setOpacity(200);
 }
 
 void Tutorial::setupJump()
 {
+	Sprite * touch = Sprite::createWithSpriteFrameName("touch.png");
+	touch->setPosition(Vec2(3 * visibleSize.width / 4, visibleSize.height / 2 - 160));
+	touch->setOpacity(200);
+	float d = 0.7;
+	auto fadeO = FadeTo::create(d, 20);
+	auto fadeI = FadeTo::create(d, 200);
+	auto fadeTouch = Sequence::create(fadeO, fadeI, NULL);
+	touch->runAction(RepeatForever::create(fadeTouch));
+
 	Sprite * doubleJump = Sprite::createWithSpriteFrameName("doubleJump.png");
 	doubleJump->setPosition(Vec2(3 * visibleSize.width / 4, visibleSize.height / 2));
+	auto fadeOdj = FadeTo::create(d, 160);
+	auto fadeIdj = FadeTo::create(d, 255);
+	auto fadeDoubleJump = Sequence::create(fadeOdj, fadeIdj, NULL);
+	doubleJump->runAction(RepeatForever::create(fadeDoubleJump));
+
+	Sprite * hand = Sprite::createWithSpriteFrameName("hand.png");
+	hand->setPosition(Vec2(3 * visibleSize.width / 4, visibleSize.height / 2 - 200));
+	hand->setOpacity(200);
+
+	this->addChild(touch);
 	this->addChild(doubleJump);
+	this->addChild(hand);
 }
 
 

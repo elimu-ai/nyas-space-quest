@@ -9,15 +9,15 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-2,0}</string>
                 <key>spriteSize</key>
-                <string>{80,80}</string>
+                <string>{60,64}</string>
                 <key>spriteSourceSize</key>
                 <string>{80,80}</string>
                 <key>textureRect</key>
-                <string>{{392,108},{80,80}}</string>
+                <string>{{238,158},{60,64}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>cat.png</key>
             <dict>
@@ -32,7 +32,7 @@
                 <key>textureRect</key>
                 <string>{{238,4},{150,166}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>doubleJump.png</key>
             <dict>
@@ -60,7 +60,22 @@
                 <key>spriteSourceSize</key>
                 <string>{100,100}</string>
                 <key>textureRect</key>
-                <string>{{392,4},{90,100}}</string>
+                <string>{{408,4},{90,100}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>touch.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{408,108},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -76,9 +91,9 @@
             <key>realTextureFileName</key>
             <string>tutorial.png</string>
             <key>size</key>
-            <string>{486,194}</string>
+            <string>{502,222}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:afb89da6dd775cce11f250dec20be542:c4d5f9e7396ce5d876d3651dfe523682:ece0306e644590bd77178891e6ea10bc$</string>
+            <string>$TexturePacker:SmartUpdate:1d668165a445de17819223a41003b229:ad9985ee78227c9fe50e61777c92c395:ece0306e644590bd77178891e6ea10bc$</string>
             <key>textureFileName</key>
             <string>tutorial.png</string>
         </dict>
