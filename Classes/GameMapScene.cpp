@@ -409,7 +409,7 @@ void GameMap::update(float dt)
 			scoreLabel->setString(scoreString);
 		}
 	}
-	//Show tutorial only athe beginning of the map
+	//Show tutorial only a the beginning of the map
 	if (gameplayNode->getPosition().x < -50)
 	{
 		tutorial->setVisible(false);
