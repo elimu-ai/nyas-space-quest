@@ -11,6 +11,7 @@
 #include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
 #include "LanguageManager.h"
+#include "Planet.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -99,11 +100,8 @@ void Menug::setupNave()
 
 void Menug::setupButtons()
 {
-	//TODO: extract a lot of this. still doing too much here
-	float buttonX = visibleSize.width - 120;
-
-	auto buttonPlay = ui::Button::create("buttonPlay.png", "buttonPlaySel.png", "buttonPlay.png", ui::Widget::TextureResType::PLIST);
-	buttonPlay->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+	auto buttonPlayA = ui::Button::create("buttonPlay.png", "buttonPlaySel.png", "buttonPlay.png", ui::Widget::TextureResType::PLIST);
+	buttonPlayA->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
 		switch (type)
 		{
 		case ui::Widget::TouchEventType::BEGAN:
@@ -112,17 +110,57 @@ void Menug::setupButtons()
 		{
 			auto audio = SimpleAudioEngine::getInstance();
 			audio->playEffect("sfx/button.wav");
-			Menug::loadGame();
+			Menug::loadGame(kNumberIdA);
 			break;
 		}
 		default:
 			break;
 		}
 	});
-	buttonPlay->setScale(0.9f);
-	buttonPlay->setPosition(Vec2(origin.x + 3 * visibleSize.width / 4, origin.y + visibleSize.height / 2 - 50));
+	buttonPlayA->setScale(0.9f);
+	buttonPlayA->setPosition(Vec2(origin.x + 3 * visibleSize.width / 4 - 30, origin.y + visibleSize.height / 2));
 
-	this->addChild(buttonPlay);
+	Planet * planetA = Planet::create(1);
+	planetA->setPosition(Vec2(origin.x + 3 * visibleSize.width / 4 + 60, origin.y + visibleSize.height / 2));
+
+	auto buttonPlayB = ui::Button::create("buttonPlay.png", "buttonPlaySel.png", "buttonPlay.png", ui::Widget::TextureResType::PLIST);
+	buttonPlayB->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+		{
+			auto audio = SimpleAudioEngine::getInstance();
+			audio->playEffect("sfx/button.wav");
+			Menug::loadGame(kNumberIdB);
+			break;
+		}
+		default:
+			break;
+		}
+	});
+	buttonPlayB->setScale(0.9f);
+	buttonPlayB->setPosition(Vec2(origin.x + 3 * visibleSize.width / 4 - 30, origin.y + visibleSize.height / 2 - 120));
+
+	Planet * planetB = Planet::create(3);
+	planetB->setPosition(Vec2(origin.x + 3 * visibleSize.width / 4 + 60, origin.y + visibleSize.height / 2 - 120));
+	planetB->setColor(Color3B::GRAY);
+
+	auto ud = UserDefault::getInstance();
+	if (ud->getIntegerForKey("levelUnlock", 0) != 10)
+	{
+		buttonPlayB->setEnabled(false);
+		buttonPlayB->setOpacity(100);
+	}
+	else
+	{
+		this->addChild(planetB);
+	}
+
+	this->addChild(planetA);
+	this->addChild(buttonPlayA);
+	this->addChild(buttonPlayB);
 }
 
 void Menug::setupVersionLabel()
@@ -133,9 +171,9 @@ void Menug::setupVersionLabel()
 	this->addChild(label1);
 }
 
-void Menug::loadGame()
+void Menug::loadGame(int level)
 {
-	auto loadScene = Loading::createScene(kNumberIdA);
+	auto loadScene = Loading::createScene(level);
 	Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
 }
 

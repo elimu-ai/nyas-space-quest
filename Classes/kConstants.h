@@ -14,6 +14,7 @@
 
 //Nya
 #define kNumberIdA 10
+#define kNumberIdB 20
 
 
 #endif

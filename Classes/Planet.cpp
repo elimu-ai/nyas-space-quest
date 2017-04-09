@@ -2,14 +2,14 @@
 
 
 
-Planet * Planet::create()
+Planet * Planet::create(int n)
 {
 	Planet * planet = new Planet();
 
 	if (planet && planet->init())
 	{
 		planet->autorelease();
-		planet->initPlanet();
+		planet->initPlanet(n);
 		return planet;
 	}
 	CC_SAFE_DELETE(planet);
@@ -21,11 +21,15 @@ Planet::~Planet()
 {
 }
 
-void Planet::initPlanet()
+void Planet::initPlanet(int n)
 {
 	auto cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("planets.plist");
-	int planetNumber = RandomHelper::random_int(0, 3);
+	int planetNumber = n;
+	if (n == -1)
+	{
+		planetNumber = RandomHelper::random_int(0, 3);
+	}
 	auto planetSprite = Sprite::createWithSpriteFrameName(std::to_string(planetNumber) + ".png");
 	auto glowSprite = Sprite::createWithSpriteFrameName("glow.png");
 	

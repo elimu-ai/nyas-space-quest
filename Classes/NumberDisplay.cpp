@@ -114,7 +114,7 @@ void NumberDisplay::update(bool hit)
 		int hLevel = 1;
 		for (int i = 1; i <= number; i++)
 		{
-			auto planet = Planet::create();
+			auto planet = Planet::create(-1);
 			planet->setPosition(Vec2(105 * hLevel - 40, vLevel * visibleSize.height / 3));
 			bg->addChild(planet);
 			hLevel++;

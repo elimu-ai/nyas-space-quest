@@ -32,7 +32,7 @@ private:
 	void setupButtons();
 	void setupVersionLabel();
 
-	void loadGame();
+	void loadGame(int level);
 	void exitAkua();
 
 
