@@ -14,6 +14,7 @@
 #include "NumberDisplay.h"
 #include "Coin.h"
 #include "End.h"
+#include "Tutorial.h"
 
 #include "androidFix.h"
 
@@ -32,6 +33,7 @@ public:
 	void setupParallax();
 	void setupKeyListener();
 	void setupNumberDisplayBG();
+	void setupTutorial();
 	virtual bool init();
 	void menuCloseCallback(Ref* pSender);
 
@@ -102,6 +104,8 @@ private:
 	Vector<Coin*> coinVector;
 	//Tip texts
 	Vector<Sprite*> tiptextVector;
+
+	Tutorial * tutorial;
 };
 
 #endif // __GAME_SCENE_H__

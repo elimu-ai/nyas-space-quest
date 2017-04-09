@@ -48,7 +48,7 @@ bool GameMap::init()
 	setupParallax();
 	setupKeyListener();
 	setupNumberDisplayBG();
-
+	setupTutorial();
 	//touch listener
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -124,6 +124,12 @@ void GameMap::setupNumberDisplayBG()
 	numberDisplayBG->setPosition(0, visibleSize.height);
 
 	this->addChild(numberDisplayBG);
+}
+
+void GameMap::setupTutorial()
+{
+	tutorial = Tutorial::create();
+	this->addChild(tutorial);
 }
 
 void GameMap::loadMap()
@@ -349,6 +355,7 @@ void GameMap::onTouchEnded(Touch *touch, Event *unused_event)
 
 void GameMap::update(float dt)
 {
+
 	auto audio = SimpleAudioEngine::getInstance();
 	if (!playerPaused)
 	{
@@ -401,6 +408,15 @@ void GameMap::update(float dt)
 			sprintf(scoreString, "%s: %i", LanguageManager::getString("stars").c_str(), grabbedCoins);
 			scoreLabel->setString(scoreString);
 		}
+	}
+	//Show tutorial only at the beginning of the map
+	if (gameplayNode->getPosition().x < -50)
+	{
+		tutorial->setVisible(false);
+	}
+	else
+	{
+		tutorial->setVisible(true);
 	}
 	if (player->checkIntersect(endObject))
 	{
