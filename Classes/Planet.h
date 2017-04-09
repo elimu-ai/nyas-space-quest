@@ -7,12 +7,12 @@
 class Planet : public BaseObject
 {
 public:
-	static Planet * create();
+	static Planet * create(int n);
 
 
 private:
 	~Planet();
-	void initPlanet();
+	void initPlanet(int n);
 };
 #endif
 
