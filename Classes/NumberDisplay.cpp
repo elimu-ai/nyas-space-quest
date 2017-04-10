@@ -104,7 +104,7 @@ void NumberDisplay::update(bool hit)
 		TargetedAction * t1 = TargetedAction::create(bg, action);
 		allActions.pushBack(t1);
 
-		Label * label = Label::createWithTTF("1", LanguageManager::getString("font"), 150);
+		Label * label = Label::createWithTTF("", LanguageManager::getString("font"), 150);
 		bg->addChild(label);
 		label->setPosition(Vec2(visibleSize.width - 125, visibleSize.height / 2));
 		label->setScale(0.9);
