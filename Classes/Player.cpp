@@ -95,7 +95,7 @@ void Player::setupJetParticle()
 
 void Player::setupSkNode()
 {
-	skNode = spine::SkeletonAnimation::createWithJsonFile("spine/Joaquin.json", "spine/Joaquin.atlas", 0.09f);
+	skNode = spine::SkeletonAnimation::createWithJsonFile("spine/Nya.json", "spine/Nya.atlas", 0.09f);
 	skNode->setAnimation(0, "idle", true);
 
 	skNode->setMix("walk", "run", 0.2f);
