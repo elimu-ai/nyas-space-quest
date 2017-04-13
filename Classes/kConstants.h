@@ -13,8 +13,9 @@
 //#define kTileDebug
 
 //Nya
-#define kNumberIdA 10
-#define kNumberIdB 20
+#define kMenuG		0
+#define kNumberIdA	10
+#define kNumberIdB	20
 
 
 #endif

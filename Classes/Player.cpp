@@ -115,26 +115,8 @@ void Player::setupSkNode()
 	skNode->setMix("jump_down", "walk", 0.1f);
 	skNode->setMix("jump_down", "run", 0.1f);
 
-	auto ud = UserDefault::getInstance();
-	int levelUnlock = ud->getIntegerForKey("levelUnlock", 1);
-	if (levelUnlock <= 0)
-	{
-		skNode->setSkin("v1");
-		skNode->setAttachment("jetpack", NULL);
-	}
-	if (levelUnlock == 1)
-	{
-		skNode->setSkin("v1");
-		skNode->setAttachment("jetpack", "jetpack");
-	}
-	if (levelUnlock >= 2)
-	{
-		skNode->setSkin("v2");
-		skNode->setAttachment("jetpack", "jetpack");
-	}
-
-	//skNode->setAttachment("jetpack", "jetpack");
-
+	skNode->setSkin("v1");
+	skNode->setAttachment("jetpack", "jetpack");
 
 	this->addChild(skNode);
 }

@@ -100,15 +100,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	register_all_packages();
 
+	auto ud = UserDefault::getInstance();
+	ud->setIntegerForKey("levelUnlock", 0);
+
 	// create a scene. it's an autorelease object
 	auto scene = Menug::createScene();
-	//auto scene = Menug::createScene();
-	//auto scene = Bitacora::createScene();
-	//auto scene = Jupiter::createScene();
-	//auto scene = Puerto::createScene();
-	//auto scene = Loading::createScene(kMoon);
-	//auto scene = Uranus::createScene();
-	// runw
 	director->runWithScene(scene);
 
 	return true;
