@@ -7,6 +7,7 @@
 //
 #include "GameMapScene.h"
 #include "MenugScene.h"
+#include "LoadingScene.h"
 
 #include "SimpleAudioEngine.h"
 #include "ui/CocosGUI.h"
@@ -197,7 +198,7 @@ void GameMap::loadMap()
 			auto tipMap = tip.asValueMap();
 			int x = tipMap["x"].asInt();
 			int y = tipMap["y"].asInt();
-			auto object = NumberDisplay::create(RandomHelper::random_int(1,10), numberDisplayBG);
+			auto object = NumberDisplay::create(RandomHelper::random_int(1, 10), numberDisplayBG);
 			object->setAnchorPoint(Vec2::ZERO);
 			object->setPosition(Vec2(x, y));
 			numberDisplayVector.pushBack(object);
@@ -421,8 +422,8 @@ void GameMap::update(float dt)
 	if (player->checkIntersect(endObject))
 	{
 		writeData();
-		//auto loadScene = Loading::createScene(kPuerto);
-		//Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
+		auto loadScene = Loading::createScene(kMenuG);
+		Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
 	}
 }
 
@@ -482,10 +483,7 @@ void GameMap::parallaxMove()
 void GameMap::writeData()
 {
 	auto ud = UserDefault::getInstance();
-	if (ud->getIntegerForKey("levelUnlock", 0) <= levelId)
-	{
-		ud->setIntegerForKey("levelUnlock", levelId + 1);
-	}
+	ud->setIntegerForKey("levelUnlock", 10);
 	std::string starsString = "stars" + std::to_string(levelId);
 	std::string tipsString = "numberDisplays" + std::to_string(levelId);
 	if (ud->getFloatForKey(starsString.c_str(), 0.0f) < grabbedCoins / totalCoins * 100)
