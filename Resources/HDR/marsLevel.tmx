@@ -5,7 +5,7 @@
   <property name="Image" value="mars.png" />
   <property name="Name" value="MARTE" />
  </properties>
- <tileset firstgid="1" name="properties" tilecount="10" tileheight="128" tilewidth="128">
+ <tileset columns="5" firstgid="1" name="properties" tilecount="10" tileheight="128" tilewidth="128">
   <image height="256" source="propertiesTiles.png" width="640" />
   <tile id="0">
    <properties>
@@ -84,29 +84,30 @@
   <object height="136" id="335" name="plat3.png" width="258" x="44159" y="1982" />
   <object height="136" id="575" name="plat3.png" width="258" x="16128" y="1600" />
  </objectgroup>
- <objectgroup name="tips">
-  <object id="554" name="tipMars7" x="1920" y="2048">
+ <objectgroup name="numberDisplays">
+  <object id="554" x="1920" y="2048">
    <ellipse />
   </object>
-  <object id="558" name="tipMars1" x="13952" y="768">
+  <object id="558" x="13952" y="768">
    <ellipse />
   </object>
-  <object id="559" name="tipMars2" x="18304" y="2048">
+  <object id="559" x="18304" y="2048">
    <ellipse />
   </object>
-  <object id="560" name="tipMars3" x="22720" y="2048">
+  <object id="560" x="22720" y="2048">
    <ellipse />
   </object>
-  <object id="561" name="tipMars6" x="9344" y="1152">
+  <object id="561" x="9344" y="1152">
    <ellipse />
   </object>
-  <object id="563" name="tipMars5" x="26368" y="1664">
+  <object id="563" x="26368" y="1664">
    <ellipse />
   </object>
-  <object id="564" name="tipMars4" x="36608" y="2048">
+  <object id="564" x="36608" y="2048">
    <ellipse />
   </object>
  </objectgroup>
+ <objectgroup name="numberTests" />
  <objectgroup name="coins">
   <object id="360" x="1024" y="2048">
    <ellipse />
@@ -556,50 +557,6 @@
    <ellipse />
   </object>
   <object id="595" x="26272" y="1024">
-   <ellipse />
-  </object>
- </objectgroup>
- <objectgroup name="tornados">
-  <object id="252" x="3458" y="1766">
-   <ellipse />
-  </object>
-  <object id="274" x="5054" y="874">
-   <ellipse />
-  </object>
-  <object id="281" x="8002" y="1258">
-   <ellipse />
-  </object>
-  <object id="337" x="17856" y="2176">
-   <ellipse />
-  </object>
-  <object id="338" x="19200" y="2176">
-   <ellipse />
-  </object>
-  <object id="340" x="20928" y="2176">
-   <ellipse />
-  </object>
-  <object id="342" x="23232" y="2176">
-   <ellipse />
-  </object>
-  <object id="344" x="24320" y="2176">
-   <ellipse />
-  </object>
-  <object id="347" x="29696" y="1792">
-   <ellipse />
-  </object>
-  <object id="349" x="31934" y="1386">
-   <ellipse />
-  </object>
-  <object id="350" x="34240" y="1152">
-   <ellipse />
-  </object>
-  <object id="351" x="35200" y="1152">
-   <ellipse />
-  </object>
-  <object id="353" x="40896" y="2176">
-   <ellipse />
-  </object>
-  <object id="355" x="43072" y="2176">
    <ellipse />
   </object>
  </objectgroup>

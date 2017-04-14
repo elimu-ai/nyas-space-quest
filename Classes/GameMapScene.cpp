@@ -190,10 +190,29 @@ void GameMap::loadMap()
 	}
 
 	//load Number Displays
-	auto numberDisplays = tiledMap->getObjectGroup("tips")->getObjects();
+	auto numberDisplays = tiledMap->getObjectGroup("numberDisplays")->getObjects();
 	if (!numberDisplays.empty())
 	{
 		for (auto tip : numberDisplays)
+		{
+			auto tipMap = tip.asValueMap();
+			int x = tipMap["x"].asInt();
+			int y = tipMap["y"].asInt();
+			auto object = NumberDisplay::create(RandomHelper::random_int(1, 10), numberDisplayBG);
+			object->setAnchorPoint(Vec2::ZERO);
+			object->setPosition(Vec2(x, y));
+			numberDisplayVector.pushBack(object);
+			gameplayNode->addChild(object);
+			object->setTag(totalTips);
+			totalTips++;
+		}
+	}
+
+	//load Number Displays
+	auto numberTests = tiledMap->getObjectGroup("numberTests")->getObjects();
+	if (!numberTests.empty())
+	{
+		for (auto tip : numberTests)
 		{
 			auto tipMap = tip.asValueMap();
 			int x = tipMap["x"].asInt();
