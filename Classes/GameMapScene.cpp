@@ -414,6 +414,31 @@ void GameMap::update(float dt)
 			numberDisplay->update(false);
 		}
 	}
+	//numberTest
+	for (NumberTest * numberTest : numberTestVector)
+	{
+		if (player->checkIntersect(numberTest))
+		{
+			spawnMarker->setPosition(numberTest->getPosition());
+			player->spawnPoint = spawnMarker->getPosition();
+
+			if (!numberTest->consumed)
+			{
+				player->pausePlayer();
+				playerPaused = true;
+			}
+			else
+			{
+				playerPaused = false;
+			}
+
+			numberTest->update(true);
+		}
+		else
+		{
+			numberTest->update(false);
+		}
+	}
 	//coins
 	for (Coin * coin : coinVector)
 	{
