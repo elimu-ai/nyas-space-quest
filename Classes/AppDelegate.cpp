@@ -104,8 +104,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ud->setIntegerForKey("levelUnlock", 0);
 
 	// create a scene. it's an autorelease object
-	//auto scene = Menug::createScene();
-	auto scene = Uranus::createScene();
+	auto scene = Menug::createScene();
+	//auto scene = Uranus::createScene();
 	director->runWithScene(scene);
 
 	return true;

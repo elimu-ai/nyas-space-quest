@@ -40,6 +40,7 @@ bool GameMap::init()
 	cache->addSpriteFramesWithFile("common.plist");
 
 	numberDisplayVector = Vector<NumberDisplay*>();
+	numberTestVector = Vector<NumberTest*>();
 	coinVector = Vector<Coin*>();
 	isCameraActive = true;
 
@@ -208,7 +209,7 @@ void GameMap::loadMap()
 		}
 	}
 
-	//load Number Displays
+	//load Number Tests
 	auto numberTests = tiledMap->getObjectGroup("numberTests")->getObjects();
 	if (!numberTests.empty())
 	{
@@ -217,10 +218,10 @@ void GameMap::loadMap()
 			auto tipMap = tip.asValueMap();
 			int x = tipMap["x"].asInt();
 			int y = tipMap["y"].asInt();
-			auto object = NumberDisplay::create(RandomHelper::random_int(1, 10), numberDisplayBG);
+			auto object = NumberTest::create(RandomHelper::random_int(1, 10), numberDisplayBG);
 			object->setAnchorPoint(Vec2::ZERO);
 			object->setPosition(Vec2(x, y));
-			numberDisplayVector.pushBack(object);
+			numberTestVector.pushBack(object);
 			gameplayNode->addChild(object);
 			object->setTag(totalTips);
 			totalTips++;
