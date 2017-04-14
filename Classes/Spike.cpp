@@ -35,8 +35,8 @@ void Spike::initSpike()
 void Spike::setupBoundary()
 {
 	boundary.shape = SHAPE::rectangle;
-	boundary.height = 170;
-	boundary.width = 180;
+	boundary.height = 150;
+	boundary.width = 160;
 	boundary.r = 80;
 	boundary.active = true;
 	boundary.offset = Vec2(-80, 0);

@@ -83,7 +83,7 @@ void Uranus::setupSpikes()
 		auto object = Spike::create();
 		object->setPosition(Vec2(x, y));
 		object->setAnchorPoint(Vec2(0.5, 0));
-		object->setScale(0.4f);
+		object->setScale(0.3f);
 		spikeVector.pushBack(object);
 		gameplayNode->addChild(object, 100);
 	}
