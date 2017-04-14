@@ -1,9 +1,9 @@
 #include "AppDelegate.h"
 /*#include "IntroScene.h"
-#include "MenugScene.h"
 #include "BitacoraScene.h"
 #include "PuertoScene.h"
 #include "LoadingScene.h"*/
+#include "UranusScene.h"
 #include "MenugScene.h"
 #include <random>
 #include "SimpleAudioEngine.h"
@@ -104,7 +104,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ud->setIntegerForKey("levelUnlock", 0);
 
 	// create a scene. it's an autorelease object
-	auto scene = Menug::createScene();
+	//auto scene = Menug::createScene();
+	auto scene = Uranus::createScene();
 	director->runWithScene(scene);
 
 	return true;

@@ -1,0 +1,40 @@
+{"skeleton":{"images":"images/"},
+"bones":[{"name":"root"}],
+"slots":[
+	{"name":"pierna2","bone":"root","attachment":"pierna2"},
+	{"name":"antepierna2","bone":"root","attachment":"antepierna2"},
+	{"name":"pie2","bone":"root","attachment":"pie2"},
+	{"name":"mano2","bone":"root","attachment":"mano2"},
+	{"name":"brazo2","bone":"root","attachment":"brazo2"},
+	{"name":"antebrazo2","bone":"root","attachment":"antebrazo2"},
+	{"name":"jetpack","bone":"root","attachment":"jetpack"},
+	{"name":"pecho","bone":"root","attachment":"pecho"},
+	{"name":"pierna1","bone":"root","attachment":"pierna1"},
+	{"name":"antepierna1","bone":"root","attachment":"antepierna1"},
+	{"name":"pie1","bone":"root","attachment":"pie1"},
+	{"name":"mano1","bone":"root","attachment":"mano1"},
+	{"name":"brazo1","bone":"root","attachment":"brazo1"},
+	{"name":"antebrazo1","bone":"root","attachment":"antebrazo1"},
+	{"name":"cabeza","bone":"root","attachment":"cabeza"}
+],
+"skins":{
+	"default":{
+		"cabeza":{"cabeza":{"x":303,"y":1101.5,"width":430,"height":397}},
+		"antebrazo1":{"antebrazo1":{"x":147.5,"y":694,"width":93,"height":146}},
+		"brazo1":{"brazo1":{"x":217,"y":805.5,"width":184,"height":173}},
+		"mano1":{"mano1":{"x":161.5,"y":590.5,"width":109,"height":139}},
+		"pie1":{"pie1":{"x":242.5,"y":259,"width":255,"height":170}},
+		"antepierna1":{"antepierna1":{"x":203.5,"y":383.5,"width":149,"height":277}},
+		"pierna1":{"pierna1":{"x":277,"y":565,"width":122,"height":236}},
+		"pecho":{"pecho":{"x":284.5,"y":787.5,"width":203,"height":321}},
+		"jetpack":{"jetpack":{"x":126.5,"y":780.5,"width":233,"height":305}},
+		"antebrazo2":{"antebrazo2":{"x":456,"y":802,"width":144,"height":112}},
+		"brazo2":{"brazo2":{"x":329.5,"y":830.5,"width":195,"height":153}},
+		"mano2":{"mano2":{"x":544,"y":843,"width":138,"height":112}},
+		"pie2":{"pie2":{"x":457,"y":274.5,"width":258,"height":167}},
+		"antepierna2":{"antepierna2":{"x":389,"y":392,"width":136,"height":294}},
+		"pierna2":{"pierna2":{"x":329,"y":590,"width":132,"height":260}}
+	}
+},
+"animations":{"animation":{}}
+}
