@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1778,1000}</string>
                 <key>textureRect</key>
-                <string>{{12,2008},{1780,1000}}</string>
+                <string>{{12,2028},{1780,1000}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{100,110}</string>
                 <key>textureRect</key>
-                <string>{{2448,2008},{100,112}}</string>
+                <string>{{2452,2028},{100,112}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -39,13 +39,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-216}</string>
+                <string>{0,-212}</string>
                 <key>spriteSize</key>
-                <string>{4000,568}</string>
+                <string>{4000,576}</string>
                 <key>spriteSourceSize</key>
                 <string>{4000,1000}</string>
                 <key>textureRect</key>
-                <string>{{12,936},{4000,568}}</string>
+                <string>{{12,940},{4000,576}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -54,13 +54,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-46}</string>
+                <string>{0,-44}</string>
                 <key>spriteSize</key>
-                <string>{4000,908}</string>
+                <string>{4000,912}</string>
                 <key>spriteSourceSize</key>
                 <string>{4000,1000}</string>
                 <key>textureRect</key>
-                <string>{{12,12},{4000,908}}</string>
+                <string>{{12,12},{4000,912}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -69,13 +69,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-264}</string>
+                <string>{0,-260}</string>
                 <key>spriteSize</key>
-                <string>{4000,472}</string>
+                <string>{4000,480}</string>
                 <key>spriteSourceSize</key>
                 <string>{4000,1000}</string>
                 <key>textureRect</key>
-                <string>{{12,1520},{4000,472}}</string>
+                <string>{{12,1532},{4000,480}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{1024,152}</string>
                 <key>textureRect</key>
-                <string>{{2356,2280},{1024,152}}</string>
+                <string>{{2356,2300},{1024,152}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{512,143}</string>
                 <key>textureRect</key>
-                <string>{{2196,2008},{512,144}}</string>
+                <string>{{2196,2028},{512,144}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -114,13 +114,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,35}</string>
+                <string>{0,33}</string>
                 <key>spriteSize</key>
-                <string>{256,76}</string>
+                <string>{256,80}</string>
                 <key>spriteSourceSize</key>
                 <string>{256,146}</string>
                 <key>textureRect</key>
-                <string>{{2356,2008},{256,76}}</string>
+                <string>{{2356,2028},{256,80}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -135,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{549,372}</string>
                 <key>textureRect</key>
-                <string>{{1808,2008},{552,372}}</string>
+                <string>{{1808,2028},{552,372}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -150,7 +150,7 @@
                 <key>spriteSourceSize</key>
                 <string>{430,372}</string>
                 <key>textureRect</key>
-                <string>{{1808,2576},{432,372}}</string>
+                <string>{{1808,2596},{432,372}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{480,375}</string>
                 <key>textureRect</key>
-                <string>{{2196,2536},{464,232}}</string>
+                <string>{{2196,2556},{464,232}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -174,14 +174,18 @@
         <dict>
             <key>format</key>
             <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
             <key>realTextureFileName</key>
-            <string>uranus.gys</string>
+            <string>uranus.png</string>
             <key>size</key>
-            <string>{4024,3020}</string>
+            <string>{4024,3040}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ee0f843b567993738bee1b49bad5906c:6db249cde91a55c4b9963e17adf047bb:1502873024734d08a8fc1f62923e2bfe$</string>
+            <string>$TexturePacker:SmartUpdate:cdb8be471d0cc9639e7ba6ca3018800f:6db249cde91a55c4b9963e17adf047bb:54121e9e1806a078185fee5b0a3f348b$</string>
             <key>textureFileName</key>
-            <string>uranus.gys</string>
+            <string>uranus.png</string>
         </dict>
     </dict>
 </plist>
