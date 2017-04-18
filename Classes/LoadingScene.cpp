@@ -7,6 +7,7 @@
 //
 
 #include "LoadingScene.h"
+#include "MenugScene.h"
 #include "MarsScene.h"
 
 Scene * Loading::createScene(int sceneNumber)
@@ -38,9 +39,20 @@ bool Loading::init()
 void Loading::loadLvl(float dt)
 {
 	Scene * scene;
-	if (sceneNumber == kNumberIdA)
+	switch (sceneNumber)
 	{
+	case kNumberIdA:
 		scene = Mars::createScene();
+		break;
+	case kNumberIdB:
+		scene = Mars::createScene();
+		break;
+	case kMenuG:
+		scene = Menug::createScene();
+		break;
+	default:
+		break;
 	}
+
 	Director::getInstance()->replaceScene(TransitionFadeTR::create(0.5, scene));
 }

@@ -7,6 +7,7 @@
 //
 #include "GameMapScene.h"
 #include "MenugScene.h"
+#include "LoadingScene.h"
 
 #include "SimpleAudioEngine.h"
 #include "ui/CocosGUI.h"
@@ -39,6 +40,7 @@ bool GameMap::init()
 	cache->addSpriteFramesWithFile("common.plist");
 
 	numberDisplayVector = Vector<NumberDisplay*>();
+	numberTestVector = Vector<NumberTest*>();
 	coinVector = Vector<Coin*>();
 	isCameraActive = true;
 
@@ -189,7 +191,7 @@ void GameMap::loadMap()
 	}
 
 	//load Number Displays
-	auto numberDisplays = tiledMap->getObjectGroup("tips")->getObjects();
+	auto numberDisplays = tiledMap->getObjectGroup("numberDisplays")->getObjects();
 	if (!numberDisplays.empty())
 	{
 		for (auto tip : numberDisplays)
@@ -197,10 +199,29 @@ void GameMap::loadMap()
 			auto tipMap = tip.asValueMap();
 			int x = tipMap["x"].asInt();
 			int y = tipMap["y"].asInt();
-			auto object = NumberDisplay::create(RandomHelper::random_int(1,10), numberDisplayBG);
+			auto object = NumberDisplay::create(RandomHelper::random_int(1, 10), numberDisplayBG);
 			object->setAnchorPoint(Vec2::ZERO);
 			object->setPosition(Vec2(x, y));
 			numberDisplayVector.pushBack(object);
+			gameplayNode->addChild(object);
+			object->setTag(totalTips);
+			totalTips++;
+		}
+	}
+
+	//load Number Tests
+	auto numberTests = tiledMap->getObjectGroup("numberTests")->getObjects();
+	if (!numberTests.empty())
+	{
+		for (auto tip : numberTests)
+		{
+			auto tipMap = tip.asValueMap();
+			int x = tipMap["x"].asInt();
+			int y = tipMap["y"].asInt();
+			auto object = NumberTest::create(RandomHelper::random_int(1, 10), numberDisplayBG);
+			object->setAnchorPoint(Vec2::ZERO);
+			object->setPosition(Vec2(x, y));
+			numberTestVector.pushBack(object);
 			gameplayNode->addChild(object);
 			object->setTag(totalTips);
 			totalTips++;
@@ -393,6 +414,31 @@ void GameMap::update(float dt)
 			numberDisplay->update(false);
 		}
 	}
+	//numberTest
+	for (NumberTest * numberTest : numberTestVector)
+	{
+		if (player->checkIntersect(numberTest))
+		{
+			spawnMarker->setPosition(numberTest->getPosition());
+			player->spawnPoint = spawnMarker->getPosition();
+
+			if (!numberTest->consumed)
+			{
+				player->pausePlayer();
+				playerPaused = true;
+			}
+			else
+			{
+				playerPaused = false;
+			}
+
+			numberTest->update(true);
+		}
+		else
+		{
+			numberTest->update(false);
+		}
+	}
 	//coins
 	for (Coin * coin : coinVector)
 	{
@@ -421,8 +467,8 @@ void GameMap::update(float dt)
 	if (player->checkIntersect(endObject))
 	{
 		writeData();
-		//auto loadScene = Loading::createScene(kPuerto);
-		//Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
+		auto loadScene = Loading::createScene(kMenuG);
+		Director::getInstance()->replaceScene(TransitionFade::create(0.3f, loadScene));
 	}
 }
 
@@ -482,10 +528,7 @@ void GameMap::parallaxMove()
 void GameMap::writeData()
 {
 	auto ud = UserDefault::getInstance();
-	if (ud->getIntegerForKey("levelUnlock", 0) <= levelId)
-	{
-		ud->setIntegerForKey("levelUnlock", levelId + 1);
-	}
+	ud->setIntegerForKey("levelUnlock", 10);
 	std::string starsString = "stars" + std::to_string(levelId);
 	std::string tipsString = "numberDisplays" + std::to_string(levelId);
 	if (ud->getFloatForKey(starsString.c_str(), 0.0f) < grabbedCoins / totalCoins * 100)
