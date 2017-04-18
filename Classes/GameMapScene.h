@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "NumberDisplay.h"
+#include "NumberTest.h"
 #include "Coin.h"
 #include "End.h"
 #include "Tutorial.h"
@@ -98,8 +99,9 @@ private:
 	float pauseTimer = 0.0f;
 	int joystickActive = 0;
 
-	//tips
+	//number
 	Vector<NumberDisplay*> numberDisplayVector;
+	Vector<NumberTest*> numberTestVector;
 	//coins
 	Vector<Coin*> coinVector;
 	//Tip texts

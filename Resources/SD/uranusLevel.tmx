@@ -5,7 +5,7 @@
   <property name="Image" value="uranus.png" />
   <property name="Name" value="URANO" />
  </properties>
- <tileset firstgid="1" name="properties" tilecount="10" tileheight="32" tilewidth="32">
+ <tileset columns="5" firstgid="1" name="properties" tilecount="10" tileheight="32" tilewidth="32">
   <image height="64" source="propertiesTiles.png" width="160" />
   <tile id="0">
    <properties>
@@ -75,7 +75,7 @@
   <object height="32" id="569" name="plat3.png" width="64" x="10944" y="256" />
   <object height="32" id="570" name="plat1.png" width="256" x="11136" y="288" />
  </objectgroup>
- <objectgroup name="tips">
+ <objectgroup name="numberTests">
   <object id="277" name="tipUranus3" x="416" y="640">
    <ellipse />
   </object>
@@ -98,6 +98,7 @@
    <ellipse />
   </object>
  </objectgroup>
+ <objectgroup name="numberDisplays" />
  <objectgroup name="coins">
   <object id="261" x="768" y="672">
    <ellipse />
