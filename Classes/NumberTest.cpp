@@ -113,6 +113,7 @@ void NumberTest::update(bool hit)
 			auto * moveUp = MoveTo::create(1.5, Vec2(0, visibleSize.height));
 			bg->runAction(moveUp);
 			consumed = true;
+			numberLabel->setVisible(true);
 		};
 
 		int n = -1;
@@ -232,7 +233,6 @@ void NumberTest::update(bool hit)
 		auto seq = Sequence::create(allActions);
 		bg->stopAllActions();
 		bg->runAction(seq);
-		numberLabel->setVisible(true);
 	}
 	else if (!hit && isMessagevisible)
 	{
