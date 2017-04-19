@@ -104,10 +104,50 @@ void NumberTest::update(bool hit)
 		TargetedAction * t1 = TargetedAction::create(bg, action);
 		allActions.pushBack(t1);
 
-		Label * label = Label::createWithTTF("", LanguageManager::getString("font"), 150);
-		bg->addChild(label);
-		label->setPosition(Vec2(visibleSize.width - 125, visibleSize.height / 2));
-		label->setScale(0.9);
+		Vector<MenuItem *> menuItems;
+		auto wrongChoice = [this, audio](Ref * sender) {
+			audio->playEffect("sfx/hurt.wav");
+		};
+		auto rightChoice = [this, audio](Ref * sender) {
+			audio->playEffect("sfx/correct.wav");
+			auto * moveUp = MoveTo::create(1.5, Vec2(0, visibleSize.height));
+			bg->runAction(moveUp);
+			consumed = true;
+		};
+
+		Label * labelA = Label::createWithTTF("", LanguageManager::getString("font"), 120);
+		labelA->setScale(0.9);
+		labelA->setString(std::to_string(RandomHelper::random_int(1,10)));
+		MenuItemLabel * mLabelA = MenuItemLabel::create(labelA, wrongChoice);
+
+		Label * labelB = Label::createWithTTF("", LanguageManager::getString("font"), 120);
+		labelB->setScale(0.9);
+		labelB->setString("2");
+		MenuItemLabel * mLabelB = MenuItemLabel::create(labelB, rightChoice);
+
+		Label * labelC = Label::createWithTTF("", LanguageManager::getString("font"), 120);
+		labelC->setScale(0.9);
+		labelC->setString("3");
+		MenuItemLabel * mLabelC = MenuItemLabel::create(labelC, wrongChoice);
+
+		auto scaleUp = ScaleTo::create(1, 1.01);
+		auto scaleDown = ScaleTo::create(1, 1);
+		auto seqScale = Sequence::create(scaleUp, scaleDown, NULL);
+		auto repScale = RepeatForever::create(seqScale);
+		labelA->runAction(repScale);
+		labelB->runAction(repScale->clone());
+		labelC->runAction(repScale->clone());
+
+		menuItems.pushBack(mLabelA);
+		menuItems.pushBack(mLabelB);
+		menuItems.pushBack(mLabelC);
+		Menu * menu = Menu::createWithArray(menuItems);
+		menu->setPosition(Vec2(visibleSize.width - 100, visibleSize.height / 2));
+		menu->alignItemsVerticallyWithPadding(-20);
+		menu->setEnabled(false);
+		
+		menu->setOpacity(100);
+		bg->addChild(menu);
 
 		auto scaleTo1 = ScaleTo::create(1.3, 1);
 		int vLevel = 2;
@@ -126,24 +166,24 @@ void NumberTest::update(bool hit)
 			planet->setScale(0.01);
 			TargetedAction * tA = TargetedAction::create(planet, scaleTo1);
 			allActions.pushBack(tA);
-			auto playAudio = CallFunc::create([this, i, label]() {
-
+			auto playAudio = CallFunc::create([this, i]() {
 				auto audio = SimpleAudioEngine::getInstance();
 				audio->playEffect(("sfx/" + langCode + "/digit_" + std::to_string(i) + ".wav").c_str());
-				label->setString(std::to_string(i));
 			});
 			allActions.pushBack(playAudio);
 		}
-		auto * scaleLabel = TargetedAction::create(label, scaleTo1);
-		allActions.pushBack(scaleLabel);
-		auto * delay = DelayTime::create(1.5);
+		auto * delay = DelayTime::create(1);
 		allActions.pushBack(delay);
-		auto * moveUp = MoveTo::create(1.5, Vec2(0, visibleSize.height));
-		allActions.pushBack(moveUp);
-		auto consumeNumberDisplay = CallFunc::create([this]() {
-			consumed = true;
+
+		auto * fadeIn = FadeIn::create(0.5);
+		TargetedAction * fadeInMenu = TargetedAction::create(menu, fadeIn);
+		allActions.pushBack(fadeInMenu);
+
+		auto * enableMenuLambda = CallFunc::create([menu]() {
+			menu->setEnabled(true);
 		});
-		allActions.pushBack(consumeNumberDisplay);
+		allActions.pushBack(enableMenuLambda);
+
 		auto seq = Sequence::create(allActions);
 		bg->stopAllActions();
 		bg->runAction(seq);
