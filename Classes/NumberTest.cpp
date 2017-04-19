@@ -69,6 +69,7 @@ void NumberTest::setupAudio()
 {
 	auto audio = SimpleAudioEngine::getInstance();
 	audio->preloadEffect("sfx/bot.wav");
+	audio->preloadEffect("sfx/correct.wav");
 	langCode = "en";
 	if (CCApplication::getInstance()->getCurrentLanguage() == LanguageType::SWAHILI)
 		langCode = "sw";
