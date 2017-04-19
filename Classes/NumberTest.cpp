@@ -115,20 +115,65 @@ void NumberTest::update(bool hit)
 			consumed = true;
 		};
 
+		int n = -1;
+		int correctPicked = RandomHelper::random_int(1, 3);
 		Label * labelA = Label::createWithTTF("", LanguageManager::getString("font"), 120);
 		labelA->setScale(0.9);
-		labelA->setString(std::to_string(RandomHelper::random_int(1,10)));
-		MenuItemLabel * mLabelA = MenuItemLabel::create(labelA, wrongChoice);
+		MenuItemLabel * mLabelA;
+		if (correctPicked == 1)
+		{
+			labelA->setString(std::to_string(number));
+			mLabelA = MenuItemLabel::create(labelA, rightChoice);
+		}
+		else
+		{
+			n = RandomHelper::random_int(1, 10);
+			while (n == number)
+			{
+				n = RandomHelper::random_int(1, 10);
+			}
+			labelA->setString(std::to_string(n));
+			mLabelA = MenuItemLabel::create(labelA, wrongChoice);
+		}
 
 		Label * labelB = Label::createWithTTF("", LanguageManager::getString("font"), 120);
 		labelB->setScale(0.9);
-		labelB->setString("2");
-		MenuItemLabel * mLabelB = MenuItemLabel::create(labelB, rightChoice);
+		MenuItemLabel * mLabelB;
+		if (correctPicked == 2)
+		{
+			labelB->setString(std::to_string(number));
+			mLabelB = MenuItemLabel::create(labelB, rightChoice);
+		}
+		else
+		{
+			n = RandomHelper::random_int(1, 10);
+			while (n == number)
+			{
+				n = RandomHelper::random_int(1, 10);
+			}
+			labelB->setString(std::to_string(n));
+			mLabelB = MenuItemLabel::create(labelB, wrongChoice);
+		}
+
 
 		Label * labelC = Label::createWithTTF("", LanguageManager::getString("font"), 120);
 		labelC->setScale(0.9);
-		labelC->setString("3");
-		MenuItemLabel * mLabelC = MenuItemLabel::create(labelC, wrongChoice);
+		MenuItemLabel * mLabelC;
+		if (correctPicked == 3)
+		{
+			labelC->setString(std::to_string(number));
+			mLabelC = MenuItemLabel::create(labelC, rightChoice);
+		}
+		else
+		{
+			n = RandomHelper::random_int(1, 10);
+			while (n == number)
+			{
+				n = RandomHelper::random_int(1, 10);
+			}
+			labelC->setString(std::to_string(n));
+			mLabelC = MenuItemLabel::create(labelC, wrongChoice);
+		}
 
 		auto scaleUp = ScaleTo::create(1, 1.01);
 		auto scaleDown = ScaleTo::create(1, 1);
@@ -145,7 +190,7 @@ void NumberTest::update(bool hit)
 		menu->setPosition(Vec2(visibleSize.width - 100, visibleSize.height / 2));
 		menu->alignItemsVerticallyWithPadding(-20);
 		menu->setEnabled(false);
-		
+
 		menu->setOpacity(100);
 		bg->addChild(menu);
 
