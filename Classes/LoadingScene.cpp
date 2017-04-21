@@ -9,6 +9,7 @@
 #include "LoadingScene.h"
 #include "MenugScene.h"
 #include "MarsScene.h"
+#include "UranusScene.h"
 
 Scene * Loading::createScene(int sceneNumber)
 {
@@ -45,7 +46,7 @@ void Loading::loadLvl(float dt)
 		scene = Mars::createScene();
 		break;
 	case kNumberIdB:
-		scene = Mars::createScene();
+		scene = Uranus::createScene();
 		break;
 	case kMenuG:
 		scene = Menug::createScene();
