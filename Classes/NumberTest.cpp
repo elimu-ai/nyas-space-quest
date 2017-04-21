@@ -118,6 +118,7 @@ void NumberTest::update(bool hit)
 		};
 
 		int n = -1;
+		int n2 = -1;
 		int correctPicked = RandomHelper::random_int(1, 3);
 		Label * labelA = Label::createWithTTF("", LanguageManager::getString("font"), 120);
 		labelA->setScale(0.9);
@@ -134,6 +135,7 @@ void NumberTest::update(bool hit)
 			{
 				n = RandomHelper::random_int(1, 10);
 			}
+			n2 = n;
 			labelA->setString(std::to_string(n));
 			mLabelA = MenuItemLabel::create(labelA, wrongChoice);
 		}
@@ -149,7 +151,7 @@ void NumberTest::update(bool hit)
 		else
 		{
 			n = RandomHelper::random_int(1, 10);
-			while (n == number)
+			while (n == number || n == n2)
 			{
 				n = RandomHelper::random_int(1, 10);
 			}
