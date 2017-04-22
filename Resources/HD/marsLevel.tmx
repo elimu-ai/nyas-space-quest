@@ -16,7 +16,7 @@
  </tileset>
  <layer name="propertiesLayer" width="365" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt28sOwiAQBdD2/3/ahTtTW0AeM3hOwk4NmYHbNtTzOI7TMAzDSDMAiE9mA+QhswHykNkAecjsuPQG+CQXAPIYndl3v5/9ejHz3Rvv/cR0VX+9YSTrah05TATWXS69+6Tv9gB78d+PWHaoa+ma6f25qLLNFyjXsrdXZMIOORRh7hHmkFmm+mW/9+Da6j5aV+zAWSSzRMhJeb2GOsNaLXtwxL5170x2s87XIpzv7XquE9m3Wrd8txd9hv8h38s81aOkXmoKMFZtzt59vuUZzDV0H78+m48eM+fOHKV1r+3X6rUaZV8A8CZDAaj1AhczAvY=
+   eJzt20EOgyAQBVC9/6W76K6xFqnAzPheMjubkAG+Guy+bduulFIqTQEQn8wGyENmA+QhswHykNlxmRvgk1wAyGN0Zle+J8z89sZ3PzEd9d/cMNLKdfX0NS2HicC6y+XueTLv9gC1+O9HLBX62rpm7r4uqmzjBdr17O0VmVAhhyKMPcIYMsvUv+zPHhxbPY/WFRU4i2SWCDkpr9fQZ1irZw+O2Leenclu1vlahPO9quc6kX3rdc9v72Ke4Tnke5tf/Wjpl54CjHU1Z8+u73kHcw+t499389E1c+zM0dr3q/O1eq1G2RcAvMlQAK56AQvLAvY=
   </data>
  </layer>
  <objectgroup name="objects">
@@ -34,7 +34,7 @@
   <object id="262" name="plat2.png" x="2624" y="706" width="256" height="80"/>
   <object id="263" name="plat3.png" x="1215" y="544" width="129" height="68"/>
   <object id="275" name="plat3.png" x="1470.5" y="418" width="129" height="68"/>
-  <object id="277" name="plat3.png" x="1919.5" y="419" width="129" height="68"/>
+  <object id="277" name="plat3.png" x="1916" y="480" width="129" height="68"/>
   <object id="278" name="plat1.png" x="3071" y="640" width="512" height="144"/>
   <object id="283" name="plat1.png" x="3712" y="639" width="512" height="144"/>
   <object id="285" name="plat1.png" x="4351" y="639" width="512" height="144"/>
@@ -162,7 +162,7 @@
   <object id="380" x="1664" y="320">
    <ellipse/>
   </object>
-  <object id="382" x="1792" y="256">
+  <object id="382" x="1788" y="294">
    <ellipse/>
   </object>
   <object id="384" x="1920" y="320">
@@ -171,7 +171,7 @@
   <object id="385" x="1983" y="381">
    <ellipse/>
   </object>
-  <object id="386" x="2112" y="256">
+  <object id="386" x="2108" y="378">
    <ellipse/>
   </object>
   <object id="392" x="2944" y="512">
@@ -561,7 +561,7 @@
   <object id="595" x="13136" y="512">
    <ellipse/>
   </object>
-  <object id="599" x="2176" y="314">
+  <object id="599" x="2176" y="340">
    <ellipse/>
   </object>
   <object id="600" x="2242" y="380">
@@ -615,9 +615,6 @@
   <object id="616" x="2432" y="704">
    <ellipse/>
   </object>
-  <object id="617" x="2624" y="640">
-   <ellipse/>
-  </object>
   <object id="618" x="2688" y="640">
    <ellipse/>
   </object>
@@ -625,9 +622,6 @@
    <ellipse/>
   </object>
   <object id="620" x="2816" y="640">
-   <ellipse/>
-  </object>
-  <object id="621" x="2880" y="640">
    <ellipse/>
   </object>
   <object id="622" x="3776" y="576">
@@ -646,9 +640,6 @@
    <ellipse/>
   </object>
   <object id="627" x="1856" y="704">
-   <ellipse/>
-  </object>
-  <object id="628" x="1984" y="704">
    <ellipse/>
   </object>
   <object id="629" x="2496" y="704">
