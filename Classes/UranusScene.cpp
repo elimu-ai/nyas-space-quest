@@ -45,7 +45,15 @@ void Uranus::loadMap()
 	setupBackground();
 	setupParallaxImages();
 	setupSpikes();
+	setupAudio();
     GameMap::loadMap();
+}
+
+void Uranus::setupAudio()
+{
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->stopBackgroundMusic();
+	audio->playBackgroundMusic("sfx/uranusMusic.mp3",true);
 }
 
 void Uranus::setupBackground()

@@ -29,7 +29,7 @@ bool Mars::init()
 	}
 	auto cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("mars.plist");
-	cache->addSpriteFramesWithFile("marsTips.plist");
+	setupAudio();
 	return true;
 }
 
@@ -39,6 +39,13 @@ void Mars::loadMap()
 	setupParallaxImages();
 	setupTilemap("marsLevel.tmx");
 	GameMap::loadMap();
+}
+
+void Mars::setupAudio()
+{
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->stopBackgroundMusic();
+	audio->playBackgroundMusic("sfx/marsMusic.mp3", true);
 }
 
 void Mars::setupBackground()
