@@ -56,6 +56,7 @@ void Tutorial::setupMovement()
 	leftArrow->setOpacity(200);
 	rightArrow->setOpacity(200);
 
+	hand->setFlippedX(true);
 	this->addChild(hand);
 	this->addChild(leftArrow);
 	this->addChild(rightArrow);
