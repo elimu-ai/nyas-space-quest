@@ -92,6 +92,28 @@ void NumberTest::setupLabel()
 	this->addChild(numberLabel);
 }
 
+void NumberTest::addTut(Vec2 position)
+{
+	Sprite * touch = Sprite::createWithSpriteFrameName("touch.png");
+	touch->setPosition(position);
+	touch->setOpacity(200);
+	float d = 0.7;
+	auto fadeO = FadeTo::create(d, 10);
+	auto fadeI = FadeTo::create(d, 70);
+	auto fadeTouch = Sequence::create(fadeO, fadeI, NULL);
+	touch->runAction(RepeatForever::create(fadeTouch));
+	touch->setScale(0.5);
+
+	Vec2 handPosition = position + Vec2(0, -20);
+	Sprite * hand = Sprite::createWithSpriteFrameName("hand.png");
+	hand->setPosition(handPosition);
+	hand->setOpacity(70);
+	hand->setScale(0.5);
+
+	bg->addChild(touch);
+	bg->addChild(hand);
+}
+
 void NumberTest::update(bool hit)
 {
 	if (hit && !isMessagevisible && !consumed)
@@ -113,12 +135,14 @@ void NumberTest::update(bool hit)
 			audio->playEffect("sfx/correct.wav");
 			auto * moveUp = MoveTo::create(1.5, Vec2(0, visibleSize.height));
 			bg->runAction(moveUp);
+			bg->removeAllChildren();
 			consumed = true;
 			numberLabel->setVisible(true);
 		};
 
 		int n = -1;
 		int n2 = -1;
+		int n3 = -1;
 		int correctPicked = RandomHelper::random_int(1, 3);
 		Label * labelA = Label::createWithTTF("", LanguageManager::getString("font"), 120);
 		labelA->setScale(0.9);
@@ -155,6 +179,7 @@ void NumberTest::update(bool hit)
 			{
 				n = RandomHelper::random_int(1, 10);
 			}
+			n3 = n;
 			labelB->setString(std::to_string(n));
 			mLabelB = MenuItemLabel::create(labelB, wrongChoice);
 		}
@@ -171,7 +196,7 @@ void NumberTest::update(bool hit)
 		else
 		{
 			n = RandomHelper::random_int(1, 10);
-			while (n == number)
+			while (n == number || n == n3 || n == n2)
 			{
 				n = RandomHelper::random_int(1, 10);
 			}
@@ -228,8 +253,11 @@ void NumberTest::update(bool hit)
 		TargetedAction * fadeInMenu = TargetedAction::create(menu, fadeIn);
 		allActions.pushBack(fadeInMenu);
 
-		auto * enableMenuLambda = CallFunc::create([menu]() {
+		auto * enableMenuLambda = CallFunc::create([this, menu]() {
 			menu->setEnabled(true);
+			addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 230));
+			addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2  - 60));
+			addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 + 120));
 		});
 		allActions.pushBack(enableMenuLambda);
 

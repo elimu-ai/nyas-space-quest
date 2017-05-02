@@ -31,6 +31,7 @@ private:
 	void setupAudio();
 	void setupSprite();
 	void setupLabel();
+	void addTut(Vec2 position);
 
 	Vec2 origin;
 	Size visibleSize;
