@@ -259,9 +259,9 @@ void NumberTest::update(bool hit)
 			menu->setEnabled(true);
 			if (NumberTest::tutActive)
 			{
-				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 170));
-				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2));
-				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 + 170));
+				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 230));
+				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 60));
+				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 + 110));
 				NumberTest::tutActive = false;
 			}
 		});
