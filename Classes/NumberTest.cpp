@@ -94,6 +94,9 @@ void NumberTest::setupLabel()
 	this->addChild(numberLabel);
 }
 
+/*
+	Adds the hand and touch indicators at the specified position for instruction
+*/
 void NumberTest::addTut(Vec2 position)
 {
 	Sprite * touch = Sprite::createWithSpriteFrameName("touch.png");
@@ -257,8 +260,11 @@ void NumberTest::update(bool hit)
 
 		auto * enableMenuLambda = CallFunc::create([this, menu]() {
 			menu->setEnabled(true);
+			//Add the hand and touch indicators next to each of the numbers, 
+			//tutActive will be set to false so the hands show up only the first time
 			if (NumberTest::tutActive)
 			{
+				//visibleSize correspond to the size currently visible in the screen
 				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 230));
 				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 60));
 				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 + 110));
