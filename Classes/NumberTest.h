@@ -18,7 +18,7 @@ public:
 	static NumberTest * create(int number, Sprite * bg);
 	void update(bool hit);
 	void playAudio();
-
+	static bool tutActive;
 	bool consumed;
 
 private:

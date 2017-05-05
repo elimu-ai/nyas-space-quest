@@ -7,6 +7,7 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 
+bool NumberTest::tutActive = true;
 NumberTest * NumberTest::create(int _number, Sprite * _bg)
 {
 	NumberTest * tip = new NumberTest();
@@ -37,6 +38,7 @@ void NumberTest::initNumberTest(int _number, Sprite * _bg)
 	consumed = false;
 	this->setScale(0.9);
 	bg = _bg;
+	NumberTest::tutActive = true;
 	BaseObject::initObject();
 }
 
@@ -92,6 +94,9 @@ void NumberTest::setupLabel()
 	this->addChild(numberLabel);
 }
 
+/*
+	Adds the hand and touch indicators at the specified position for instruction
+*/
 void NumberTest::addTut(Vec2 position)
 {
 	Sprite * touch = Sprite::createWithSpriteFrameName("touch.png");
@@ -255,9 +260,16 @@ void NumberTest::update(bool hit)
 
 		auto * enableMenuLambda = CallFunc::create([this, menu]() {
 			menu->setEnabled(true);
-			addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 230));
-			addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2  - 60));
-			addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 + 120));
+			//Add the hand and touch indicators next to each of the numbers, 
+			//tutActive will be set to false so the hands show up only the first time
+			if (NumberTest::tutActive)
+			{
+				//visibleSize correspond to the size currently visible in the screen
+				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 230));
+				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 - 60));
+				addTut(Vec2(visibleSize.width - 100, visibleSize.height / 2 + 110));
+				NumberTest::tutActive = false;
+			}
 		});
 		allActions.pushBack(enableMenuLambda);
 
