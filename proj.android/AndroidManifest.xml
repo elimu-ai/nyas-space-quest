@@ -26,6 +26,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+         <receiver
+            android:name="org.literacyapp.keyboard.receiver.StudentUpdatedReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="literacyapp.intent.action.STUDENT_UPDATED" />
+            </intent-filter>
+        </receiver>
+        
     </application>
 
     <supports-screens android:anyDensity="true"
