@@ -28,7 +28,7 @@
         </activity>
 
          <receiver
-            android:name="org.literacyapp.keyboard.receiver.StudentUpdatedReceiver"
+            android:name="org.cocos2dx.cpp.StudentUpdatedReceiver"
             android:enabled="true"
             android:exported="true">
 
