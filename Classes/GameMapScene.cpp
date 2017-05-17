@@ -91,7 +91,7 @@ void GameMap::setupTilemap(std::string map)
 void GameMap::setupLabels()
 {
 	//score
-	scoreLabel = Label::createWithTTF(LanguageManager::getString("stars") + ": 0", LanguageManager::getString("font"), 24);
+	scoreLabel = Label::createWithTTF("0", LanguageManager::getString("font"), 24);
 	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
 	scoreLabel->setPosition(Vec2(origin.x + 10,
 		origin.y + visibleSize.height - 20));
@@ -451,7 +451,7 @@ void GameMap::update(float dt)
 				grabbedCoins++;
 
 			}
-			sprintf(scoreString, "%s: %i", LanguageManager::getString("stars").c_str(), grabbedCoins);
+			sprintf(scoreString, "%i", grabbedCoins);
 			scoreLabel->setString(scoreString);
 		}
 	}
