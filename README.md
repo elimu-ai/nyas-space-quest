@@ -1,5 +1,6 @@
-# nyas-space-quest
-Nya's Space Quest - An Android game for teaching number identification
+# Nya's Space Quest
+
+An Android game for teaching number identification
 
 ![screenshot_20170607-131607](https://user-images.githubusercontent.com/15718174/26873794-641bfbfc-4b7b-11e7-95ee-82b19b661ad5.png)
 
