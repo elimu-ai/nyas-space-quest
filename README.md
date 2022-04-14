@@ -13,6 +13,8 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 
 <img width="640" src="https://user-images.githubusercontent.com/15718174/26873800-67dcc0c8-4b7b-11e7-83f5-38fc8881c3ca.png" />
 
-## Demo Video 🎥
+## Demo Videos 🎥
 
 [![](https://i.ytimg.com/vi/B4pLVIHeqTc/hqdefault.jpg)](https://youtu.be/B4pLVIHeqTc)
+
+[![](https://i.ytimg.com/vi/EkkYc0g3npE/hqdefault.jpg)](https://youtu.be/EkkYc0g3npE)
