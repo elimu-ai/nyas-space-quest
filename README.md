@@ -15,4 +15,4 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 
 ## Demo Video 🎥
 
-[![](https://i.ytimg.com/vi/lpU_TUciDvU/hqdefault.jpg)](https://youtu.be/lpU_TUciDvU)
+[![](https://i.ytimg.com/vi/B4pLVIHeqTc/hqdefault.jpg)](https://youtu.be/B4pLVIHeqTc)
