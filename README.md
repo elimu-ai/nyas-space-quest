@@ -1,4 +1,4 @@
-# Nya's Space Quest 👩🏽‍🚀
+# Nya's Space Quest 🕹👩🏽‍🚀
 
 An Android game for teaching number identification.
 
@@ -25,7 +25,8 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 
 ## Installation
 
-Note: This app depends on the [elimu.ai Content Provider](https://github.com/elimu-ai/content-provider) to be installed.
+> [!IMPORTANT]
+> Note: This app depends on the [elimu.ai Content Provider](https://github.com/elimu-ai/content-provider) to be installed.
 
 ---
 
