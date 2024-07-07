@@ -36,6 +36,10 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 > [!IMPORTANT]
 > Note: This app depends on the [elimu.ai Content Provider](https://github.com/elimu-ai/content-provider) to be installed.
 
+## Background Story
+
+[Nya’s Space Quest - Background Story.pdf](https://github.com/user-attachments/files/16119018/Nya.s.Space.Quest.-.Background.Story.pdf)
+
 ---
 
 <p align="center">
