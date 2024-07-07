@@ -38,7 +38,7 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 
 ## Background Story
 
-[Nya’s Space Quest - Background Story.pdf](https://github.com/user-attachments/files/16119018/Nya.s.Space.Quest.-.Background.Story.pdf)
+[`Nya’s Space Quest - Background Story.pdf`](https://github.com/user-attachments/files/16119018/Nya.s.Space.Quest.-.Background.Story.pdf)
 
 ---
 
