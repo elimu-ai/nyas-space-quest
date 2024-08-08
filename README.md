@@ -21,7 +21,7 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 > 
 > This is a scroller level, simple jumps and some action to get the kid engaged with the game, in this stage the numbers are presented with the symbol, objects and audio.
 
-[![](https://i.ytimg.com/vi/B4pLVIHeqTc/hqdefault.jpg)](https://youtu.be/B4pLVIHeqTc)
+<kbd>[![](https://i.ytimg.com/vi/B4pLVIHeqTc/hqdefault.jpg)](https://youtu.be/B4pLVIHeqTc)</kbd>
 
 ### Assessment
 
@@ -29,7 +29,7 @@ Corresponding [EGMA skill](https://github.com/elimu-ai/model/blob/master/src/mai
 >
 > This is similar to the 1st level, but in each “stop” the kid has to correctly identify the number associated with the number of objects shown in the screen.
 
-[![](https://i.ytimg.com/vi/EkkYc0g3npE/hqdefault.jpg)](https://youtu.be/EkkYc0g3npE)
+<kbd>[![](https://i.ytimg.com/vi/EkkYc0g3npE/hqdefault.jpg)](https://youtu.be/EkkYc0g3npE)</kbd>
 
 ## Installation
 
