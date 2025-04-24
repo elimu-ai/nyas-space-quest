@@ -1,6 +1,8 @@
 # Nya's Space Quest 🕹👩🏽‍🚀
 
-An Android game for learning [number identification](https://github.com/elimu-ai/wiki/blob/main/numeracy-skills/NUMBER_IDENTIFICATION.md).
+An Android game for learning number identification
+
+See Wiki: [`NUMBER_IDENTIFICATION.md`](https://github.com/elimu-ai/wiki/blob/main/numeracy-skills/NUMBER_IDENTIFICATION.md)
 
 ## Screenshots 📸
 
