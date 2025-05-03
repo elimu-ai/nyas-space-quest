@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Android Build
 
 on:
   push:
@@ -25,22 +25,29 @@ jobs:
 
       - name: Setup Android SDK
         run: |
-          # Download and install a specific version of command line tools compatible with Java 8
-          mkdir -p ${ANDROID_HOME}/cmdline-tools
-          wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip
-          unzip -q commandlinetools-linux-6609375_latest.zip -d ${ANDROID_HOME}/cmdline-tools
-          mv ${ANDROID_HOME}/cmdline-tools/tools ${ANDROID_HOME}/cmdline-tools/latest
-          rm commandlinetools-linux-6609375_latest.zip
+          # Set up Android SDK path
+          echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+          export ANDROID_HOME=$HOME/android-sdk
+          
+          # Create Android SDK directory if it doesn't exist
+          mkdir -p $ANDROID_HOME
+          
+          # Download and install an old version of Android SDK tools (compatible with Java 8)
+          wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+          tar -xzf android-sdk_r24.4.1-linux.tgz -C /tmp
+          mv /tmp/android-sdk-linux/* $ANDROID_HOME/
+          rm -rf /tmp/android-sdk-linux android-sdk_r24.4.1-linux.tgz
           
           # Add Android SDK tools to path
-          echo "${ANDROID_HOME}/cmdline-tools/latest/bin" >> $GITHUB_PATH
-          echo "${ANDROID_HOME}/platform-tools" >> $GITHUB_PATH
+          echo "$ANDROID_HOME/tools" >> $GITHUB_PATH
+          echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
           
-          # Install required Android components
-          echo "y" | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "build-tools;23.0.1" "platforms;android-23" "extras;android;m2repository"
+          # Install required Android components using the older android command
+          echo y | $ANDROID_HOME/tools/android update sdk --no-ui --all --filter "build-tools-23.0.1,android-23,extra-android-m2repository"
 
       - name: Setup Android NDK
         run: |
+          export ANDROID_HOME=$HOME/android-sdk
           wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
           chmod a+x android-ndk-r14b-linux-x86_64.zip
           unzip -qq android-ndk-r14b-linux-x86_64.zip -d $ANDROID_HOME/ndk-bundle
