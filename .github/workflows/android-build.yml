@@ -1,0 +1,74 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: false
+
+      - name: Setup JDK 8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+
+      - name: Setup Android SDK
+        run: |
+          # Set up Android SDK path
+          echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+          export ANDROID_HOME=$HOME/android-sdk
+          
+          # Create Android SDK directory if it doesn't exist
+          mkdir -p $ANDROID_HOME
+          
+          # Download and install an old version of Android SDK tools (compatible with Java 8)
+          wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+          tar -xzf android-sdk_r24.4.1-linux.tgz -C /tmp
+          mv /tmp/android-sdk-linux/* $ANDROID_HOME/
+          rm -rf /tmp/android-sdk-linux android-sdk_r24.4.1-linux.tgz
+          
+          # Add Android SDK tools to path
+          echo "$ANDROID_HOME/tools" >> $GITHUB_PATH
+          echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
+          
+          # Install required Android components using the older android command
+          echo y | $ANDROID_HOME/tools/android update sdk --no-ui --all --filter "build-tools-23.0.1,android-23,extra-android-m2repository"
+
+      - name: Setup Android NDK
+        run: |
+          export ANDROID_HOME=$HOME/android-sdk
+          wget https://dl.google.com/android/repository/android-ndk-r14b-linux-x86_64.zip
+          chmod a+x android-ndk-r14b-linux-x86_64.zip
+          unzip -qq android-ndk-r14b-linux-x86_64.zip -d $ANDROID_HOME/ndk-bundle
+          echo "NDK_ROOT=$ANDROID_HOME/ndk-bundle/android-ndk-r14b" >> $GITHUB_ENV
+          echo "$ANDROID_HOME/ndk-bundle/android-ndk-r14b" >> $GITHUB_PATH
+
+      - name: Clone Cocos2d-x repository
+        run: |
+          git clone --branch cocos2d-x-3.14.1 http://github.com/cocos2d/cocos2d-x.git
+          cd cocos2d-x
+          python download-deps.py -r yes
+          git submodule update --init
+          cd tools/cocos2d-console/
+          python download-bin.py -r yes
+          cd ../../
+          echo "COCOS_CONSOLE_ROOT=$(pwd)/tools/cocos2d-console/bin" >> $GITHUB_ENV
+          echo "$(pwd)/tools/cocos2d-console/bin" >> $GITHUB_PATH
+          echo "COCOS_TEMPLATES_ROOT=$(pwd)/templates" >> $GITHUB_ENV
+          echo "$(pwd)/templates" >> $GITHUB_PATH
+          cd ..
+          echo "yes Y" | cocos -v
+
+      - name: Build Android APK
+        run: cocos compile -p android
