@@ -48,6 +48,16 @@ jobs:
             "extras;android;m2repository"
           echo "$ANDROID_SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
 
+      # The Eclipse/Ant project layout needs the legacy `android` command,
+      # which only exists in the last classic SDK Tools release (r25.2.5)
+      - name: Install legacy Android SDK Tools
+        run: |
+          wget -q https://dl.google.com/android/repository/tools_r25.2.5-linux.zip
+          rm -rf "$ANDROID_SDK_ROOT/tools"
+          unzip -qq tools_r25.2.5-linux.zip -d "$ANDROID_SDK_ROOT"
+          ls -al "$ANDROID_SDK_ROOT/tools/android"
+          echo "$ANDROID_SDK_ROOT/tools" >> "$GITHUB_PATH"
+
       # Android NDK configuration
       - name: Install Android NDK r14b
         run: |
