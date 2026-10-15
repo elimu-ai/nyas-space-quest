@@ -61,6 +61,8 @@ jobs:
       # Cocos2d-x engine and console
       - name: Set up Cocos2d-x
         run: |
+          # GitHub no longer serves the git:// protocol, which Cocos2d-x's .gitmodules uses
+          git config --global url."https://github.com/".insteadOf "git://github.com/"
           git clone --branch "$COCOS2DX_BRANCH" https://github.com/cocos2d/cocos2d-x.git
           cd cocos2d-x
           python download-deps.py -r yes
