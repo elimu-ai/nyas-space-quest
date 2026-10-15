@@ -1,12 +1,17 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion '25.0.0'
+    namespace "org.cocos2dx.lib"
+    compileSdk 34
+    ndkVersion "25.2.9519653"
+
+    buildFeatures {
+        aidl true
+    }
 
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 21
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName "1.0"
     }
@@ -23,16 +28,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86_64', 'armeabi-v7a'
-        }
-    }
 }
 
 dependencies {
-    compile fileTree(dir: '../java/libs', include: ['*.jar'])
+    implementation fileTree(dir: '../java/libs', include: ['*.jar'])
 }
