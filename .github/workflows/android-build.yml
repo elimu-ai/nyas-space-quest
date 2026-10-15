@@ -54,6 +54,16 @@ jobs:
           echo "NDK_ROOT=$ANDROID_HOME/ndk-bundle/android-ndk-r14b" >> $GITHUB_ENV
           echo "$ANDROID_HOME/ndk-bundle/android-ndk-r14b" >> $GITHUB_PATH
 
+
+      - name: Clone Cocos2d-x repository
+        run: |
+          # Rewrite legacy GitHub submodule URLs to HTTPS.
+          git config --global url."https://github.com/".insteadOf "git://github.com/"
+
+          git clone --branch cocos2d-x-3.14.1 https://github.com/cocos2d/cocos2d-x.git
+          cd cocos2d-x
+          python download-deps.py -r yes
+          git submodule update --init
       - name: Clone Cocos2d-x repository
         run: |
           git clone --branch cocos2d-x-3.14.1 http://github.com/cocos2d/cocos2d-x.git
