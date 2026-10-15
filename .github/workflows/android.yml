@@ -1,1 +1,83 @@
-https://github.com/elimu-ai/nyas-space-quest/blob/main/.travis.yml
+name: Android Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    # Cocos2d-x 3.14.1's scripts need Python 2, which is still installable on 22.04
+    runs-on: ubuntu-22.04
+
+    env:
+      NDK_VERSION: r14b
+      COCOS2DX_BRANCH: cocos2d-x-3.14.1
+
+    steps:
+      # Submodules are not checked out by default (same as `submodules: false` in .travis.yml)
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 8
+
+      - name: Install Python 2 and Ant
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python2 ant
+          sudo ln -sf /usr/bin/python2 /usr/local/bin/python
+
+      # Android SDK configuration
+      - name: Install Android SDK components
+        run: |
+          printenv
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          # sdkmanager needs a newer JDK than the project's JDK 8
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
+            "build-tools;23.0.1" \
+            "platforms;android-23" \
+            "extras;android;m2repository"
+          echo "$ANDROID_SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+
+      # Android NDK configuration
+      - name: Install Android NDK r14b
+        run: |
+          wget -q https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux-x86_64.zip
+          mkdir -p "$ANDROID_SDK_ROOT/ndk-bundle"
+          unzip -qq android-ndk-${NDK_VERSION}-linux-x86_64.zip -d "$ANDROID_SDK_ROOT/ndk-bundle"
+          NDK_DIR="$ANDROID_SDK_ROOT/ndk-bundle/android-ndk-${NDK_VERSION}"
+          ls -al "$NDK_DIR"
+          echo "NDK_ROOT=$NDK_DIR" >> "$GITHUB_ENV"
+          echo "$NDK_DIR" >> "$GITHUB_PATH"
+
+      # Cocos2d-x engine and console
+      - name: Set up Cocos2d-x
+        run: |
+          git clone --branch "$COCOS2DX_BRANCH" https://github.com/cocos2d/cocos2d-x.git
+          cd cocos2d-x
+          python download-deps.py -r yes
+          git submodule update --init
+          cd tools/cocos2d-console/
+          python download-bin.py -r yes
+          cd ../../
+          echo "COCOS_CONSOLE_ROOT=$(pwd)/tools/cocos2d-console/bin" >> "$GITHUB_ENV"
+          echo "$(pwd)/tools/cocos2d-console/bin" >> "$GITHUB_PATH"
+          echo "COCOS_TEMPLATES_ROOT=$(pwd)/templates" >> "$GITHUB_ENV"
+          echo "$(pwd)/templates" >> "$GITHUB_PATH"
+          echo "ANT_ROOT=/usr/share/ant/bin" >> "$GITHUB_ENV"
+          echo "/usr/share/ant/bin" >> "$GITHUB_PATH"
+
+      # Answers the "Do you agree to send the data? [Y]es, [N]o" prompt
+      - name: Initialize Cocos console
+        run: yes Y | cocos -v || true
+
+      - name: Compile for Android
+        run: cocos compile -p android
