@@ -46,6 +46,10 @@ jobs:
             "platforms;android-21" \
             "platforms;android-23" \
             "extras;android;m2repository"
+          # Ant always picks the newest build-tools, and newer ones (31+) no longer ship `dx`.
+          # Remove everything except 23.0.1 so the legacy build uses it.
+          find "$ANDROID_SDK_ROOT/build-tools" -mindepth 1 -maxdepth 1 ! -name 23.0.1 -exec sudo rm -rf {} +
+          ls "$ANDROID_SDK_ROOT/build-tools"
           echo "$ANDROID_SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
 
       # The Eclipse/Ant project layout needs the legacy `android` command,
