@@ -23,10 +23,13 @@
 
 #include "platform/CCPlatformConfig.h"
 
-#if (!defined(_WIN32)) && (!defined(WIN32))
+#if (!defined(_WIN32)) && (!defined(WIN32)) && (!defined(__ANDROID__))
 
   // Linux needs this to support file operation on files larger then 4+GB
   // But might need better if/def to select just the platforms that needs them.
+  // NOTE: intentionally skipped on Android: defining __USE_FILE_OFFSET64 hides
+  // fgetpos/fsetpos declarations in modern NDK headers when targeting
+  // API < 24, which breaks <cstdio> (libc++). Game assets are far below 4GB.
 
         #ifndef __USE_FILE_OFFSET64
                 #define __USE_FILE_OFFSET64
