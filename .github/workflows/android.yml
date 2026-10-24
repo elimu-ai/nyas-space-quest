@@ -7,94 +7,33 @@ on:
 
 jobs:
   build:
-    # Cocos2d-x 3.14.1's scripts need Python 2, which is still installable on 22.04
     runs-on: ubuntu-22.04
 
-    env:
-      NDK_VERSION: r14b
-      COCOS2DX_BRANCH: cocos2d-x-3.14.1
-
     steps:
-      # Submodules are not checked out by default (same as `submodules: false` in .travis.yml)
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: false
 
-      - name: Set up JDK 8
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 8
+          java-version: 17
 
-      - name: Install Python 2 and Ant
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python2 ant
-          sudo ln -sf /usr/bin/python2 /usr/local/bin/python
-
-      # Android SDK configuration
       - name: Install Android SDK components
         run: |
-          printenv
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
-          # sdkmanager needs a newer JDK than the project's JDK 8
-          export JAVA_HOME="$JAVA_HOME_17_X64"
-          yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
-          "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
-            "build-tools;23.0.1" \
-            "platforms;android-21" \
-            "platforms;android-23" \
-            "extras;android;m2repository"
-          # Ant always picks the newest build-tools, and newer ones (31+) no longer ship `dx`.
-          # Remove everything except 23.0.1 so the legacy build uses it.
-          find "$ANDROID_SDK_ROOT/build-tools" -mindepth 1 -maxdepth 1 ! -name 23.0.1 -exec sudo rm -rf {} +
-          ls "$ANDROID_SDK_ROOT/build-tools"
-          echo "$ANDROID_SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+          SDK_ROOT="${ANDROID_HOME:-$ANDROID_SDK_ROOT}"
+          yes | "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-34" \
+            "build-tools;34.0.0" \
+            "ndk;25.2.9519653"
 
-      # The Eclipse/Ant project layout needs the legacy `android` command,
-      # which only exists in the last classic SDK Tools release (r25.2.5)
-      - name: Install legacy Android SDK Tools
-        run: |
-          wget -q https://dl.google.com/android/repository/tools_r25.2.5-linux.zip
-          rm -rf "$ANDROID_SDK_ROOT/tools"
-          unzip -qq tools_r25.2.5-linux.zip -d "$ANDROID_SDK_ROOT"
-          ls -al "$ANDROID_SDK_ROOT/tools/android"
-          echo "$ANDROID_SDK_ROOT/tools" >> "$GITHUB_PATH"
+      - name: Build debug APK
+        working-directory: proj.android-studio
+        run: ./gradlew :Nya2:assembleDebug
 
-      # Android NDK configuration
-      - name: Install Android NDK r14b
-        run: |
-          wget -q https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux-x86_64.zip
-          mkdir -p "$ANDROID_SDK_ROOT/ndk-bundle"
-          unzip -qq android-ndk-${NDK_VERSION}-linux-x86_64.zip -d "$ANDROID_SDK_ROOT/ndk-bundle"
-          NDK_DIR="$ANDROID_SDK_ROOT/ndk-bundle/android-ndk-${NDK_VERSION}"
-          ls -al "$NDK_DIR"
-          echo "NDK_ROOT=$NDK_DIR" >> "$GITHUB_ENV"
-          echo "$NDK_DIR" >> "$GITHUB_PATH"
-
-      # Cocos2d-x engine and console
-      - name: Set up Cocos2d-x
-        run: |
-          # GitHub no longer serves the git:// protocol, which Cocos2d-x's .gitmodules uses
-          git config --global url."https://github.com/".insteadOf "git://github.com/"
-          git clone --branch "$COCOS2DX_BRANCH" https://github.com/cocos2d/cocos2d-x.git
-          cd cocos2d-x
-          python download-deps.py -r yes
-          git submodule update --init
-          cd tools/cocos2d-console/
-          python download-bin.py -r yes
-          cd ../../
-          echo "COCOS_CONSOLE_ROOT=$(pwd)/tools/cocos2d-console/bin" >> "$GITHUB_ENV"
-          echo "$(pwd)/tools/cocos2d-console/bin" >> "$GITHUB_PATH"
-          echo "COCOS_TEMPLATES_ROOT=$(pwd)/templates" >> "$GITHUB_ENV"
-          echo "$(pwd)/templates" >> "$GITHUB_PATH"
-          echo "ANT_ROOT=/usr/share/ant/bin" >> "$GITHUB_ENV"
-          echo "/usr/share/ant/bin" >> "$GITHUB_PATH"
-
-      # Answers the "Do you agree to send the data? [Y]es, [N]o" prompt
-      - name: Initialize Cocos console
-        run: yes Y | cocos -v || true
-
-      - name: Compile for Android
-        run: cocos compile -p android
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nya2-debug
+          path: proj.android-studio/app/build/outputs/apk/debug/Nya2-debug.apk
