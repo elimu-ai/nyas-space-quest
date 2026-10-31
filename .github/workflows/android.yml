@@ -33,7 +33,7 @@ jobs:
         run: ./gradlew :Nya2:assembleDebug
 
       - name: Upload debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Nya2-debug
           path: proj.android-studio/app/build/outputs/apk/debug/Nya2-debug.apk
