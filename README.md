@@ -62,6 +62,25 @@ Release signing uses the existing mechanism (unverified here): pass
 `-PRELEASE_STORE_FILE=... -PRELEASE_STORE_PASSWORD=... -PRELEASE_KEY_ALIAS=... -PRELEASE_KEY_PASSWORD=...`
 and build `:Nya2:assembleRelease`.
 
+### Release
+
+Every push to `main` runs [`gradle-release.yml`](.github/workflows/gradle-release.yml)
+(it can also be started manually from the Actions tab). The workflow:
+
+1. Removes `-SNAPSHOT` from `versionName`, then commits and tags that version.
+2. Increments `versionCode` and `versionName` for the next development iteration.
+3. Builds the release APK from the tag, signs it, and attaches it to a
+   [GitHub release](https://github.com/elimu-ai/nyas-space-quest/releases) as
+   `<applicationId>-<versionName>.apk`.
+
+Signing requires these repository or organization secrets: `SIGN_ANDROID_KEY`
+(base64-encoded keystore), `SIGN_ANDROID_ALIAS`,
+`SIGN_ANDROID_KEY_STORE_PASSWORD` and `SIGN_ANDROID_KEY_PASSWORD`.
+
+The version is derived from `versionCode`: one digit for the major version,
+then three each for minor and patch (e.g. `2000000` is `2.0.0`). When changing
+it by hand, update both values and keep the `-SNAPSHOT` suffix.
+
 ### Install & smoke-test on an emulator
 
 ```sh

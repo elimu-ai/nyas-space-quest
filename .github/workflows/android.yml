@@ -32,6 +32,11 @@ jobs:
         working-directory: proj.android-studio
         run: ./gradlew :Nya2:assembleDebug
 
+      # Verifies that the build used by gradle-release.yml works, before a release is tagged
+      - name: Build release APK
+        working-directory: proj.android-studio
+        run: ./gradlew :Nya2:assembleRelease
+
       - name: Upload debug APK
         uses: actions/upload-artifact@v7
         with:
