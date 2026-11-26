@@ -1,8 +1,8 @@
 # Nya's Space Quest 🕹👩🏽‍🚀
 
-An Android game for learning number identification
+> An Android game for learning one-to-one correspondence.
 
-See Wiki: [`NUMBER_IDENTIFICATION.md`](https://github.com/elimu-ai/wiki/blob/main/numeracy-skills/NUMBER_IDENTIFICATION.md)
+See Wiki: [`ONE_TO_ONE_CORRESPONDENCE.md`](https://github.com/elimu-ai/wiki/blob/main/numeracy-skills/ONE_TO_ONE_CORRESPONDENCE.md)
 
 ## Screenshots 📸
 
