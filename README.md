@@ -67,8 +67,8 @@ and build `:Nya2:assembleRelease`.
 ```sh
 # Boot an AVD (see GPU note below), then:
 adb -s <device> install -r proj.android-studio/app/build/outputs/apk/debug/Nya2-debug.apk
-adb -s <device> shell am start -n org.literacyapp.nya/org.cocos2dx.cpp.AppActivity
-adb -s <device> shell pidof org.literacyapp.nya   # process alive = no crash
+adb -s <device> shell am start -n ai.elimu.nya/org.cocos2dx.cpp.AppActivity
+adb -s <device> shell pidof ai.elimu.nya   # process alive = no crash
 adb -s <device> exec-out screencap -p > nya.png   # tutorial level renders
 adb -s <device> logcat -d | grep -E "FATAL EXCEPTION"  # expect no output
 ```
