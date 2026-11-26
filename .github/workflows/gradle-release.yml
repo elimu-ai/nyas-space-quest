@@ -88,6 +88,9 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       VERSION_NAME: ${{ needs.create_git_tag.outputs.tagName }}
+    outputs:
+      applicationId: ${{ steps.rename_apk.outputs.application_id }}
+      apkFileUrl: ${{ steps.prepare_apk_file_url.outputs.apk_file_url }}
     steps:
       - name: Checkout refs/tags/${{ needs.create_git_tag.outputs.tagName }}
         uses: actions/checkout@v7
@@ -134,6 +137,7 @@ jobs:
           APK_FILE="proj.android-studio/app/build/outputs/apk/release/$APPLICATION_ID-$VERSION_NAME.apk"
           mv "$SIGNED_RELEASE_FILE" "$APK_FILE"
           echo "apk_file=$APK_FILE" >> "$GITHUB_OUTPUT"
+          echo "application_id=$APPLICATION_ID" >> "$GITHUB_OUTPUT"
 
       - name: Upload the signed APK file to GitHub release
         uses: softprops/action-gh-release@v3.0.0
@@ -142,3 +146,29 @@ jobs:
           files: ${{ steps.rename_apk.outputs.apk_file }}
           fail_on_unmatched_files: true
           generate_release_notes: true
+
+      - name: Prepare the APK file URL
+        id: prepare_apk_file_url
+        env:
+          APPLICATION_ID: ${{ steps.rename_apk.outputs.application_id }}
+        run: |
+          APK_FILE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$VERSION_NAME/$APPLICATION_ID-$VERSION_NAME.apk"
+          echo "APK_FILE_URL $APK_FILE_URL"
+          echo "apk_file_url=$APK_FILE_URL" >> "$GITHUB_OUTPUT"
+
+  notify_webapp_api:
+    needs: [create_git_tag, release_apk]
+    strategy:
+      max-parallel: 1
+      matrix:
+        language_code: [eng, hin, tgl, tha, vie]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Send HTTP request to `${{ matrix.language_code }}.elimu.ai`
+        uses: fjogeleit/http-request-action@v2
+        with:
+          url: http://${{ matrix.language_code }}.elimu.ai/rest/v2/applications/${{ needs.release_apk.outputs.applicationId }}/application-versions/${{ needs.create_git_tag.outputs.tagName }}
+          method: PUT
+          data: '{"fileUrl": "${{ needs.release_apk.outputs.apkFileUrl }}"}'
+          customHeaders: '{"Content-Type": "application/json"}'
+          timeout: 60000

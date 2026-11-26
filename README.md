@@ -72,6 +72,8 @@ Every push to `main` runs [`gradle-release.yml`](.github/workflows/gradle-releas
 3. Builds the release APK from the tag, signs it, and attaches it to a
    [GitHub release](https://github.com/elimu-ai/nyas-space-quest/releases) as
    `<applicationId>-<versionName>.apk`.
+4. Sends the APK file URL to the webapp REST API of each language (`eng`, `hin`,
+   `tgl`, `tha` and `vie` at `<language>.elimu.ai`).
 
 Signing requires these repository or organization secrets: `SIGN_ANDROID_KEY`
 (base64-encoded keystore), `SIGN_ANDROID_ALIAS`,
