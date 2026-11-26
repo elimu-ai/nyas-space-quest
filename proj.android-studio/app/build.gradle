@@ -13,7 +13,7 @@ android {
         minSdk 21
         targetSdk 34
         versionCode 2000000
-        versionName "2.0.0-SNAPSHOT"
+        versionName "2.0.0"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
