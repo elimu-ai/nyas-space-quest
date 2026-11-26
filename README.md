@@ -14,7 +14,7 @@ See Wiki: [`ONE_TO_ONE_CORRESPONDENCE.md`](https://github.com/elimu-ai/wiki/blob
 
 ### Instruction
 
-> **Level 1 - Number Identification**
+> **Level 1 - One-to-One Correspondence**
 > 
 > This is a scroller level, simple jumps and some action to get the kid engaged with the game, in this stage the numbers are presented with the symbol, objects and audio.
 
@@ -22,7 +22,7 @@ See Wiki: [`ONE_TO_ONE_CORRESPONDENCE.md`](https://github.com/elimu-ai/wiki/blob
 
 ### Assessment
 
-> **Level 2 - Number Identification**
+> **Level 2 - One-to-One Correspondence**
 >
 > This is similar to the 1st level, but in each “stop” the kid has to correctly identify the number associated with the number of objects shown in the screen.
 
