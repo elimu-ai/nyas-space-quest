@@ -140,7 +140,7 @@ jobs:
           echo "application_id=$APPLICATION_ID" >> "$GITHUB_OUTPUT"
 
       - name: Upload the signed APK file to GitHub release
-        uses: softprops/action-gh-release@v3.0.0
+        uses: softprops/action-gh-release@v3.0.4
         with:
           tag_name: ${{ needs.create_git_tag.outputs.tagName }}
           files: ${{ steps.rename_apk.outputs.apk_file }}
